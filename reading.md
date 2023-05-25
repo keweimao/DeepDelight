@@ -21,6 +21,14 @@ https://nlp.stanford.edu/IR-book/html/htmledition/language-models-for-informatio
 Elastic Language Models
 https://www.elastic.co/blog/language-models-in-elasticsearch
 
+## Linear & Non-linear Classification (w/ NN)
+
+Linear classification (w/ single perceptron): 
+https://youtu.be/kuNQViqLw40
+
+Non-linear classification (w/ NN): 
+https://youtu.be/P1RAjm6di20
+
 ## Reinforcement Learning
 
 * Weimao Ke's Tutorial: http://keensee.com/pdp/research/rl_taxi.html
