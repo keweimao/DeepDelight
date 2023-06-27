@@ -71,7 +71,7 @@ https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transfo
 3. Train and test it using a **small** number of parameters, unless you have a powerful GPU machine. :)
 
 
-### Module 4: Information Gain and Loss Functions
+## Module 4: Information Gain and Loss Functions
 
 ### Reading
 
@@ -85,5 +85,5 @@ https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transfo
 2. Parameters should be any two discrete probability distributions $P$ and $Q$. 
 3. Test combinations of P and Q to show they produce correct scores. 
 
-### More TBD...
+## More TBD...
 
