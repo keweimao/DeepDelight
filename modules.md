@@ -8,12 +8,12 @@ They may include readings, tutorials, exercises, as well as assignments for deve
 Current Threads (Summary 2023): 
 
 1. Transformer with DLITE for predictive analytics (Sonia, Michael)
-  * [ ] With applications in summarization and/or named entity recognition
+   * With applications in summarization and/or named entity recognition
 2. GPT fine-tuning for information/fact/answer retrieval (Jerry, Lixiao)
 
 Potential Future Projects: 
 
-* [ ] Distributed agents for GPTs (Weimao)
+* A distributed network of personal agents based on GPTs
 
 ## Text and Readings
 
