@@ -13,6 +13,7 @@ https://ieeexplore.ieee.org/document/10020937
 Video presentation: https://www.youtube.com/watch?v=qQXCgmX8sOk
 
 
+
 ## Language Models for IR
 
 MRS Book Chapter 12: Language Models
