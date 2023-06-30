@@ -6,7 +6,7 @@
 Reading from Module 4: 
 https://towardsdatascience.com/four-llm-trends-since-chatgpt-and-their-implications-for-ai-builders-a140329fc0d2
 
-Big picture on the `transformation` technology for AI: 
+### Big picture on the `transformation` technology for AI: 
 
 * Training objectives
   1. Autoregression (generative): common focus, not analytical
@@ -30,15 +30,14 @@ And then there are:
 * Cross-entropy and KL divergence are very common
 * Ke's DLITE, Discounted Least Information Theory for Entropy (Ke 2020 & 2022)
 
-Practical: 
+### B. Practical: 
 * LLM-based frameworks such as LangChain, AutoGPT and LlamaIndex
   * Allows integration with private data and its index
 * How about integration with an IR engine, e.g. Elastic? 
 * Distributed models with web APIs
 
-Research Objectives: 
+### C. Research Objectives: 
+
 1. Improved autoencoding for analytical tasks such as summarization, extraction, and named entity detection, e.g. with DLITE. 
 1. Personalized GPTs for local information retrieval and question answering, e.g. Elastic and RL. 
 2. Distributed GPTs for collaborative information retrieval and analytical tasks. 
-
-
