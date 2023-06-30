@@ -46,15 +46,15 @@ on Simple Language Models:
 ### Reading
 
 1. Chapter `Binary Questions` (p.81-) in `Reading/Ke_Book_draft.pdf` 
-2. * Weimao Ke's Tutorial: http://keensee.com/pdp/research/rl_taxi.html
-* Video on the above tutorial: https://youtu.be/QUPpKgXJd5M
+2. Weimao Ke's Tutorial on Reinforcement Learning: http://keensee.com/pdp/research/rl_taxi.html
+   * Video on the above tutorial: https://youtu.be/QUPpKgXJd5M
 
 ### Exercise
 
 Pick one of the following for the exercise: 
 
 1. Build a Neural Network: https://towardsdatascience.com/building-neural-network-using-pytorch-84f6e75f9a
-2. https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
+2. Reinforcement Learning with Gym: https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/
 
 ## Module 3: Transformer & GPT
 
@@ -63,6 +63,7 @@ Pick one of the following for the exercise:
 1. State of GPT: https://youtu.be/bZQun8Y4L2A
 2. Transformer explained (on Attention is All You Need paper): 
 https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transformer-paper-73e5ff5e0634
+3. Challenges and opportunities with LLMs: https://towardsdatascience.com/four-llm-trends-since-chatgpt-and-their-implications-for-ai-builders-a140329fc0d2
 
 ### Assignment 
 
@@ -86,4 +87,13 @@ https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transfo
 3. Test combinations of P and Q to show they produce correct scores. 
 
 ## More TBD...
+
+
+
+## Potential Leads
+
+GPT for private data retrieval: 
+1. LangChain for loading personal data into ChatGPT for retrieval: 
+2. Or LLaMa_index: https://github.com/jerryjliu/llama_index
+3. A simple application here: https://www.youtube.com/watch?v=9AXP7tCI9PI&t=29s
 
