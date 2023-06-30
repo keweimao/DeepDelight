@@ -31,7 +31,7 @@ And then there are:
 * Ke's DLITE, Discounted Least Information Theory for Entropy (Ke 2020 & 2022)
 
 ### B. Practical: 
-* LLM-based frameworks such as LangChain, AutoGPT and LlamaIndex
+* LLM-based frameworks such as [LangChain](https://github.com/hwchase17/langchain), [AutoGPT](https://github.com/Significant-Gravitas/Auto-GPT) and [LlamaIndex](https://github.com/jerryjliu/llama_index)
   * Allows integration with private data and its index
 * How about integration with an IR engine, e.g. Elastic? 
 * Distributed models with web APIs
