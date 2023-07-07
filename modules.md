@@ -45,8 +45,11 @@ on Simple Language Models:
 
 ### Reading
 
-1. Chapter `Binary Questions` (p.81-) in `Reading/Ke_Book_draft.pdf` 
-2. Weimao Ke's Tutorial on Reinforcement Learning: http://keensee.com/pdp/research/rl_taxi.html
+1. State of GPT: https://youtu.be/bZQun8Y4L2A
+   * Be mindful of GPT training pipeline, e.g. at 1:00. 
+2. Chapter `Binary Questions` (p.81-) in `Reading/Ke_Book_draft.pdf` 
+   * Video on non-linear classification (NN): https://www.youtube.com/watch?v=P1RAjm6di20
+3. Weimao Ke's Tutorial on Reinforcement Learning: http://keensee.com/pdp/research/rl_taxi.html
    * Video on the above tutorial: https://youtu.be/QUPpKgXJd5M
 
 ### Exercise
@@ -60,10 +63,9 @@ Pick one of the following for the exercise:
 
 ### Reading & Tutorial
 
-1. State of GPT: https://youtu.be/bZQun8Y4L2A
-2. Transformer explained (on Attention is All You Need paper): 
+1. Transformer explained (on Attention is All You Need paper): 
 https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transformer-paper-73e5ff5e0634
-3. Challenges and opportunities with LLMs: https://towardsdatascience.com/four-llm-trends-since-chatgpt-and-their-implications-for-ai-builders-a140329fc0d2
+2. Challenges and opportunities with LLMs: https://towardsdatascience.com/four-llm-trends-since-chatgpt-and-their-implications-for-ai-builders-a140329fc0d2
 
 ### Assignment 
 

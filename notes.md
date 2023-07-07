@@ -41,3 +41,25 @@ And then there are:
 1. Improved autoencoding for analytical tasks such as summarization, extraction, and named entity detection, e.g. with DLITE. 
 1. Personalized GPTs for local information retrieval and question answering, e.g. Elastic and RL. 
 2. Distributed GPTs for collaborative information retrieval and analytical tasks. 
+
+
+## Week 2
+
+### Week 1 Review
+
++ Language model exercise & presentation
++ Thoughts and comments
+  + Potentials and limits
+  + Uni-gram to bi-gram: size of context
++ Questions on reading? 
+
+### Week 2 Notes
+
++ Overview of GPT training, pipeline, and "tricks"
++ Reading on ML and predictive analytics
++ Linear to non-linear models (e.g. NN)
++ Reinforcement learning (e.g. Q-learning)
++ Exercise, questions, and thoughts for next week
+
+
+
