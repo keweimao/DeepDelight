@@ -53,6 +53,13 @@ And then there are:
   + Uni-gram to bi-gram: size of context
 + Questions on reading? 
 
+
+Notes: 
+1. bag of words, but not exactly? 
+2. what if more context? 
+3. how long does it run, e.g. uni- and bi-gram? 
+4. tokens as words? 
+
 ### Week 2 Notes
 
 + Overview of GPT training, pipeline, and "tricks"

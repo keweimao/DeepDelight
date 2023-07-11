@@ -96,6 +96,9 @@ https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transfo
 + What is most cost-effective, global retrain, local pretrain? 
 
 
++ GPT Alignment: https://openai.com/research/instruction-following
++ Learning from HP: https://openai.com/research/learning-from-human-preferences
+
 ## Potential Leads
 
 GPT for private data retrieval: 
