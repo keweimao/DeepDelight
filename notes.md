@@ -62,11 +62,41 @@ Notes:
 
 ### Week 2 Notes
 
+In week 2 meeting: 
 + Overview of GPT training, pipeline, and "tricks"
 + Reading on ML and predictive analytics
 + Linear to non-linear models (e.g. NN)
 + Reinforcement learning (e.g. Q-learning)
 + Exercise, questions, and thoughts for next week
 
+In week 3 meeting: 
++ NN vs. RL results? Questions? Notes? 
++ NN with Pytorch, most used for deep learning
+  + Consider TinyCorp's implementation in the future
++ RL with OpenAI's Gym (legacy), now maintained as Gymnastics
++ My Youtube series on TicTacToe and AI (random, NN, and RL)
 
+
+### Week 3 Notes
+
+In week 3 meeting: 
++ Major assignment/exercise: build GPT from scratch
+  + Start small, w/ data and parameters, don't jump
+  + Build UP, w/ larger network, more parameters, and intensive training
+  + Observe use of local resources. Enough GPUs? 
+  + Key issues and solutions, especially in training? 
++ Train it on Shakespeare data; and train it on your personal data? 
++ After done, you may use the NanoGPT to train, save, and fine-tune the model
+
+TODOS: 
++ Github discussions
++ 
+
+
+### Week 4
+
+No meeting, or meeting without Dr. Ke
+
++ DLITE theory
++ DLITE implementation, e.g. with Pytorch
 
