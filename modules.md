@@ -99,6 +99,14 @@ https://towardsdatascience.com/attention-is-all-you-need-discovering-the-transfo
 + GPT Alignment: https://openai.com/research/instruction-following
 + Learning from HP: https://openai.com/research/learning-from-human-preferences
 
+
+## Module 6: LLM plus Retrieval
+
++ Augmented language models: https://bdtechtalks.com/2023/04/03/augmented-language-models/
++ REALM: https://ai.googleblog.com/2020/08/realm-integrating-retrieval-into.html
++ In context REALM: https://bdtechtalks.com/2023/01/30/ai21labs-llms-ralm/
+
+
 ## Potential Leads
 
 GPT for private data retrieval: 
