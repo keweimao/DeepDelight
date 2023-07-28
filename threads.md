@@ -48,3 +48,12 @@ Train GPT to generate (recognize) name entities.
 3. Train and fine-tune on New York Times annotated data. 
 4. Test and evaluate predictions for NER. 
 
+## Thread 5. Residual Network Optimization (Net4GPT)
+
+Core question of how to construct and optimize residual connection for faster and robust learning? 
+
+1. Test different combinations of layer-to-layer vs. residual (skip) connections. 
+2. What is the optimal connections for: * fastest convergence, and * best performance (min loss). 
+3. Inspirations: Weimao Ke's extensive research on network connections and the "Clustering Paradox" in distributed search and retrieval. 
+
+
