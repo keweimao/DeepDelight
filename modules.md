@@ -114,3 +114,7 @@ GPT for private data retrieval:
 2. Or LLaMa_index: https://github.com/jerryjliu/llama_index
 3. A simple application here: https://www.youtube.com/watch?v=9AXP7tCI9PI&t=29s
 
+
+## Additional Reading
+
+* Simplified explanation of GPT: https://arstechnica.com/science/2023/07/a-jargon-free-explanation-of-how-ai-large-language-models-work/ 
