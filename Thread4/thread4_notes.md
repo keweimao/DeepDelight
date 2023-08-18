@@ -45,3 +45,8 @@ Related resources:
 ## Experiments
 
 
+## References
+
+* BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding: https://aclanthology.org/N19-1423.pdf
+* Exploring Cross-sentence Contexts for Named Entity Recognition with BERT: https://arxiv.org/abs/2006.01563
+

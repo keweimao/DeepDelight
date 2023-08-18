@@ -38,3 +38,8 @@ TREC QA data: https://trec.nist.gov/data/qa/t2007_qadata.html
     + github: https://github.com/nomic-ai/gpt4all
     + for langchain: https://python.langchain.com/docs/integrations/llms/gpt4all.html
     + data like: https://github.com/nomic-ai/gpt4all-datalake
+
+### Reading and References
+
+* REALM: Retrieval-Augmented Language Model Pre-Training: https://arxiv.org/abs/2002.08909
+* In-Context Retrieval-Augmented Language Models: https://arxiv.org/abs/2302.00083
