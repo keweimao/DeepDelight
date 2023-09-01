@@ -47,3 +47,25 @@ class DiceLoss(nn.Module):
 * Custom criterion: https://discuss.pytorch.org/t/solved-what-is-the-correct-way-to-implement-custom-loss-function/3568
 
 
+## Notes
+
+9/1/2023
+
+Observation after 4999 (5000) steps: 
+* Training with DLITE: 
+    * DLITE train & val loss: 0.4652, 0.4906 (better)
+    * CE train & val loss: 2.8259, 2.9784
+* Training with CE: 
+    * DLITE train & val loss: 0.4662, 0.4957
+    * CE train & val loss: 1.6615, 1.8189 (better)
+
+Next: 
+* More experiments: 
+    * Increase number of iterations: 10k or 20k or until loss/error stop decreasing
+        * Please also report `nn.L1Loss()` and `nn.L1Loss()` (two more columns)
+        * Results based on DLITE? 
+        * Results based on CE? 
+    * Mixed iterations and report results
+        1. First 5000 on DLITE, and continue 5000 on CE
+        2. First 5000 on CE, and continue 5000 on DLITE
+* Reading: https://link.springer.com/article/10.1007/s40745-020-00253-5
