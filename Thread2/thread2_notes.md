@@ -24,6 +24,17 @@ Potential dataset to use:
 + Create a couple of questions related, e.g. Which team won the 2022 world cup? 
 + Test the questions and report what you find in the result/answers. 
 
+### 9/1/2023 Notes: 
+
+* Observation: 
+    * Answer accuracy varies
+    * Long response time to each question
+* TDOD: 
+    * Split the long FIFA document into multiple documents mannually (small and structured/specific for certain questions). 
+    * Load documents from within a directory. 
+    * Test the same questions again. 
+
+
 ## Additional Resources
 
 ### Data
