@@ -33,14 +33,22 @@ Related resources:
 + Fine-tune BERT for NER: https://www.freecodecamp.org/news/getting-started-with-ner-models-using-huggingface/
 
 
-## TODOs
+## Assignments
 
 ### 1. Exploration
 
 + Follow the tutorial to train/fine-tune BERT for NER. 
 + Test and report the results. 
 
+### 2. Baseline (Fall 2023 Week 1)
 
+* Reading to understand BERT for classification: http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/
+* Follow this to experiment and produce a baseline: https://github.com/NielsRogge/Transformers-Tutorials/blob/master/BERT/Custom_Named_Entity_Recognition_with_BERT.ipynb
+
+TODO: 
+* Present major ideas from the above reading (understanding)
+* How does it translate to BERT for token classification (NER)? 
+* Produce NER baseline results in terms of Precision, Recall, F1, etc. (as in the tutorial). 
 
 ## Experiments
 
