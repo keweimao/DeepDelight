@@ -42,6 +42,7 @@ Related resources:
 
 ### 2. Baseline (Fall 2023 Week 1)
 
+* Reading to understand BERT: https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
 * Reading to understand BERT for classification: http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/
 * Follow this to experiment and produce a baseline: https://github.com/NielsRogge/Transformers-Tutorials/blob/master/BERT/Custom_Named_Entity_Recognition_with_BERT.ipynb
 
