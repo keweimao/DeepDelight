@@ -1,0 +1,15 @@
+Presidents of FIFA
+No	Name	Country	Took office	Left office	Note
+1	Robert Guérin	 France	23 May 1904	4 June 1906	
+2	Daniel Burley Woolfall	 United Kingdom	4 June 1906	24 October 1918	Died in office
+—	Cornelis August Wilhelm Hirschman	 Netherlands	24 October 1918	1920	Acting
+3	Jules Rimet	 France	1 March 1921	21 June 1954	
+4	Rodolphe Seeldrayers	 Belgium	21 June 1954	7 October 1955	Died in office
+5	Arthur Drewry	 United Kingdom	9 June 1956	25 March 1961	Died in office
+—	Ernst Thommen	  Switzerland	25 March 1961	28 September 1961	Acting
+6	Stanley Rous	 United Kingdom	28 September 1961	8 May 1974	
+7	João Havelange	 Brazil	8 May 1974	8 June 1998	
+8	Sepp Blatter	  Switzerland	8 June 1998	8 October 2015	Impeached
+—	Issa Hayatou	 Cameroon	8 October 2015	26 February 2016	Acting
+9	Gianni Infantino	 Italy
+  Switzerland	26 February 2016	Incumbent	
