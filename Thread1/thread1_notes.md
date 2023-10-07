@@ -69,3 +69,6 @@ Next:
         1. First 5000 on DLITE, and continue 5000 on CE
         2. First 5000 on CE, and continue 5000 on DLITE
 * Reading: https://link.springer.com/article/10.1007/s40745-020-00253-5
+  * Focus on section 3.1 Loss Functions for Classification
+  * Compare logarithmic function fig 1.c to DLITE fig. 2.a
+

@@ -30,7 +30,7 @@ Potential dataset to use:
     * Answer accuracy varies
     * Long response time to each question
 * TDOD: 
-    * Split the long FIFA document into multiple documents mannually (small and structured/specific for certain questions). 
+    * Split the long FIFA document into multiple documents manually (small and structured/specific for certain questions). 
     * Load documents from within a directory. 
     * Test the same questions again. 
 
