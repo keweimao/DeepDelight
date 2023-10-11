@@ -50,11 +50,17 @@ TODO:
 * How does it translate to BERT for token classification (NER)? 
 * Produce NER baseline results in terms of Precision, Recall, F1, etc. (as in the tutorial). 
 
+### 3. Fall 2023 Week 2
+
+* A Survey on Deep Learning for Named Entity Recognition: https://ieeexplore.ieee.org/abstract/document/9039685
+
 ## Experiments
 
 
 ## References
 
+* Comprehensive Overview of Named Entity Recognition: Models, Domain-Specific Applications and Challenges: https://arxiv.org/abs/2309.14084
 * BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding: https://aclanthology.org/N19-1423.pdf
 * Exploring Cross-sentence Contexts for Named Entity Recognition with BERT: https://arxiv.org/abs/2006.01563
+* NER-BERT: A Pre-trained Model for Low-Resource Entity Tagging: https://arxiv.org/abs/2112.00405
 
