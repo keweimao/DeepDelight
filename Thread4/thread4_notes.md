@@ -51,9 +51,15 @@ TODO:
 * How does it translate to BERT for token classification (NER)? 
 * Produce NER baseline results in terms of Precision, Recall, F1, etc. (as in the tutorial). 
 
-### 3. Fall 2023 Week 2
+### 3. Training and Optimization (Fall 2023 Week 2)
 
 * A Survey on Deep Learning for Named Entity Recognition: https://ieeexplore.ieee.org/abstract/document/9039685
+* Fine-tune BERT for NER: https://skimai.com/how-to-fine-tune-bert-for-named-entity-recognition-ner/
+
+TODO: 
+* Investigate different parameters for training, e.g. learning rate, dropout, and experiment them to observe their impact on training efficient and result accuracy. 
+* Investigate how to implement a custom LOSS function for NER training (on top of BERT). 
+    * Also read DLITE paper and review DLITE_LOSS code from Thread #1
 
 ## Experiments
 
