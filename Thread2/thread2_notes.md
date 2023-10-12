@@ -37,17 +37,25 @@ Potential dataset to use:
 ### 1. Baseline Implementation and Testing (Fall 2023 Week 3)
 
 * Generative AI / LLM - Document Retrieval and Question Answering: youtube.com/watch?v=inAY6M6UUkk
-    * Pay attention to the architecture and prompt/context template
-    * Chunking and embedding
+    * Consider the architecture and prompt/context template
+    * Consider chunk and chunk overlap sizes for embedding
+        * See chunking parameters at 6:15: https://youtu.be/inAY6M6UUkk?si=A62nOAaPpE1G0CkP&t=375
+
 
 TODO: 
-1. Replicate the implementation of the above, with the following in mind: 
+1. Review the implementation of the above, with the following in mind: 
     * Text document chunking, embdedding to vector stores, 
-    * Try if you can use GPT4All's embedding, instead Google Vertex AI (in the video)
+    * Investigate which model of GPT4All's embedding is most effective? 
 2. Explore and investigate potential benchmark dataset to use. 
 3. Think about the type of questions and answers to focus on. 
     * For example, tabular data with implicit inforamtion that require logical understanding of "ranking" and "aggregation" is a challenging task. 
     * Do we want to take up this special data/question type and come up with an innovative solution, e.g. with ways to **encode** ranking and aggregation in the data with proper **chunking**? 
+
+### 2. Further Reading and Ideation (Fall 2023 Week 4)
+
+* Question Answering over Long, Structured Documents: https://arxiv.org/abs/2309.08872
+* Open Question Answering over Tables and Text: https://arxiv.org/abs/2010.10439
+* Retrieval Augmented Language Model Pre-Training: http://proceedings.mlr.press/v119/guu20a.html?ref=https://githubhelp.com
 
 ## Additional Resources
 
