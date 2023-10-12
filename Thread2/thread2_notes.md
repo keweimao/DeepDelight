@@ -34,6 +34,20 @@ Potential dataset to use:
     * Load documents from within a directory. 
     * Test the same questions again. 
 
+### 1. Baseline Implementation and Testing (Fall 2023 Week 3)
+
+* Generative AI / LLM - Document Retrieval and Question Answering: youtube.com/watch?v=inAY6M6UUkk
+    * Pay attention to the architecture and prompt/context template
+    * Chunking and embedding
+
+TODO: 
+1. Replicate the implementation of the above, with the following in mind: 
+    * Text document chunking, embdedding to vector stores, 
+    * Try if you can use GPT4All's embedding, instead Google Vertex AI (in the video)
+2. Explore and investigate potential benchmark dataset to use. 
+3. Think about the type of questions and answers to focus on. 
+    * For example, tabular data with implicit inforamtion that require logical understanding of "ranking" and "aggregation" is a challenging task. 
+    * Do we want to take up this special data/question type and come up with an innovative solution, e.g. with ways to **encode** ranking and aggregation in the data with proper **chunking**? 
 
 ## Additional Resources
 
