@@ -1,55 +1,14 @@
 # Thread 1: Delightful Loss
 
 ## Resources
-
 * PyTorch loss functions: https://neptune.ai/blog/pytorch-loss-functions
-
-Example custom loss functions from the above reference: 
-
-```python
-def myCustomLoss(my_outputs, my_labels):
-    #specifying the batch size
-    my_batch_size = my_outputs.size()[0]
-    #calculating the log of softmax values           
-    my_outputs = F.log_softmax(my_outputs, dim=1)
-    #selecting the values that correspond to labels
-    my_outputs = my_outputs[range(my_batch_size), my_labels]
-    #returning the results
-    return -torch.sum(my_outputs)/number_examples
-```
-
-
-You can also create other advanced PyTorch custom loss functions. 
-
-Creating custom loss function with a class definition
-Let’s modify the Dice coefficient, which computes the similarity between two samples, to act as a loss function for binary classification problems:
-
-```python
-class DiceLoss(nn.Module):
-    def __init__(self, weight=None, size_average=True):
-        super(DiceLoss, self).__init__()
-
-    def forward(self, inputs, targets, smooth=1):
-
-        inputs = F.sigmoid(inputs)
-
-        inputs = inputs.view(-1)
-        targets = targets.view(-1)
-
-        intersection = (inputs * targets).sum()
-        dice = (2.*intersection + smooth)/(inputs.sum() + targets.sum() + smooth)
-
-        return 1 - dice
-```
-
-
 * Implementation: https://towardsdatascience.com/implementing-custom-loss-functions-in-pytorch-50739f9e0ee1#:~:text=In%20PyTorch%2C%20custom%20loss%20functions,the%20value%20of%20the%20loss.
 * Custom criterion: https://discuss.pytorch.org/t/solved-what-is-the-correct-way-to-implement-custom-loss-function/3568
 
 
-## Notes
+## Notes and TODOs
 
-9/1/2023
+### 9/1/2023
 
 Observation after 4999 (5000) steps: 
 * Training with DLITE: 
@@ -59,7 +18,8 @@ Observation after 4999 (5000) steps:
     * DLITE train & val loss: 0.4662, 0.4957
     * CE train & val loss: 1.6615, 1.8189 (better)
 
-Next: 
+### Baseline Comparison (2023 Fall Week 2)
+
 * More experiments: 
     * Increase number of iterations: 10k or 20k or until loss/error stop decreasing
         * Please also report `nn.L1Loss()` and `nn.L1Loss()` (two more columns)
@@ -71,4 +31,23 @@ Next:
 * Reading: https://link.springer.com/article/10.1007/s40745-020-00253-5
   * Focus on section 3.1 Loss Functions for Classification
   * Compare logarithmic function fig 1.c to DLITE fig. 2.a
+
+### More on Implementation
+
+* Besides the `forward` function (for loss), how can `backward` be implemnted (back propagate derivative)? 
+* Derivative of DLITE given below--
+
+Let $x$ be an output probability (after softmax), derivative of Least Information $lit$ can be obtained: 
+
+$ lit'(x) = - \ln x $
+
+Derivative of entropy discount $dh'(x)$ can be obtained by: 
+
+
+Yes, the rule you're referring to is the **Quotient Rule** for differentiation. Given two differentiable functions \( u(x) \) and \( v(x) \), the derivative of their quotient is given by:
+
+$ \frac{d}{dx} \left( \frac{u}{v} \right) = \frac{u'v - uv'}{v^2} $
+
+$\frac{d}{dx} [u(x) \cdot v(x)] = u'(x) \cdot v(x) + u(x) \cdot v'(x) $
+
 

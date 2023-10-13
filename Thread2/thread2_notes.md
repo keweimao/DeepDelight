@@ -40,12 +40,17 @@ Potential dataset to use:
     * Consider the architecture and prompt/context template
     * Consider chunk and chunk overlap sizes for embedding
         * See chunking parameters at 6:15: https://youtu.be/inAY6M6UUkk?si=A62nOAaPpE1G0CkP&t=375
-
+* Consider chunking strategies: 
+    * Fixed chunking with fixed overlap, enough? 
+    * Semantic chunking based on text structures, e.g. sentences or paragraphs
+    * Adaptive or hierarchical chunking: start with larger chunks, and break down into smaller ones if no good (confident) answer is identified. 
+        * How do we dynamically evaluate confidence of an answer? 
 
 TODO: 
 1. Review the implementation of the above, with the following in mind: 
-    * Text document chunking, embdedding to vector stores, 
+    * Text document **chunking**, **overlap**, before embdedding to vector stores, 
     * Investigate which model of GPT4All's embedding is most effective? 
+    * Test it in your implementation
 2. Explore and investigate potential benchmark dataset to use. 
 3. Think about the type of questions and answers to focus on. 
     * For example, tabular data with implicit inforamtion that require logical understanding of "ranking" and "aggregation" is a challenging task. 
@@ -53,9 +58,10 @@ TODO:
 
 ### 2. Further Reading and Ideation (Fall 2023 Week 4)
 
-* Question Answering over Long, Structured Documents: https://arxiv.org/abs/2309.08872
-* Open Question Answering over Tables and Text: https://arxiv.org/abs/2010.10439
-* Retrieval Augmented Language Model Pre-Training: http://proceedings.mlr.press/v119/guu20a.html?ref=https://githubhelp.com
+* Standford & Adobe Research (2023). Question Answering over Long, Structured Documents: https://arxiv.org/abs/2309.08872
+* UCSB & Google Research (2021). Open Question Answering over Tables and Text: https://arxiv.org/abs/2010.10439
+* Google (2020). Retrieval Augmented Language Model Pre-Training: http://proceedings.mlr.press/v119/guu20a.html?ref=https://githubhelp.com
+* Retrieval Augmented Generation (RAG): https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00530/114590/Improving-the-Domain-Adaptation-of-Retrieval
 
 ## Additional Resources
 
