@@ -1,0 +1,77 @@
+The FIFA Men's World Ranking is a ranking system for men's national teams in association football, led by Argentina as of April 2023.[1] The teams of the men's member nations of FIFA, football's world governing body, are ranked based on their game results with the most successful teams being ranked highest. The rankings were introduced in December 1992, and eight teams (Argentina, Belgium, Brazil, France, Germany, Italy, the Netherlands and Spain) have held the top position, of which Brazil have spent the longest ranked first.
+
+A points system is used, with points being awarded based on the results of all FIFA-recognised full international matches. The ranking system has been revamped on several occasions, generally responding to criticism that the preceding calculation method did not effectively reflect the relative strengths of the national teams. Since 16 August 2018, the ranking system has adopted the Elo rating system used in chess and Go.
+
+The ranking is sponsored by Coca-Cola; as such, the FIFA/Coca-Cola World Ranking name is also used. Coca-Cola also sponsors the women's counterpart.
+
+As of 21st September 2023, the top 20 FIFA men's football team rankings are as follows:
+1. Argentina remains steady at the top with 1851.41 points.
+2. France also maintains its position with 1840.76 points.
+3. Brazil secures the third spot with 1837.61 points.
+4. England holds steady in fourth place with 1794.34 points.
+5. Belgium stays in the fifth position with 1792.64 points.
+6. Croatia is in sixth place with 1747.83 points.
+7. Netherlands resides in the seventh position with 1743.15 points.
+8. Portugal moves up a spot to eighth with 1728.58 points.
+9. Italy drops down to ninth place with 1727.37 points.
+10. Spain keeps its tenth position with 1710.72 points.
+11. United States is at eleventh with 1678.71 points.
+12. Mexico stands at twelfth place with 1661.46 points.
+13. Morocco climbs one position to thirteenth with 1658.32 points.
+14. Switzerland falls to fourteenth place with 1654.11 points.
+15. Germany holds the fifteenth position with 1637.9 points.
+16. Colombia advances to sixteenth place with 1629.6 points.
+17. Uruguay slips to seventeenth with 1626.51 points.
+18. Denmark ascends to eighteenth place with 1606.84 points.
+19. Japan climbs to nineteenth with 1605.2 points.
+20. Senegal drops two positions to twentieth with 1597.01 points.
+
+
+Team of the Year
+Best Mover of the Year
+The changes made the ranking system more complex, but helped improve its accuracy by making it more comprehensive.
+
+2006–2018 calculation method
+Main article: FIFA World Ranking system (2006–2018)
+FIFA announced that the ranking system would be updated following the 2006 World Cup. The evaluation period was cut from eight to four years, and a simpler method of calculation was used to determine rankings.[13] Goals scored and home or away advantage were no longer taken into account, and other aspects of the calculations, including the importance attributed to different types of match, were revised. The first set of revised rankings and the calculation methodology were announced on 12 July 2006.
+
+This change was rooted at least in part in widespread criticism of the previous ranking system. Many football enthusiasts felt it was inaccurate, especially when compared to other ranking systems and that it was not sufficiently responsive to changes in the performance of individual teams.
+
+2018 ranking system update
+In September 2017, FIFA announced they were reviewing the ranking system and would decide after the end of the 2018 FIFA World Cup qualification whether any changes would be made to improve the ranking.[14] FIFA announced on 10 June 2018 that the ranking system would be updated following the 2018 World Cup finals. The calculation method to be adopted will be closely modelled after the Elo rating system and rankings of its member associations will be updated on a game-by-game basis. The weighting designated for each confederation for ranking purposes will be abolished.[15] However, the new methodology does not account for home or away games and margin of the victory, as in several popular unofficial Elo-based ranking systems.[16]
+
+FIFA had intended to introduce the new ranking system in July 2018, but with no matches scheduled between the July and August ranking dates, delayed until August 2018. There was speculation from football journalists such as ESPN's Dale Johnson that this was because projections of the new rankings had seen relatively little change in positions,[17] with Germany – who had been eliminated in the first round of the World Cup – remaining as the top ranked team.[18] FIFA had originally planned to use existing world ranking points from June 2018 as the start value, but when the August rankings appeared, the starting points had been changed to an equal distribution of points between 1600 (Germany, as the previously top ranked team) and 868 (Anguilla, Bahamas, Eritrea, Somalia, Tonga and Turks and Caicos Islands, which had 0 points in June), according to the formula:
+
+where R is the rank in June 2018. When two or more teams had equal ranks, the following team received the next immediate rank possible, e.g. if two teams had R=11, the following team had R=12, not 13. Then the rating changes according to the games played after previous release were calculated.[19][20] This produced a more dramatically altered ranking table, with Germany falling to 15th and 2018 World Cup champions France moving to the top of the ranking.[20]
+
+2021 alteration
+Starting with the April 2021 rankings, the teams' points are now rounded to two decimal points, instead of being rounded to the nearest integer.
+
+
+Leaders
+When the system was introduced, Germany debuted as the top-ranked team following their extended period of dominance in which they had reached the three previous FIFA World Cup finals, winning one of them. Brazil took the lead in the run up to the 1994 FIFA World Cup after winning eight and losing only one of nine qualification matches, while on the way scoring twenty goals and conceding just four. Italy then led for a short time on the back of their own equally successful World Cup qualifying campaign, after which the top place was re-claimed by Germany.
+Brazil's success in their lengthy qualifying campaign returned them to the lead for a brief period. Germany led again during the 1994 World Cup, until Brazil's victory in that competition gave them a large lead that would stand up for nearly seven years, until they were surpassed by a strong France team that captured both the 1998 FIFA World Cup and the 2000 European Football Championship.
+Success at the 2002 FIFA World Cup restored Brazil to the top position, where they remained until February 2007, when Italy returned to the top for the first time since 1993 following their 2006 FIFA World Cup win in Germany. Just one month later, Argentina replaced them, reaching the top for the first time, but Italy regained its place in April. After winning the Copa América 2007 in July, Brazil returned to the top, but were replaced by Italy in September and then Argentina in October.
+In July 2008, Spain took over the lead for the first time, having won UEFA Euro 2008. Brazil began a sixth stint at the top of the rankings in July 2009 after winning the 2009 Confederations Cup, and Spain regained the title in November 2009 after winning every match in qualification for the 2010 FIFA World Cup.
+In April 2010, Brazil returned to the top of the table. After winning the 2010 World Cup, Spain regained the top position and held it until August 2011, when the Netherlands reached the top spot for the first time,[23] only to relinquish it the following month.
+In July 2014, Germany took over the lead once again, having won the 2014 FIFA World Cup. In July 2015, Argentina reached the top spot for the first time since 2008, after reaching both the 2014 FIFA World Cup Final, as well as the 2015 Copa America Final. In November 2015, Belgium became the leader in the FIFA rankings for the first time, after topping their Euro 2016 qualifying group. Belgium led the rankings until April 2016, when Argentina returned to the top. On 6 April 2017, Brazil returned to the No. 1 spot for the first time since just before the 2010 World Cup,[24] but Germany regained the top spot in July after winning the Confederations Cup.[25]
+In the summer of 2018, FIFA updated their rating system by adopting the Elo rating system. The first ranking list with this system, in August 2018, saw France retake the top spot for the first time after nearly 16 years, having won the 2018 FIFA World Cup. One month later, for the first time, two teams were joint leaders as Belgium reached the same ranking as France.[26] This lasted only one month as Belgium regained sole possession of the top spot in September 2018 and kept it for nearly four years until the end of March 2022, with only Brazil and Spain ever holding it longer uninterrupted. In March 2022, Brazil returned to the top of the list for about a year before being overtaken by 2022 FIFA World Cup winners Argentina on 6 April 2023.
+
+Uses of the rankings
+The rankings are used by FIFA to rank the progression and ability of the national football teams of its member nations, and claims that they create "a reliable measure for comparing national A-teams".[2] They are used as part of the calculation, or the entire grounds to seed competitions. In the 2010 FIFA World Cup qualification tournament, the rankings were used to seed the groups in the competitions involving CONCACAF members (using the May rankings), CAF (with the July set of data), and UEFA, using the specially postponed November 2007 ranking positions.
+The October 2009 ranking was used to determine the seeds for the 2010 FIFA World Cup final draw.[27] The March 2011 ranking was used to seed the draw for the 2012 CAF Men's Pre-Olympic Tournament second qualifying round.[28]
+The rankings are also used to determine the winners of the two annual awards national teams receive on the basis of their performance in the rankings.
+The (English) Football Association uses the average of the last 24 months of rankings as one of the criteria for player work permits.[29]
+
+Special releases
+To determine the seeding of teams in certain instances like FIFA World Cup qualification, FIFA occasionally releases a list of special rankings for a particular confederation to determine the seeding of the teams. For instance, the seeding for the third round draw for AFC qualifiers was based on a special release of the FIFA World Rankings for Asian teams on 18 June 2021.[30]
+
+Criticism of pre-2018 methods
+Since their introduction in 1992, the FIFA World Rankings have been the subject of much debate, particularly regarding the calculation procedure and the resulting disparity between generally perceived quality and world ranking of some teams. The perceived flaws in the FIFA system have led to the creation of a number of alternative rankings from football statisticians.[31]
+The initial system was very simple, with no weighting for the quality of opponent or importance of a match. This saw Norway reach second in October 1993 and July–August 1995, a ranking that was criticised at the time.[31] The rankings were adapted in 1999 to include weightings based on the importance of the match and the strength of the opponent. A win over a weak opponent resulted in fewer points being awarded than a win over a much stronger one. Further adaptations in 2006 were made to reduce the number of years' results considered from 8 to 4,[31][32] with greater reliance on matches from within the previous 12 months.
+Still, criticisms of the rankings remained, with particular anomalies being noted including: the United States rise to fourth in 2006, to the surprise of even their own players;[33] Israel's climb to 15th in November 2008, which surprised the Israeli press;[34][35][36] and Belgium's rank of world number 1 in November 2015, even though Belgium had only played in one tournament final stage in the past 13 years.[37]
+Further criticisms of the 2006–2018 formula included the inability of hosts of major tournaments to retain a high place in the rankings, as the team participated in only lower-value friendly matches due to their automatic qualification for the tournament. For example, 2014 FIFA World Cup hosts Brazil fell to a record low ranking of 22nd in the world before that tournament,[38][39] at which they then finished fourth. 2018 FIFA World Cup hosts Russia had the lowest ranking (70th) at the tournament, where they reached the quarter-finals before bowing out to eventual finalists Croatia on penalties.
+In the 2010s, teams realised the ranking system could be 'gamed', specifically by avoiding playing non-competitive matches, particularly against weaker opponents.[40] This was because the low weighting of friendlies meant that even victories could reduce a team's average score: in other words, a team could win a match and lose points. Before the seeding of the 2018 World Cup preliminary draw, Romania even appointed a ranking consultant, playing only one friendly in the year before the draw.[41][42][43] Similar accusations had been made against Switzerland, who were a seeded team at the 2014 FIFA World Cup having played only three friendly matches in the previous year,[40] and Poland before the 2018 FIFA World Cup.[44]
+The use of regional strength multiplier in the ranking formula before 2018 was also accused of further reinforcing and perpetuating the bias for and against certain regions.[citation needed]
+
+
