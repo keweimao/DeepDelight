@@ -71,7 +71,7 @@ TODO:
 * Invesgate the potential to implement something similar with your NER implementation: 
     * Related implementation in Thread #1: [Jerry's Notebook](../Thread1/DLITE_CrossEntropy_Comparison_10_11_2023.ipynb)
     * First test something simple like `L1` Loss in your implementation
-    * Then implement DLITE Loss after your custome `LI` works reliably
+    * Then implement DLITE Loss after your custome `L1` works reliably
 
 
 ## Experiments
