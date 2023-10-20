@@ -40,7 +40,7 @@ Related resources:
 + Follow the tutorial to train/fine-tune BERT for NER. 
 + Test and report the results. 
 
-### 2. Baseline (Fall 2023 Week 1)
+### 2. Baseline (Fall 2023 Week 2)
 
 * Reading to understand BERT: https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270
 * Reading to understand BERT for classification: http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/
@@ -51,7 +51,7 @@ TODO:
 * How does it translate to BERT for token classification (NER)? 
 * Produce NER baseline results in terms of Precision, Recall, F1, etc. (as in the tutorial). 
 
-### 3. Training and Optimization (Fall 2023 Week 2)
+### 3. Training and Optimization (Fall 2023 Week 3)
 
 * A Survey on Deep Learning for Named Entity Recognition: https://ieeexplore.ieee.org/abstract/document/9039685
 * Fine-tune BERT for NER: https://skimai.com/how-to-fine-tune-bert-for-named-entity-recognition-ner/
@@ -60,6 +60,19 @@ TODO:
 * Investigate different parameters for training, e.g. learning rate, dropout, and experiment them to observe their impact on training efficient and result accuracy. 
 * Investigate how to implement a custom LOSS function for NER training (on top of BERT). 
     * Also read DLITE paper and review DLITE_LOSS code from Thread #1
+
+### 4. Training and Optimization (Fall 2023 Week 4)
+
+Reading: 
+* DLITE paper and the DLITE formula: https://arxiv.org/abs/2002.07888
+* An example of DLITE Loss for `torch` in Thread #1: [dlite_loss_notes.md](../Thread1/dlite_loss_notes.md)
+
+TODO: 
+* Invesgate the potential to implement something similar with your NER implementation: 
+    * Related implementation in Thread #1: [Jerry's Notebook](../Thread1/DLITE_CrossEntropy_Comparison_10_11_2023.ipynb)
+    * First test something simple like `L1` Loss in your implementation
+    * Then implement DLITE Loss after your custome `LI` works reliably
+
 
 ## Experiments
 
