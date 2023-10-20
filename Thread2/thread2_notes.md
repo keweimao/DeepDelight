@@ -58,10 +58,20 @@ TODO:
 
 ### 2. Further Reading and Ideation (Fall 2023 Week 4)
 
-* Standford & Adobe Research (2023). Question Answering over Long, Structured Documents: https://arxiv.org/abs/2309.08872
-* UCSB & Google Research (2021). Open Question Answering over Tables and Text: https://arxiv.org/abs/2010.10439
-* Google (2020). Retrieval Augmented Language Model Pre-Training: http://proceedings.mlr.press/v119/guu20a.html?ref=https://githubhelp.com
+Reading: 
 * Retrieval Augmented Generation (RAG): https://direct.mit.edu/tacl/article/doi/10.1162/tacl_a_00530/114590/Improving-the-Domain-Adaptation-of-Retrieval
+
+Benchmark datasets: 
+* QAConv: https://github.com/salesforce/QAConv
+* NewsQA: https://github.com/Maluuba/newsqa
+
+TODO: 
+1. Explore the QAConv and NewsQA datasets or other that have been used in related research. Pick one to test. 
+2. Experiment on the following chunking strategies and observe performances: 
+    * Fixed chunking: 200, 400, 800, 1600; combined with 0%, 10%, 20% and 30% overlap. (16 combinations)
+    * Semantic structure chunking: sentence, paragraphs, and sections. (No overlap)
+    * Record performance for each configuration, e.g. EM (exact match) and F1
+
 
 ## Additional Resources
 
@@ -82,3 +92,6 @@ TREC QA data: https://trec.nist.gov/data/qa/t2007_qadata.html
 
 * REALM: Retrieval-Augmented Language Model Pre-Training: https://arxiv.org/abs/2002.08909
 * In-Context Retrieval-Augmented Language Models: https://arxiv.org/abs/2302.00083
+* Standford & Adobe Research (2023). Question Answering over Long, Structured Documents: https://arxiv.org/abs/2309.08872
+* UCSB & Google Research (2021). Open Question Answering over Tables and Text: https://arxiv.org/abs/2010.10439
+* Google (2020). Retrieval Augmented Language Model Pre-Training: http://proceedings.mlr.press/v119/guu20a.html?ref=https://githubhelp.com
