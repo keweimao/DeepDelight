@@ -48,7 +48,7 @@ class DLITELoss(nn.Module):
 
 ```
 
-## DLITE Loss to Avoid Log(0) (NaN)
+## PREFERRED: DLITE Loss to Avoid Log(0) (NaN)
 
 To avoid zero values in P and Q: 
 
