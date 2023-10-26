@@ -31,6 +31,7 @@ Observation after 4999 (5000) steps:
 * Reading: https://link.springer.com/article/10.1007/s40745-020-00253-5
   * Focus on section 3.1 Loss Functions for Classification
   * Compare logarithmic function fig 1.c to DLITE fig. 2.a
+* Refer to this for math notation and examples of softmax plus cross-entropy: https://gombru.github.io/2018/05/23/cross_entropy_loss/
 
 ### More on Implementation
 
