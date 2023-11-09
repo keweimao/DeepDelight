@@ -72,8 +72,9 @@ The `KL` formula can be found at: https://en.wikipedia.org/wiki/Kullback%E2%80%9
 3. The result of the above `KL` implementation will confirm whether the probabilities have been used correctly: 
     * If this KL works well, the impelementation is good and the issue is with DLITE theory itself. 
     * If this doesn't, then review code and fix the issue until achieve the same good result with THIS `KL`. 
-4. After the above correction, implement and test one more method $DLITE^{1/3}$, which is a metric distance: 
-    * Use the final DLITE implementation, and compute its **Cube Root** as `loss`. 
+4. After the above correction, implement and test **TWO** additional methods below: 
+    * $DLITE^{1/3}$, which is a metric distance. Use the final DLITE implementation, and compute its **Cube Root** as `loss`. 
+    * **LIT** method, which is a sum of `g_values` **without** `delta_h_values`. 
 
 
 ### More on Implementation
