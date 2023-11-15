@@ -74,6 +74,46 @@ TODO:
     * Then implement DLITE Loss after your custome `L1` works reliably
 
 
+### 5. Check Implementation (Fall 2023 Week 7)
+
+1. One way to check and test (for a potential bug) is to **implement KL from scratch**: 
+    * Instead of calling `F.kl_div()` in the `torch.nn` module
+    * Implement our own `KLLoss()` based on simple revision (simplification) of `DLITELoss()`
+    * The following is example code: 
+
+Based on the sample zero-value masking, we can compute `KL` in the `forward` function: 
+
+```python
+def forward(self, logits, targets):
+        # Convert logits to probabilities using softmax
+        probs = F.softmax(logits, dim=-1)
+
+        # One-hot encode the targets to get true probabilities
+        true_probs = F.one_hot(targets, num_classes=probs.size(-1)).float()
+
+        # Masks for non-zero elements of probs and true_probs
+        mask_probs = probs > 0
+        mask_true_probs = true_probs > 0
+
+        # Calculate g function for non-zero elements using the mask
+        kl_values = torch.zeros_like(probs)
+        kl_values[mask_true_probs] = true_probs[mask_true_probs] * torch.log(true_probs[mask_true_probs]/probs[mask_true_probs])
+
+        # Sum over all classes and average over the batch size
+        loss = kl_values.sum(dim=-1).mean()
+
+        return loss
+```
+
+The `KL` formula can be found at: https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence, where $P$ is true probability distribution and $Q$ is the estimate (prediction). 
+
+2. The result of the above `KL` implementation will confirm whether the probabilities have been used correctly: 
+    * If this KL works well, the impelementation is good and the issue is with DLITE theory itself. 
+    * If this doesn't, then review code and fix the issue until achieve the same good result with THIS `KL`. 
+3. After the above correction, implement and test **TWO** additional methods below: 
+    * $DLITE^{1/3}$, which is a metric distance. Use the final DLITE implementation, and compute its **Cube Root** as `loss`. 
+    * **LIT** method, which is a sum of `g_values` **without** `delta_h_values`. 
+
 ## Experiments
 
 
