@@ -72,6 +72,15 @@ TODO:
     * Semantic structure chunking: sentence, paragraphs, and sections. (No overlap)
     * Record performance for each configuration, e.g. EM (exact match) and F1
 
+## 3. Experimentation (Fall 2023 Week 7)
+
+1. Optimization: 
+    * Looks like the gpt4all module is already optimzed GPUs (Apple Metal)
+    * Text splitter and embedder instances can be called ONCE outside loops
+2. Improvement: 
+    * Change `1similar_search` to `similarity_search_by_vector()` with query embedding
+    * Consider `InstructEmbedding` for search queries (questions)
+
 
 ## Additional Resources
 
