@@ -75,11 +75,20 @@ TODO:
 ## 3. Experimentation (Fall 2023 Week 7)
 
 1. Optimization: 
-    * Looks like the gpt4all module is already optimzed GPUs (Apple Metal)
+    * Looks like the gpt4all module is already optimized GPUs (Apple Metal)
     * Text splitter and embedder instances can be called ONCE outside loops
 2. Improvement: 
-    * Change `1similar_search` to `similarity_search_by_vector()` with query embedding
-    * Consider `InstructEmbedding` for search queries (questions)
+    * Change `1similar_search` to `similarity_search_by_vector()` with query embedding (DONE)
+    * Consider `InstructEmbedding` for search queries (questions), along with other models (TODO)
+3. Current results on NewsQA:
+    * Tested chunk_sizes = [25, 50, 75, 100, 125, 150, 175, 200, 400, 800, 1600]
+    * Best on first 100 stories at around chunk_size=200 with 0 overlap, low F1<0.1 and 0 EM
+    * Inconsistent F1 scores in different runs, please check F1 calculation.
+    * Use the 1st story and all 9 questions, print ground truth, predicted answer, and F1 for checking.
+4. Mengyang to take on QAConv dataset?
+    * First use a TINY subset of: https://github.com/Maluuba/newsqa
+    * Implement and test implementation on the TINY data. 
+
 
 
 ## Additional Resources
