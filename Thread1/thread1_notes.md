@@ -77,6 +77,9 @@ The `KL` formula can be found at: https://en.wikipedia.org/wiki/Kullback%E2%80%9
     * **LIT** method, which is a sum of `g_values` **without** `delta_h_values`. 
 
 
+
+
+
 ### More on Implementation
 
 * Besides the `forward` function (for loss), how can `backward` be implemnted (back propagate derivative)? 
