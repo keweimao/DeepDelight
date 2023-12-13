@@ -91,6 +91,8 @@ TODO:
 
 
 
+* A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT: https://arxiv.org/abs/2302.11382
+
 ## Additional Resources
 
 ### Data
