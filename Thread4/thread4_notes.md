@@ -116,6 +116,10 @@ The `KL` formula can be found at: https://en.wikipedia.org/wiki/Kullback%E2%80%9
 
 ## Experiments
 
+More datasets for NER: 
++ CoNLL: https://huggingface.co/datasets/conll2003
++ Broad Twitter Corpus: https://huggingface.co/datasets/strombergnlp/broad_twitter_corpus
++ NYTimes Annotated Corpus: https://catalog.ldc.upenn.edu/LDC2008T19
 
 ## References
 
