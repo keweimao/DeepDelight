@@ -102,7 +102,7 @@ TODO:
 ### B. Research Papers
 
 1. ArXiv paper with a proposed retrieval-augmented generative QA model for **event argument extraction**, focusing on the effectiveness of using RAG in various settings​: https://arxiv.org/abs/2211.07067
-2. Fine-tuning RAG with prompt engineering: https://arxiv.org/abs/2005.11401, also discussed briefly at: https://www.promptingguide.ai/techniques/rag
+2. Meta Research paper with proposed RAG: https://arxiv.org/abs/2005.11401, also discussed briefly at: https://www.promptingguide.ai/techniques/rag
 3. A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT: https://arxiv.org/abs/2302.11382
 
 ### C. Notebooks for Ideas
