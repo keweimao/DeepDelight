@@ -90,10 +90,25 @@ TODO:
     * Implement and test implementation on the TINY data. 
 
 
+## Additional Readings and Resources
 
-* A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT: https://arxiv.org/abs/2302.11382
+### A. General Articles and Resources
 
-## Additional Resources
+1. IBM Research Blog on RAG as an AI framework that improves the quality of LLM-generated responses by grounding the model on external knowledge sources​: https://research.ibm.com/blog/retrieval-augmented-generation-RAG
+2. Hugging Face brief documentation on RAG: https://huggingface.co/docs/transformers/model_doc/rag
+3. Key concepts in RAG: https://www.datastax.com/guides/what-is-retrieval-augmented-generation
+4. Azure ML on RAG: https://learn.microsoft.com/en-us/azure/machine-learning/concept-retrieval-augmented-generation?view=azureml-api-2
+
+### B. Research Papers
+
+1. ArXiv paper with a proposed retrieval-augmented generative QA model for **event argument extraction**, focusing on the effectiveness of using RAG in various settings​: https://arxiv.org/abs/2211.07067
+2. Fine-tuning RAG with prompt engineering: https://arxiv.org/abs/2005.11401, also discussed briefly at: https://www.promptingguide.ai/techniques/rag
+3. A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT: https://arxiv.org/abs/2302.11382
+
+### C. Notebooks for Ideas
+
+1. Amazon SageMaker JumpStart provides sample notebooks demonstrating question answering tasks using a RAG-based approach with large language models (LLMs), focusing on domain-specific text outputs: https://aws.amazon.com/blogs/machine-learning/question-answering-using-retrieval-augmented-generation-with-foundation-models-in-amazon-sagemaker-jumpstart/
+2. RAG Evaluation: https://towardsdatascience.com/evaluating-rag-applications-with-ragas-81d67b0ee31a
 
 ### Data
 
