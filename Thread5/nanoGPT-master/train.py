@@ -27,6 +27,8 @@ import torch
 from torch.nn.parallel import DistributedDataParallel as DDP
 from torch.distributed import init_process_group, destroy_process_group
 
+import json
+
 from model import GPTConfig, GPT
 
 # -----------------------------------------------------------------------------
@@ -77,6 +79,9 @@ config_keys = [k for k,v in globals().items() if not k.startswith('_') and isins
 exec(open('configurator.py').read()) # overrides from command line or config file
 config = {k: globals()[k] for k in config_keys} # will be useful for logging
 # -----------------------------------------------------------------------------
+train_losses = []
+val_losses = []
+
 
 # various inits, derived attributes, I/O setup
 ddp = int(os.environ.get('RANK', -1)) != -1 # is this a ddp run?
@@ -259,6 +264,8 @@ while True:
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
         losses = estimate_loss()
+        train_losses.append(losses['train'].item())
+        val_losses.append(losses['val'].item())
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
             wandb.log({
@@ -331,3 +338,10 @@ while True:
 
 if ddp:
     destroy_process_group()
+
+
+with open('train_losses.json', 'w') as file:
+    json.dump(train_losses, file)
+
+with open('val_losses.json', 'w') as file:
+    json.dump(val_losses, file)
