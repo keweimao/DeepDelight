@@ -16,4 +16,6 @@ plt.xlabel('Iteration Number')
 plt.ylabel('Loss')
 plt.legend()
 plt.grid(True)
-plt.savefig('loss_plot.png')
+
+plt.savefig('origin_loss_plot.png')
+# plt.savefig('test_loss_plot.png')
