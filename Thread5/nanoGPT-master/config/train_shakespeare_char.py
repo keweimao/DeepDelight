@@ -65,7 +65,7 @@ n_embd = 128
 
 
 attn_dropout = 0.2
-resid_dropout = 0.2
+resid_dropout = 0.0
 
 learning_rate = 1e-3 # with baby networks can afford to go a bit higher
 max_iters = 5000
