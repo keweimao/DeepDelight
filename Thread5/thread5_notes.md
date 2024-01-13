@@ -50,6 +50,7 @@ so you can have **different dropout rates** for `self.attn_dropout` and `self.re
 
 4. Test the following combinations of parameters (identical dropouts): 
 
+```
 self.attn_dropout = self.resid_dropout = 0
 self.attn_dropout = self.resid_dropout = 0.1
 self.attn_dropout = self.resid_dropout = 0.2
@@ -57,6 +58,7 @@ self.attn_dropout = self.resid_dropout = 0.3
 self.attn_dropout = self.resid_dropout = 0.4
 self.attn_dropout = self.resid_dropout = 0.5
 self.attn_dropout = self.resid_dropout = 0.6
+```
 
 5. Test additional combinations of parameters: 
 
