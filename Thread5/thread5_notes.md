@@ -34,5 +34,73 @@ TODOs:
 4. Report moving average Val Loss in the last 5 iterations
 
 
-## Winter 2024
+## Winter 2024 (Week 1)
 
+1. Use the NanoGPT implementation here: https://github.com/karpathy/nanoGPT
+2. Revise code in `https://github.com/karpathy/nanoGPT/blob/master/model.py`, and
+3. Program the following two parameters: 
+
+```
+        # regularization
+        self.attn_dropout = nn.Dropout(config.dropout)
+        self.resid_dropout = nn.Dropout(config.dropout)
+```
+
+so you can have **different dropout rates** for `self.attn_dropout` and `self.resid_dropout`. 
+
+4. Test the following combinations of parameters (identical dropouts): 
+
+```
+self.attn_dropout = self.resid_dropout = 0
+self.attn_dropout = self.resid_dropout = 0.1
+self.attn_dropout = self.resid_dropout = 0.2
+self.attn_dropout = self.resid_dropout = 0.3
+self.attn_dropout = self.resid_dropout = 0.4
+self.attn_dropout = self.resid_dropout = 0.5
+self.attn_dropout = self.resid_dropout = 0.6
+```
+
+5. Test additional combinations of parameters: 
+
+```python
+with self.resid_dropout = 0
+    self.attn_dropout = 0
+    self.attn_dropout = 0.1
+    self.attn_dropout = 0.2
+    self.attn_dropout = 0.3
+    self.attn_dropout = 0.4
+with self.resid_dropout = 0.1
+    self.attn_dropout = 0
+    self.attn_dropout = 0.1
+    self.attn_dropout = 0.2
+    self.attn_dropout = 0.3
+    self.attn_dropout = 0.4
+with self.resid_dropout = 0.2
+    self.attn_dropout = 0
+    self.attn_dropout = 0.1
+    self.attn_dropout = 0.2
+    self.attn_dropout = 0.3
+    self.attn_dropout = 0.4
+with self.resid_dropout = 0.3
+    self.attn_dropout = 0
+    self.attn_dropout = 0.1
+    self.attn_dropout = 0.2
+    self.attn_dropout = 0.3
+    self.attn_dropout = 0.4
+with self.resid_dropout = 0.4
+    self.attn_dropout = 0
+    self.attn_dropout = 0.1
+    self.attn_dropout = 0.2
+    self.attn_dropout = 0.3
+    self.attn_dropout = 0.4
+```
+
+6. After an initial test, program this with a loop in a `.py` implementation so you can run it in a batch mode. 
+7. Save all results to CSV file in the following format: 
+
+```
+attn_dropout    resid_dropout   iterations  train_loss  val_loss
+0.0             0.0             5000        2.0         2.2
+0.1             0.0             5000        1.9         2.0
+..              ..              ..          ..          ..
+```
