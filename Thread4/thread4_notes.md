@@ -114,8 +114,36 @@ The `KL` formula can be found at: https://en.wikipedia.org/wiki/Kullback%E2%80%9
     * $DLITE^{1/3}$, which is a metric distance. Use the final DLITE implementation, and compute its **Cube Root** as `loss`. 
     * **LIT** method, which is a sum of `g_values` **without** `delta_h_values`. 
 
+
+### 6. Winter 2024 (Week 1)
+
+1. Code debugging and testing: Is it producing correct results without 0 scores? 
+2. Test NER predictions with CE, KL, DLITE loss functions. Report overall (weighted/micro/macro) precision, recall, F1 in one table: 
+
+Example format: 
+```csv
+Loss    Train Iterations    Precision   Recall  F1
+CE      100?                0.9         0.9     0.9
+KL      100                 0.91        0.91    0.91
+DLITE   ...
+L1      ...
+```
+
+3. Consider additional loss functions such as: 
+    * existing implementation of `nn.CosineEmbeddingLoss`, and/or 
+    * Jessen-Shannon divergence: https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
+
+
+References: 
+* A good reference to additional loss functions: https://arxiv.org/pdf/2301.05579.pdf
+* Loss functions in PyTorch: https://pytorch.org/docs/stable/nn.html#loss-functions
+
 ## Experiments
 
+More datasets for NER: 
++ CoNLL: https://huggingface.co/datasets/conll2003
++ Broad Twitter Corpus: https://huggingface.co/datasets/strombergnlp/broad_twitter_corpus
++ NYTimes Annotated Corpus: https://catalog.ldc.upenn.edu/LDC2008T19
 
 ## References
 
