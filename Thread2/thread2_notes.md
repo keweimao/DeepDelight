@@ -89,6 +89,26 @@ TODO:
     * First use a TINY subset of: https://github.com/Maluuba/newsqa
     * Implement and test implementation on the TINY data. 
 
+## 4. Improvement (Winter 2024 Week 1)
+
+For Lixiao on `NewsQA` and Mengyang on `QAConv` dataset respectively, follow the same procedure: 
+
+1. Use the GPT4All Falcon (8GB memory use) model for the final answer generation. 
+2. Test the following prompt (see prompts.md for examples) and evaluate precision, recall, and F1: 
+
+```json
+Based on the following information only: 
+
+"{Retrieved Chunks or Sentences}"
+
+{QUESTION} Please provide the answer in as few words as possible and please do NOT repeat any word in the question, i.e. "{QUESTION}". 
+```
+
+3. Test the above on a small subset only, e.g. with 1 story and/or 10 questions or so. 
+4. If the above yield decent results, create code as `.py` for experiments on the full dataset. 
+5. NEXT: Will go back to different chunks and overlaps for (baseline) comparision, using the same prompt. 
+6. NEXT: Consider other even smaller models for answer generation, i.e. less memory and faster responses. 
+
 
 ## Additional Readings and Resources
 
