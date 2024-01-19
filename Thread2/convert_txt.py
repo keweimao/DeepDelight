@@ -16,9 +16,10 @@ from langchain.embeddings.huggingface import HuggingFaceInstructEmbeddings
 import torch
 import pandas as pd
 
-file_path='E:/QA/article_segment.json'
+#The link of the files is https://github.com/salesforce/QAConv/tree/master/dataset, which in QAConv-V1.0.zip
+file_path='E:/QA/article_segment.json' #The file here should be article_segment.txt, but its actual structure is json file
 data = json.loads(Path(file_path).read_text())
-QA = pd.read_json("E:/QAConv-V1.0/QAConv-V1.0/sample.json")
+QA = pd.read_json("E:/QAConv-V1.0/QAConv-V1.0/sample.json") #For the file here, either trn.json, tst.json or val.json can be used as Question_Answer data
 QA['text']=''
 for i in range(len(QA)):
     text=''
