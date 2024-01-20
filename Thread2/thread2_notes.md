@@ -110,6 +110,8 @@ Based on the following information only:
 6. NEXT: Consider other even smaller models for answer generation, i.e. less memory and faster responses. 
 
 
+* A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT: https://arxiv.org/abs/2302.11382
+
 ## Additional Readings and Resources
 
 ### A. General Articles and Resources
