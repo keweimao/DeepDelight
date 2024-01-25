@@ -38,7 +38,7 @@ def calculate_token_f1(predicted, actual):
 def newsqa_loop(data, llm, output_file_path, chunk_sizes, overlap_percentages, max_stories, instruct_embedding_model_name, instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT):
     with open(output_file_path, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1'])
+        writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1'])
 
         word_embed = HuggingFaceInstructEmbeddings(
             model_name=instruct_embedding_model_name,
@@ -109,7 +109,7 @@ def newsqa_loop(data, llm, output_file_path, chunk_sizes, overlap_percentages, m
                         em_score = calculate_em(predicted_answer, actual_answer)
 
                         # Write the scores to the file
-                        writer.writerow([time.time() - start_time, i, j, em_score, precision, recall, f1_score_value])
+                        writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value])
 
                     # Cleanup
                     del qa_chain
