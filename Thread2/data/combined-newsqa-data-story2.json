@@ -1,0 +1,336 @@
+{"version": "1", "data":[
+  {
+    "text": "LOS ANGELES, California (CNN) -- Fans wishing to attend singer Michael Jackson's memorial service next week will have to register for the 11,000 free tickets, organizers said Thursday.\n\n\n\nMichael Jackson is shown rehearsing at the Staples Center on June 23, two days before his death.\n\n\n\nDetails on how to register for the 10 a.m. (1 p.m. ET) service at the 20,000-seat Staples Center in Los Angeles, California, Tuesday are to be announced Friday.\n\n\n\nJackson's family will hold a private ceremony before the public memorial service, his brother said Thursday.\n\n\n\nSpeaking to CNN's Larry King, Jermaine Jackson said the ceremony will be held Tuesday morning, but he did not say where.\n\n\n\nJackson rehearsed at Staples Center two nights before he died, and he appeared healthy in a video clip of the rehearsal obtained by CNN. Jackson died June 25 after collapsing at his rented home in Los Angeles.\n\n\n\nAEG, promoter of Jackson's planned London, England, shows, released the short video of Jackson rehearsing in the arena on June 23.\n\n\n\nJackson sang \"They Don't Care About Us,\" a song from his \"HIStory\" album, as he danced along with eight male dancers.  Watch Jackson rehearse »\n\n\n\nJackson did not specify where he wished to be buried in a 2002 will, which was filed in court Wednesday.  Watch CNN's Anderson Cooper talk about his interview with AEG »\n\n\n\nMore information emerged Thursday about how Jackson's estate will be shared, which his will estimated in 2002 as being worth $500 million.\n\n\n\nThe family trust created by Jackson to receive all of his assets includes his mother, his children and a list of charities, according to a person with direct knowledge of the contents of the trust.\n\n\n\nMother Katherine Jackson's 40 percent share would go to Michael Jackson's three children after her death, the source said.\n\n\n\nThe children -- ages 7, 11 and 12 -- also will share 40 percent of the estate's assets, and the remaining 20 percent will benefit charities designated by the executors of the will, the source said.\n\n\n\nA judge has delayed for a week, until July 13, a hearing to decide whether Katherine Jackson will remain the temporary guardian of Jackson's children.\n\n\n\nAt a brief talk with reporters Thursday, an attorney for Jackson's ex-wife Debbie Rowe said she \"has not reached a final decision\" on whether she will challenge Jackson's mother for custody of Jackson's two oldest children, according to her lawyer.\n\n\n\nA Los Angeles TV station quoted Rowe on Thursday morning saying, \"I want my children.\"\n\n\n\nExcept for the statement to the radio station, she has not publicly indicated whether she would seek custody now that Jackson is dead.\n\n\n\nRowe was left out of the will.\n\n\n\n\"I have intentionally omitted to provide for my former wife, Deborah Rowe Jackson,\" the will said.\n\n\n\nThe will nominated Katherine Jackson, now 79, as the guardian of his children. If Katherine Jackson were to die, \"I nominate Diana Ross as guardian,\" Jackson said in the will, written July 7, 2002.\n\n\n\nSinger Ross, 65, was a lifelong friend of Jackson's.  Watch how the two had a close relationship »\n\n\n\nThere's also a question on when the will's executors should take over control of the late entertainer's assets, which Judge Mitchell Beckloff temporarily placed under Katherine Jackson's control.\n\n\n\nOne man named as executor is John Branca, who represented Jackson from 1980 until 2006 and was hired again before the singer's death. He helped acquire Jackson's music catalog, which is worth millions.\n\n\n\nThe other is music industry executive John McClain, a longtime Jackson friend who has worked with him and his sister Janet.\n\n\n\nDEA reportedly joins investigation\n\n\n\nThe Drug Enforcement Administration has joined the investigation into Jackson's death, a federal law enforcement official said Wednesday night.\n\n\n\nAnd the California State Attorney General's office said Thursday that it is helping the Los Angeles Police Department in its investigation. The attorney general's office said it will assist police in sifting through information in a state database that monitors controlled medication.\n\n\n\nTwo law enforcement officials separately confirmed the DEA inquiry, saying agents would look at doctors involved with Jackson, their practices and their possible sources of medicine supply.\n\n\n\nNeither official wanted to be identified because they could not comment publicly on the matter.\n\n\n\nOfficially, a DEA spokeswoman referred questions to the Los Angeles Police Department, which would not confirm the involvement.\n\n\n\n\"We routinely offer assistance to any agency regarding the Federal Controlled Substance Act,\" said Sarah Pullen of the DEA. \"However, at this time, we have nothing further to comment about the death of Michael Jackson.\"\n\n\n\nSpeculation about the role of drugs has been swirling since Jackson died June 25 at his rented estate in Holmby Hills. The cause of his death, at age 50, was pending toxicology results.\n\n\n\nOn Wednesday, police released a car belonging to Jackson's cardiologist, Dr. Conrad Murray. They had impounded the vehicle Friday, saying it might contain evidence -- possibly prescription medications.\n\n\n\nPolice did not say whether they found anything.\n\n\n\nMurray's attorneys issued a statement, asking the public to reserve judgment about the cause of death until the coroner's tests are complete.\n\n\n\n\"Based on our agreement with Los Angeles investigators, we are waiting on real information to come from viable sources like the Los Angeles medical examiner's office about the death of Michael Jackson,\" the statement said. \"We will not be responding to rumors and innuendo.\"\n\n\n\nNo public showing planned for Neverland\n\n\n\nLogistical and financial challenges derailed earlier plans for a public viewing and private memorial at Neverland Ranch.\n\n\n\nPlanning had been under way for a motorcade to carry Jackson's body from Los Angeles to the Santa Barbara County ranch, which state and local officials suggested would be difficult and costly.\n\n\n\nLaw enforcement sources had said a public viewing at the ranch was under consideration for Friday, but a spokesman for the family said that it would not happen.\n\n\n\n\"Plans are under way regarding a public memorial for Michael Jackson, and we will announce those plans shortly,\" said Ken Sunshine, whose public relations firm had been hired by the Jackson family.\n\n\n\nDespite the announcement, more than two dozen TV satellite trucks lined the narrow two-lane road leading to the ranch.\n\n\n\nFor a time, the California Highway Patrol closed the road to clear up a small bottleneck of cars created by Jackson fans and the media.\n\n\n\nCNN's Drew Griffin, Kathleen Johnston, Michael Carey, Paul Vercammen, Carol Cratty and Kara Finnstrom contributed to this report.",
+    "type": "train",
+    "questions": [
+        {
+            "q": "Who has  joined inquiry into Jackson's death?",
+            "isQuestionBad": 0,
+            "consensus": {
+                "s": 3667,
+                "e": 3703
+            },
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 3667,
+                            "e": 3703
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 462,
+                            "e": 469
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 3667,
+                            "e": 3703
+                        }
+                    ]
+                }
+            ],
+            "isAnswerAbsent": 0
+        },
+        {
+            "isQuestionBad": 0,
+            "consensus": {
+                "noAnswer": true
+            },
+            "validatedAnswers": [
+                {
+                    "count": 1,
+                    "noAnswer": true
+                },
+                {
+                    "count": 1,
+                    "s": 5760,
+                    "e": 5780
+                },
+                {
+                    "count": 1,
+                    "s": 370,
+                    "e": 413
+                }
+            ],
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 5763,
+                            "e": 5780
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 5760,
+                            "e": 5780
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 354,
+                            "e": 358
+                        },
+                        {
+                            "s": 370,
+                            "e": 413
+                        }
+                    ]
+                }
+            ],
+            "q": "Where will the memorial take place?",
+            "isAnswerAbsent": 0
+        },
+        {
+            "isQuestionBad": 0.333333333333,
+            "consensus": {
+                "s": 724,
+                "e": 735
+            },
+            "validatedAnswers": [
+                {
+                    "count": 1,
+                    "s": 258,
+                    "e": 262
+                },
+                {
+                    "count": 2,
+                    "s": 724,
+                    "e": 735
+                }
+            ],
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 258,
+                            "e": 262
+                        },
+                        {
+                            "s": 274,
+                            "e": 278
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "noAnswer": true
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 724,
+                            "e": 735
+                        },
+                        {
+                            "s": 742,
+                            "e": 751
+                        }
+                    ]
+                }
+            ],
+            "q": "How many days before Jackson's death was the video taken?",
+            "isAnswerAbsent": 0
+        },
+        {
+            "isQuestionBad": 0,
+            "consensus": {
+                "s": 370,
+                "e": 401
+            },
+            "validatedAnswers": [
+                {
+                    "count": 2,
+                    "s": 370,
+                    "e": 401
+                }
+            ],
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 370,
+                            "e": 385
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 370,
+                            "e": 385
+                        },
+                        {
+                            "s": 388,
+                            "e": 413
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 370,
+                            "e": 401
+                        }
+                    ]
+                }
+            ],
+            "q": "Where will Jackon's memorial be?",
+            "isAnswerAbsent": 0
+        },
+        {
+            "q": "Who joins the inquiry into Jackson's death?",
+            "isQuestionBad": 0,
+            "consensus": {
+                "s": 3667,
+                "e": 3703
+            },
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 4190,
+                            "e": 4220
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 3667,
+                            "e": 3703
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 3667,
+                            "e": 3703
+                        }
+                    ]
+                }
+            ],
+            "isAnswerAbsent": 0
+        },
+        {
+            "q": "How many service tickets will be made available?",
+            "isQuestionBad": 0,
+            "consensus": {
+                "s": 138,
+                "e": 145
+            },
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 358,
+                            "e": 370
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 138,
+                            "e": 145
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 138,
+                            "e": 145
+                        }
+                    ]
+                }
+            ],
+            "isAnswerAbsent": 0
+        },
+        {
+            "q": "How many memorial service tickets will be made available?",
+            "isQuestionBad": 0,
+            "consensus": {
+                "s": 138,
+                "e": 145
+            },
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "noAnswer": true
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 138,
+                            "e": 145
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 138,
+                            "e": 145
+                        }
+                    ]
+                }
+            ],
+            "isAnswerAbsent": 0.33333333333299997
+        },
+        {
+            "q": "Whose memorial will be Tuesday?",
+            "isQuestionBad": 0,
+            "consensus": {
+                "s": 63,
+                "e": 81
+            },
+            "answers": [
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 63,
+                            "e": 81
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "noAnswer": true
+                        }
+                    ]
+                },
+                {
+                    "sourcerAnswers": [
+                        {
+                            "s": 63,
+                            "e": 81
+                        }
+                    ]
+                }
+            ],
+            "isAnswerAbsent": 0
+        }
+    ],
+    "storyId": "./cnn/stories/512e80a87a428d2ee0ff32b00c98c1f4abdac48f.story"
+}
+]}
