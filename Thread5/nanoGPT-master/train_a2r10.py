@@ -29,7 +29,7 @@ from torch.distributed import init_process_group, destroy_process_group
 
 import json
 
-from model_a2r2 import GPTConfig, GPT
+from model_a2r10 import GPTConfig, GPT
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -79,8 +79,8 @@ config_keys = [k for k,v in globals().items() if not k.startswith('_') and isins
 exec(open('configurator.py').read()) # overrides from command line or config file
 config = {k: globals()[k] for k in config_keys} # will be useful for logging
 # -----------------------------------------------------------------------------
-train_losses_a2r2 = []
-val_losses_a2r2 = []
+train_losses_a2r10 = []
+val_losses_a2r10 = []
 
 # various inits, derived attributes, I/O setup
 ddp = int(os.environ.get('RANK', -1)) != -1 # is this a ddp run?
@@ -263,8 +263,8 @@ while True:
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
         losses = estimate_loss()
-        train_losses_a2r2.append(losses['train'].item())
-        val_losses_a2r2.append(losses['val'].item())
+        train_losses_a2r10.append(losses['train'].item())
+        val_losses_a2r10.append(losses['val'].item())
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
             wandb.log({
@@ -343,8 +343,8 @@ if ddp:
     destroy_process_group()
 
 
-with open('train_losses_a2r2.json', 'w') as file:
-    json.dump(train_losses_a2r2, file)
+with open('train_losses_a2r10.json', 'w') as file:
+    json.dump(train_losses_a2r10, file)
 
-with open('val_losses_a2r2.json', 'w') as file:
-    json.dump(val_losses_a2r2, file)
+with open('val_losses_a2r10.json', 'w') as file:
+    json.dump(val_losses_a2r10, file)

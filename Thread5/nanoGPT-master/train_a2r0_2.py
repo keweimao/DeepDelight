@@ -29,7 +29,7 @@ from torch.distributed import init_process_group, destroy_process_group
 
 import json
 
-from model import GPTConfig, GPT
+from model_a2r0_2 import GPTConfig, GPT
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText
@@ -54,12 +54,7 @@ block_size = 1024
 n_layer = 12
 n_head = 12
 n_embd = 768
-
-
-attn_dropout = 0.0
-resid_dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
-
-
+dropout = 0.0 # for pretraining 0 is good, for finetuning try 0.1+
 bias = False # do we use bias inside LayerNorm and Linear layers?
 # adamw optimizer
 learning_rate = 6e-4 # max learning rate
@@ -84,9 +79,8 @@ config_keys = [k for k,v in globals().items() if not k.startswith('_') and isins
 exec(open('configurator.py').read()) # overrides from command line or config file
 config = {k: globals()[k] for k in config_keys} # will be useful for logging
 # -----------------------------------------------------------------------------
-train_losses_a1r0 = []
-val_losses_a1r0 = []
-
+train_losses_a2r0_2 = []
+val_losses_a2r0_2 = []
 
 # various inits, derived attributes, I/O setup
 ddp = int(os.environ.get('RANK', -1)) != -1 # is this a ddp run?
@@ -152,7 +146,7 @@ if os.path.exists(meta_path):
 
 # model init
 model_args = dict(n_layer=n_layer, n_head=n_head, n_embd=n_embd, block_size=block_size,
-                  bias=bias, vocab_size=None, attn_dropout=attn_dropout, resid_dropout=resid_dropout) # start with model_args from command line
+                  bias=bias, vocab_size=None, dropout=dropout) # start with model_args from command line
 if init_from == 'scratch':
     # init a new model from scratch
     print("Initializing a new model from scratch")
@@ -188,8 +182,8 @@ elif init_from == 'resume':
 elif init_from.startswith('gpt2'):
     print(f"Initializing from OpenAI GPT-2 weights: {init_from}")
     # initialize from OpenAI GPT-2 weights
-    override_args = dict(attn_dropout=attn_dropout)
-    model = GPT.from_pretrained(init_from, ovcontainererride_args)
+    override_args = dict(dropout=dropout)
+    model = GPT.from_pretrained(init_from, override_args)
     # read off the created config params, so we can store them into checkpoint correctly
     for k in ['n_layer', 'n_head', 'n_embd', 'block_size', 'bias', 'vocab_size']:
         model_args[k] = getattr(model.config, k)
@@ -269,8 +263,8 @@ while True:
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
         losses = estimate_loss()
-        train_losses_a1r0.append(losses['train'].item())
-        val_losses_a1r0.append(losses['val'].item())
+        train_losses_a2r0_2.append(losses['train'].item())
+        val_losses_a2r0_2.append(losses['val'].item())
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
             wandb.log({
@@ -326,6 +320,10 @@ while True:
     t1 = time.time()
     dt = t1 - t0
     t0 = t1
+
+    if dt == 0:
+        dt = 1e-6
+
     if iter_num % log_interval == 0 and master_process:
         # get loss as float. note: this is a CPU-GPU sync point
         # scale up to undo the division above, approximating the true total loss (exact would have been a sum)
@@ -345,8 +343,8 @@ if ddp:
     destroy_process_group()
 
 
-with open('train_losses_a1r0.json', 'w') as file:
-    json.dump(train_losses_a1r0, file)
+with open('train_losses_a2r0_2.json', 'w') as file:
+    json.dump(train_losses_a2r0_2, file)
 
-with open('val_losses_a1r0.json', 'w') as file:
-    json.dump(val_losses_a1r0, file)
+with open('val_losses_a2r0_2.json', 'w') as file:
+    json.dump(val_losses_a2r0_2, file)
