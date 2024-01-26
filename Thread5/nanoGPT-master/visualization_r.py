@@ -20,11 +20,11 @@ with open('train_losses_a2r5.json', 'r') as file:
 with open('val_losses_a2r5.json', 'r') as file:
     val_losses_a2r5 = json.load(file)
 
-with open('train_losses_a2r10.json', 'r') as file:
-    train_losses_a2r10 = json.load(file)
+# with open('train_losses_a2r10.json', 'r') as file:
+#     train_losses_a2r10 = json.load(file)
 
-with open('val_losses_a2r10.json', 'r') as file:
-    val_losses_a2r10 = json.load(file)
+# with open('val_losses_a2r10.json', 'r') as file:
+#     val_losses_a2r10 = json.load(file)
 
 
 
@@ -41,7 +41,7 @@ plt.plot(val_losses_a2r2, label='Validation Loss a2r2')
 
 plt.plot(val_losses_a2r5, label='Validation Loss a2r5')
 
-plt.plot(val_losses_a2r10, label='Validation Loss a2r10')
+# plt.plot(val_losses_a2r10, label='Validation Loss a2r10')
 
 plt.title('Training and Validation Loss over Iterations')
 plt.xlabel('Iteration Number')
