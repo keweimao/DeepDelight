@@ -121,8 +121,10 @@ def newsqa_loop(data, llm, output_file_path, chunk_sizes, overlap_percentages, m
 
 ############## Running Parameters ##############
 max_stories = 100
-chunk_sizes = [200, 400, 800, 1600]
-overlap_percentages = [0, 0.1, 0.2, 0.4]  # Expressed as percentages (0.1 = 10%)
+# chunk_sizes = [200, 400, 800, 1600]
+# overlap_percentages = [0, 0.1, 0.2, 0.4]  # Expressed as percentages (0.1 = 10%)
+chunk_sizes = [50, 100, 150, 200, 300, 400]
+overlap_percentages = [0, 0.1, 0.2, 0.3, 0.4]  # Expressed as percentages (0.1 = 10%)
 random_seed = 123
 # model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
 # model_location = "/Users/wk77/Library/CloudStorage/OneDrive-DrexelUniversity/Documents/data/gpt4all/models/gpt4all-falcon-q4_0.gguf"
