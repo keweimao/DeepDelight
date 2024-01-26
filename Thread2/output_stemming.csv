@@ -1,0 +1,18 @@
+Chunk_size,Overlap_percentage,Quesion,Predicted Answer,Actual Answer,f1 score,Precision,Recall
+200,0.1,Which program does Suellen reference that shares its name with a snake?,program suel,python,0.0,0.0,0.0
+200,0.1,Which person is talking to the Chief Justice?,answer person talk chief justic provid given text,mr. kneedler,0.0,0.0,0.0
+200,0.1,What is the name of the most important center of learning of Sunni Islam in the country where the pope is going to celebrate a mass tomorrow ?,import center learn sunni islam countri pope go celebr mass tomorrow al-azhar univers,al-azhar univers,0.2666666666666667,0.15384615384615385,1.0
+200,0.1,Who hosts NEWS & NOTES?,answer host news note provid given text,farai chideya,0.0,0.0,0.0
+200,0.1,Which feature in DrRacket inserts an epsilon?,answer featur drracket insert ep featur drracket insert ep silon reader,\epsilon,0.0,0.0,0.0
+200,0.1,What is the name of the clinical psychologist with the Psychological Group of Washington?,taniesha wood,katherin marshal wood,0.4,0.5,0.3333333333333333
+200,0.1,what was the name of the case?,answer case call state v. davi,baby-shak case,0.25,0.16666666666666666,0.5
+200,0.1,Who is the Chief Justice of  United States ?,chief justic unit state current john g. robert jr,chief justic robert,0.5,0.3333333333333333,1.0
+200,0.1,What proportion of African American jurors were struck?,answer 10/20,10 11,0.0,0.0,0.0
+200,0.1,Which NPR reporter was traveling in South Carolina?,answer question provid enough inform determin npr report travel south carolina,gonyea,0.0,0.0,0.0
+200,0.1,Who is the only person that needs Denis O'Connell to sign a bilateral NDA?,answer person need deni o'connel sign bilater nd,leslie.hansen,0.0,0.0,0.0
+200,0.1,In which industry lynda need the survey about developers?,answer survey develop relev tech industri,tech industri,0.5,0.3333333333333333,1.0
+200,0.1,What is the name of the petitioner in the case?,petition case person initi appeal,mr. lamken,0.0,0.0,0.0
+200,0.1,"Which act has a piece missing from it, according to the Circuit court?",answer act piec miss provid given passag,feder whistle-blow protect act,0.18181818181818182,0.14285714285714285,0.25
+200,0.1,Which restatement section was based on injured party?,answer relianc exist injur parti,section 324,0.0,0.0,0.0
+200,0.1,How many months of unpaid leave does anyone with a permanent position have in Sweden ?,answer twelv month,six,0.0,0.0,0.0
+200,0.1,What is the name of the amendment that requires reliability in the determination that death is an appropriate sentence ?,answer eighth amend requir reliabl determin death appropri sentenc,eighth amend,0.3636363636363636,0.2222222222222222,1.0
