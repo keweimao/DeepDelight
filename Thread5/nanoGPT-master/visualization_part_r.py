@@ -1,17 +1,17 @@
 import json
 import matplotlib.pyplot as plt
 
-with open('train_losses_a2r0.json', 'r') as file:
-    train_losses_a2r0 = json.load(file)
+# with open('train_losses_a2r0.json', 'r') as file:
+#     train_losses_a2r0 = json.load(file)
 
-with open('val_losses_a2r0.json', 'r') as file:
-    val_losses_a2r0 = json.load(file)
+# with open('val_losses_a2r0.json', 'r') as file:
+#     val_losses_a2r0 = json.load(file)
 
-with open('train_losses_a2r1.json', 'r') as file:
-    train_losses_a2r1 = json.load(file)
+# with open('train_losses_a2r1.json', 'r') as file:
+#     train_losses_a2r1 = json.load(file)
 
-with open('val_losses_a2r1.json', 'r') as file:
-    val_losses_a2r1 = json.load(file)
+# with open('val_losses_a2r1.json', 'r') as file:
+#     val_losses_a2r1 = json.load(file)
 
 with open('train_losses_a2r2.json', 'r') as file:
     train_losses_a2r2 = json.load(file)
@@ -51,13 +51,13 @@ with open('val_losses_a2r2.json', 'r') as file:
 # # plt.savefig('test_loss_plot.png')
 
 
-# # Plotting
-plt.figure(figsize=(10, 6))
-# plt.plot(train_losses_a2r0, label='Training Loss a2r0')
-plt.plot(val_losses_a2r0, label='Validation Loss a2r0')
+# # # Plotting
+# plt.figure(figsize=(10, 6))
+# # plt.plot(train_losses_a2r0, label='Training Loss a2r0')
+# plt.plot(val_losses_a2r0, label='Validation Loss a2r0')
 
-# plt.plot(train_losses_a2r1, label='Training Loss a2r1')
-plt.plot(val_losses_a2r1, label='Validation Loss a2r1')
+# # plt.plot(train_losses_a2r1, label='Training Loss a2r1')
+# plt.plot(val_losses_a2r1, label='Validation Loss a2r1')
 
 # plt.plot(train_losses_a2r2, label='Training Loss a2r2')
 plt.plot(val_losses_a2r2, label='Validation Loss a2r2')
@@ -74,7 +74,7 @@ plt.grid(True)
 # plt.show()
 
 # Focus on the latter half of the iterations
-num_iterations = len(val_losses_a2r0)  # Use the actual number of iterations
+num_iterations = len(val_losses_a2r2)  # Use the actual number of iterations
 start_point = num_iterations // 2  # Starting from the halfway point
 
 plt.xlim(start_point, num_iterations)  # Set x-axis limits to focus on the latter half

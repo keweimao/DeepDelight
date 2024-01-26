@@ -99,10 +99,11 @@ class Block(nn.Module):
         self.attn = CausalSelfAttention(config)
         self.ln_2 = LayerNorm(config.n_embd, bias=config.bias)
         self.mlp = MLP(config)
+        self.dropout = nn.Dropout(0.5)
 
     def forward(self, x):
-        x = x + self.attn(self.ln_1(x))
-        x = x + self.mlp(self.ln_2(x))
+        x = self.dropout(x) + self.attn(self.ln_1(x))
+        x = self.dropout(x) + self.mlp(self.ln_2(x))
         return x
 
 @dataclass
