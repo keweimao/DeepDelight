@@ -21,7 +21,7 @@ https://sigir-2024.github.io/call_for_short_papers.html
         * [ ] NewsQA (Lixiao)
         * [ ] QAConv (Mengyang) 
 
-## Thread 4
+## Thread 5
 
 * [ ] Experiments and improvements on dropout, residual, residual dropouts (Jerry)
     * [ ] Attention/MLP dropout optimization
@@ -35,7 +35,7 @@ https://sigir-2024.github.io/call_for_short_papers.html
     * [ ] Description of an additional dataset
     * [ ] Description of Evaluation metrics
 
-## Thread 5
+## Thread 4
 
 * [ ] Experiments and improvements (Michael and Sonia)
     * [ ] Loss functions to focus on: CE, KL, DLITE, JS, L1, and L2? 
