@@ -19,6 +19,8 @@ from nltk.tokenize import sent_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 import string
+from heapq import nlargest
+import torch.nn as nn
 # Download necessary NLTK data
 # nltk.download('punkt')
 # nltk.download('stopwords')
@@ -72,16 +74,29 @@ def calculate_token_f1(predicted, actual):
 
     return f1, precision, recall
 
-def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, instruct_embedding_model_name, instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT):
+def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories,
+                top_n_sentences, dist_functions, instruct_embedding_model_name, instruct_embedding_model_kwargs, 
+                instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT):
     with open(output_csv_path, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1'])
 
-        word_embed = HuggingFaceInstructEmbeddings(
+        # Embedding for story sentences
+        hf_story_embs = HuggingFaceInstructEmbeddings(
             model_name=instruct_embedding_model_name,
             model_kwargs=instruct_embedding_model_kwargs,
-            encode_kwargs=instruct_embedding_encode_kwargs
+            encode_kwargs=instruct_embedding_encode_kwargs,
+            embed_instruction="Use the following pieces of context to answer the question at the end:"
         )
+
+        # Embedding for questions
+        hf_query_embs = HuggingFaceInstructEmbeddings(
+            model_name=instruct_embedding_model_name,
+            model_kwargs=instruct_embedding_model_kwargs,
+            encode_kwargs=instruct_embedding_encode_kwargs,
+            query_instruction="How does this information relate to the question?"
+        )
+        
         start_time = time.time()
 
         for chunk_size in chunk_sizes:
@@ -96,21 +111,32 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
                 for i, story in enumerate(data['data']):
                     if i >= max_stories:
                         break
+
                     now_time = time.time()
-                    print(f"\n{now_time-start_time}\t{now_time-last_time}\t\tstory {i+1}: ", end='')
+                    print(f"\n{now_time - start_time}\t{now_time - last_time}\t\tstory {i + 1}: ", end='')
                     last_time = now_time
-                    
+
+                    # Segment story text into sentences and embed each sentence
+                    sentences = sent_tokenize(story['text'])
+                    sentence_embs = hf_story_embs.embed_documents(sentences)
+
+                    # Text splitting for chunk-based processing (if required)
                     all_splits = text_splitter.split_text(story['text'])
-                    vectorstore = Chroma.from_texts(texts=all_splits, embedding=word_embed)
+                    
+                    # Pass the embedding model to Chroma.from_texts
+                    vectorstore = Chroma.from_texts(texts=all_splits, embedding=hf_story_embs)
+
+                    # Initialize the QA chain with the vectorstore as the retriever
                     qa_chain = RetrievalQA.from_chain_type(
-                                llm, 
-                                retriever=vectorstore.as_retriever(), 
-                                chain_type="stuff",
-                                verbose=False,
-                                chain_type_kwargs={
-                                    "prompt": QA_CHAIN_PROMPT,
-                                    "verbose": False},
-                                return_source_documents=False)
+                        llm, 
+                        retriever=vectorstore.as_retriever(), 
+                        chain_type="stuff",
+                        verbose=False,
+                        chain_type_kwargs={
+                            "prompt": QA_CHAIN_PROMPT,
+                            "verbose": False},
+                        return_source_documents=False
+                    )
                     
                     chunk_boundaries = []
                     start_index = 0
@@ -118,20 +144,28 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
                         end_index = start_index + len(split)
                         chunk_boundaries.append((start_index, end_index))
                         start_index = end_index
-
+                        
                     for j, question_data in enumerate(story['questions']):
                         if question_data['isAnswerAbsent']:
                             continue  # Skip this question because an answer is absent
-                        
+
                         question = question_data['q']
-                        consensus = question_data['consensus']
-                        
+                        question_emb = hf_query_embs.embed_documents([question])[0]
+
+                        # Compute cosine similarity scores with each sentence
+                        if dist_functions == 'pairwise':
+                            scores = [pdist(torch.tensor(sentence_emb).unsqueeze(0), torch.tensor(question_emb).unsqueeze(0)).item() for sentence_emb in sentence_embs]
+                        else:
+                            scores = [torch.cosine_similarity(torch.tensor(sentence_emb).unsqueeze(0), torch.tensor(question_emb).unsqueeze(0))[0].item() for sentence_emb in sentence_embs]
+
+                        # Find the sentences with the top x highest scores
+                        top_scores_indices = nlargest(top_n_sentences, range(len(scores)), key=lambda idx: scores[idx])
+                        context_for_qa = " ".join([sentences[idx] for idx in top_scores_indices])
+
                         # Check if there is a consensus answer and extract it
+                        consensus = question_data['consensus']
                         if 's' in consensus and 'e' in consensus:
                             actual_answer = story['text'][consensus['s']:consensus['e']]
-                            answer_chunk_index = next((index for index, (start, end) in enumerate(chunk_boundaries) if consensus['s'] >= start and consensus['e'] <= end), None)
-                            if answer_chunk_index is not None:
-                                context_for_qa = all_splits[answer_chunk_index]
                         else:
                             continue  # No consensus answer, skip to the next question
 
@@ -181,6 +215,8 @@ max_stories = 100
 chunk_sizes = [200]
 overlap_percentages = [0, 0.1]  # Expressed as percentages (0.1 = 10%)
 random_seed = 123
+top_n_sentences = 1 # Use top n scored sentence as embedding
+dist_functions = 'pairwise' # Default value is cosine similarity
 model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
 # model_location = "/Users/wk77/Library/CloudStorage/OneDrive-DrexelUniversity/Documents/data/gpt4all/models/gpt4all-falcon-q4_0.gguf"
 # model_location = "/Users/wk77/Documents/data/gpt4all-falcon-newbpe-q4_0.gguf"
@@ -189,10 +225,13 @@ input_file_path='C:/NewsQA/combined-newsqa-data-story2.json'
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/newsqa-data-v1.csv"
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined-newsqa-data-v1.json"
 # input_file_path = "/Users/wk77/Documents/git/DeepDelight/Thread2/data/combined-newsqa-data-story1.json"
-output_csv_path = '../results/story2_score_test2.csv'
+output_csv_path = '../results/story2_score_test6.csv'
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_scores_test.csv"
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_scores_test.csv"
-output_log_path = '../results/story2_score_test2.log'
+output_log_path = '../results/story2_score_test6.log'
+
+# Initialize PairwiseDistance
+pdist = nn.PairwiseDistance(p=2.0, eps=1e-06)
 
 ##################################################
 # logging.basicConfig(level=logging.INFO)
@@ -239,5 +278,5 @@ print(f"{start_time} Started.")
 
 # Main Function Execution
 print("Processing.")
-newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, instruct_embedding_model_name,
+newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, top_n_sentences, dist_functions, instruct_embedding_model_name,
             instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT_ORIGINAL)
