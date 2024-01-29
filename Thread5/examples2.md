@@ -67,7 +67,7 @@ Here we have two separate skip-1-layer residuals, visualized below:
 |--------------    |--------------
 |             ||   |             ||
 |    ------   \/   |    -----    \/
-x --| attn |-----> y --| mlp |-------> z
+x --| attn |---+--> y --| mlp |---+--> z
      ------             -----
 ```
 
