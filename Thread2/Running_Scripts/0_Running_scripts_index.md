@@ -33,10 +33,19 @@ Differentce compared to previous version:
 
 [2_3_newsqa_rag_script_lyang_sentence_revised.py](https://github.com/lixiao-yang/DeepDelight/blob/main/Thread2/Running_Scripts/2_3_newsqa_rag_script_lyang_sentence_revised.py)
 Differentce compared to previous version:
-- Add chunk size and overlap size into CSV output
-- Add log file generation
+- ~~Add chunk size and overlap size into CSV output~~
+- **Modified log and csv file output [1/30/2024]**
 - Add normalization and stemming before comparing predicted and actual answers
 - Fix normalized sentence output newline issue [1/26/2024]
 - Add sentence-based structure and with adjustable parameter `top_n_sentences`
 - Add parameter `dist_functions` to enable cosine/pairwise distance calculations
-- **Incorporate `top_nsentences` and `dist_functions` as sets of parameters to enable loop**
+- **Incorporate `top_nsentences` and `dist_functions` as lists of parameters to enable loop**
+
+[2_4_newsqa_rag_script_lyang_whole_story.py](https://github.com/lixiao-yang/DeepDelight/blob/main/Thread2/Running_Scripts/2_4_newsqa_rag_script_lyang_whole_story.py)
+Differentce compared to previous version:
+- ~~Add chunk size and overlap size into CSV output~~
+- Add log file generation
+- Add normalization and stemming before comparing predicted and actual answers
+- Add sentence-based structure and with adjustable parameter `top_n_sentences`
+- Add parameter `dist_functions` to enable cosine/pairwise distance calculations
+- **Whole story as the prompt**
