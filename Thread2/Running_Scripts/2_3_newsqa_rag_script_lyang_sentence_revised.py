@@ -24,9 +24,9 @@ import torch.nn as nn
 # Download necessary NLTK data
 # nltk.download('punkt')
 # nltk.download('stopwords')
-from sklearn.feature_extraction.text import TfidfVectorizer
-from rank_bm25 import BM25Okapi
-import numpy as np
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from rank_bm25 import BM25Okapi
+# import numpy as np
 
 ########## Config for Dr.Ke ############
 # from langchain_community.llms import GPT4All
@@ -167,7 +167,7 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
 
                         # Get the prediction from the model
                         result = qa_chain({"context": context_for_qa, "query": question})
-                        print(context_for_qa)
+                        # print(context_for_qa)
                         
                         # Extract and process the predicted answer
                         predicted_answer = result['result'] if isinstance(result['result'], str) else ""
