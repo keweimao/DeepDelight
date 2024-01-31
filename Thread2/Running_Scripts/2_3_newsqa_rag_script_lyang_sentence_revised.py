@@ -77,7 +77,7 @@ def calculate_token_f1(predicted, actual):
 
     return f1, precision, recall
 
-def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories,
+def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories,
                 top_n_sentences, dist_functions, instruct_embedding_model_name, instruct_embedding_model_kwargs, 
                 instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT):
     with open(output_csv_path, 'w', newline='') as file:
@@ -209,8 +209,6 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
 
 ############## Running Parameters ##############
 max_stories = 100
-chunk_sizes = [200]
-overlap_percentages = [0, 0.1]  # Expressed as percentages (0.1 = 10%)
 random_seed = 123
 top_n_sentences = [1, 2] # Use top n scored sentence as embedding
 dist_functions = ['pairwise', 'cosine'] # Default value is cosine similarity
@@ -275,5 +273,5 @@ print(f"{start_time} Started.")
 
 # Main Function Execution
 print("Processing.")
-newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, top_n_sentences, dist_functions, instruct_embedding_model_name,
+newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, top_n_sentences, dist_functions, instruct_embedding_model_name,
             instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT_ORIGINAL)
