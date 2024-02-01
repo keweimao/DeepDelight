@@ -102,11 +102,11 @@ class Block(nn.Module):
         self.dropout = nn.Dropout(0.5)
 
     def forward(self, x):
-        attn_output = self.dropout(x) + self.attn(self.ln_1(x))
-        mlp_output = self.mlp(self.ln_2(attn_output))
-        x = self.dropout(attn_output) + mlp_output
-        return x
-
+        x = self.ln_1(x)        
+        y = self.dropout(x) + self.attn(x)    # add skip 1 layer from x
+        y = self.ln_2(y)        
+        z = self.dropout(y) + self.mlp(y)     # add skip 1 layer from y
+        return z
 
 @dataclass
 class GPTConfig:

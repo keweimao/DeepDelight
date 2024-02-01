@@ -99,12 +99,14 @@ class Block(nn.Module):
         self.attn = CausalSelfAttention(config)
         self.ln_2 = LayerNorm(config.n_embd, bias=config.bias)
         self.mlp = MLP(config)
-        self.dropout = nn.Dropout(0)
+        self.dropout = nn.Dropout(0.2)
 
     def forward(self, x):
-        x = self.dropout(x) + self.attn(self.ln_1(x))
-        x = self.dropout(x) + self.mlp(self.ln_2(x))
-        return x
+        x = self.ln_1(x)        
+        y = self.dropout(x) + self.attn(x)    # add skip 1 layer from x
+        y = self.ln_2(y)        
+        z = self.dropout(y) + self.mlp(y)     # add skip 1 layer from y
+        return z
 
 @dataclass
 class GPTConfig:

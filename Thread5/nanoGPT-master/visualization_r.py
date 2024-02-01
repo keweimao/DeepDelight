@@ -1,21 +1,21 @@
 import json
 import matplotlib.pyplot as plt
 
-with open('train_losses_a2r0.json', 'r') as file:
-    train_losses_a2r0 = json.load(file)
+# with open('train_losses_a2r0.json', 'r') as file:
+#     train_losses_a2r0 = json.load(file)
 
 with open('val_losses_a2r0.json', 'r') as file:
     val_losses_a2r0 = json.load(file)
 
 
-with open('train_losses_a2r2.json', 'r') as file:
-    train_losses_a2r2 = json.load(file)
+# with open('train_losses_a2r2.json', 'r') as file:
+#     train_losses_a2r2 = json.load(file)
 
 with open('val_losses_a2r2.json', 'r') as file:
     val_losses_a2r2 = json.load(file)
 
-with open('train_losses_a2r5.json', 'r') as file:
-    train_losses_a2r5 = json.load(file)
+# with open('train_losses_a2r5.json', 'r') as file:
+#     train_losses_a2r5 = json.load(file)
 
 with open('val_losses_a2r5.json', 'r') as file:
     val_losses_a2r5 = json.load(file)
