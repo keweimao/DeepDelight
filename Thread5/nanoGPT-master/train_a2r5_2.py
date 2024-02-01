@@ -29,7 +29,7 @@ from torch.distributed import init_process_group, destroy_process_group
 
 import json
 
-from model_a2r5_2 import GPTConfig, GPT
+from model_r5_2 import GPTConfig, GPT
 
 # -----------------------------------------------------------------------------
 # default config values designed to train a gpt2 (124M) on OpenWebText

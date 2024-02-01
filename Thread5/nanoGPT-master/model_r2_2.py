@@ -92,19 +92,23 @@ class MLP(nn.Module):
         return x
 
 class Block(nn.Module):
-
+ 
     def __init__(self, config):
         super().__init__()
         self.ln_1 = LayerNorm(config.n_embd, bias=config.bias)
         self.attn = CausalSelfAttention(config)
         self.ln_2 = LayerNorm(config.n_embd, bias=config.bias)
         self.mlp = MLP(config)
-        self.dropout = nn.Dropout(0.2)
-
+        self.dropout1 = nn.Dropout(0)  # dropout1 for skip-1-layer connections
+        self.dropout2 = nn.Dropout(0.2)  # dropout2 for skip-2-layer connections
+ 
     def forward(self, x):
-        x = self.dropout(x) + self.attn(self.ln_1(x))
-        x = self.dropout(x) + self.mlp(self.ln_2(x))
-        return x
+        x = self.ln_1(x)        
+        y = self.dropout1(x) + self.attn(x)                     # x skips 1 layer
+        y = self.ln_2(y)        
+        z = self.dropout2(x) + self.dropout1(y) + self.mlp(y)   # x skips 2 layers and y skips 1 layer
+        return z
+
 
 @dataclass
 class GPTConfig:
