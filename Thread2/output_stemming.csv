@@ -1,18 +1,69 @@
-Chunk_size,Overlap_percentage,Quesion,Predicted Answer,Actual Answer,f1 score,Precision,Recall
-200,0.1,Which program does Suellen reference that shares its name with a snake?,program suel,python,0.0,0.0,0.0
-200,0.1,Which person is talking to the Chief Justice?,answer person talk chief justic provid given text,mr. kneedler,0.0,0.0,0.0
-200,0.1,What is the name of the most important center of learning of Sunni Islam in the country where the pope is going to celebrate a mass tomorrow ?,import center learn sunni islam countri pope go celebr mass tomorrow al-azhar univers,al-azhar univers,0.2666666666666667,0.15384615384615385,1.0
-200,0.1,Who hosts NEWS & NOTES?,answer host news note provid given text,farai chideya,0.0,0.0,0.0
-200,0.1,Which feature in DrRacket inserts an epsilon?,answer featur drracket insert ep featur drracket insert ep silon reader,\epsilon,0.0,0.0,0.0
-200,0.1,What is the name of the clinical psychologist with the Psychological Group of Washington?,taniesha wood,katherin marshal wood,0.4,0.5,0.3333333333333333
-200,0.1,what was the name of the case?,answer case call state v. davi,baby-shak case,0.25,0.16666666666666666,0.5
-200,0.1,Who is the Chief Justice of  United States ?,chief justic unit state current john g. robert jr,chief justic robert,0.5,0.3333333333333333,1.0
-200,0.1,What proportion of African American jurors were struck?,answer 10/20,10 11,0.0,0.0,0.0
-200,0.1,Which NPR reporter was traveling in South Carolina?,answer question provid enough inform determin npr report travel south carolina,gonyea,0.0,0.0,0.0
-200,0.1,Who is the only person that needs Denis O'Connell to sign a bilateral NDA?,answer person need deni o'connel sign bilater nd,leslie.hansen,0.0,0.0,0.0
-200,0.1,In which industry lynda need the survey about developers?,answer survey develop relev tech industri,tech industri,0.5,0.3333333333333333,1.0
-200,0.1,What is the name of the petitioner in the case?,petition case person initi appeal,mr. lamken,0.0,0.0,0.0
-200,0.1,"Which act has a piece missing from it, according to the Circuit court?",answer act piec miss provid given passag,feder whistle-blow protect act,0.18181818181818182,0.14285714285714285,0.25
-200,0.1,Which restatement section was based on injured party?,answer relianc exist injur parti,section 324,0.0,0.0,0.0
-200,0.1,How many months of unpaid leave does anyone with a permanent position have in Sweden ?,answer twelv month,six,0.0,0.0,0.0
-200,0.1,What is the name of the amendment that requires reliability in the determination that death is an appropriate sentence ?,answer eighth amend requir reliabl determin death appropri sentenc,eighth amend,0.3636363636363636,0.2222222222222222,1.0
+top_n_sentences,dist_function,Chunk_size,Overlap_percentage,Quesion,Predicted Answer,Actual Answer,f1 score,Precision,Recall
+1,pairwise,200,0.1,Which program does Suellen reference that shares its name with a snake?,program suellen refer share name snake provid given text,python,0.0,0.0,0.0
+1,pairwise,200,0.1,Which person is talking to the Chief Justice?,person talk chief justic provid given text,mr. kneedler,0.0,0.0,0.0
+1,pairwise,200,0.1,What is the name of the most important center of learning of Sunni Islam in the country where the pope is going to celebrate a mass tomorrow ?,import center learn sunni islam countri pope go celebr mass tomorrow al-azh,al-azhar univers,0.0,0.0,0.0
+1,pairwise,200,0.1,Who hosts NEWS & NOTES?,show host geoffrey bennett,farai chideya,0.0,0.0,0.0
+1,pairwise,200,0.1,Which feature in DrRacket inserts an epsilon?,none featur drracket insert epsilon,\epsilon,0.0,0.0,0.0
+1,pairwise,200,0.1,What is the name of the clinical psychologist with the Psychological Group of Washington?,clinic psychologist psycholog group washington katherin marshal wood,katherin marshal wood,0.5454545454545454,0.375,1.0
+1,pairwise,200,0.1,what was the name of the case?,case call `` citizen unit v. feder elect commiss '',baby-shak case,0.16666666666666669,0.1,0.5
+1,pairwise,200,0.1,Who is the Chief Justice of  United States ?,chief justic unit state current john g. robert jr,chief justic robert,0.5,0.3333333333333333,1.0
+1,pairwise,200,0.1,What proportion of African American jurors were struck?,trial court found state 's case suffici develop support exclus prospect juror trial court found state fail show prospect juror 's race would signific factor case trial court conclud state met burden show prospect juror 's race would signific factor case trial court found state fail show prospect juror 's race would signific factor case trial court found state fail show prospect juror 's race would signific factor case trial court found state fail show prospect juror 's race would signific factor case,10 11,0.0,0.0,0.0
+1,pairwise,200,0.1,Which NPR reporter was traveling in South Carolina?,report travel south carolina npr 's emili harri,gonyea,0.0,0.0,0.0
+1,pairwise,200,0.1,Who is the only person that needs Denis O'Connell to sign a bilateral NDA?,person need deni o'connel sign bilater nd,leslie.hansen,0.0,0.0,0.0
+1,pairwise,200,0.1,In which industry lynda need the survey about developers?,answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer answer,tech industri,0.0,0.0,0.0
+1,pairwise,200,0.1,What is the name of the petitioner in the case?,error prompt size exce context window size process,mr. lamken,0.0,0.0,0.0
+1,pairwise,200,0.1,"Which act has a piece missing from it, according to the Circuit court?",error prompt size exce context window size process,feder whistle-blow protect act,0.0,0.0,0.0
+1,pairwise,200,0.1,Which restatement section was based on injured party?,error prompt size exce context window size process,section 324,0.0,0.0,0.0
+1,pairwise,200,0.1,How many months of unpaid leave does anyone with a permanent position have in Sweden ?,amount unpaid leav someon perman posit sweden 6 month,six,0.0,0.0,0.0
+1,pairwise,200,0.1,What is the name of the amendment that requires reliability in the determination that death is an appropriate sentence ?,eighth amend requir reliabl determin death appropri sentenc,eighth amend,0.4,0.25,1.0
+2,pairwise,200,0.1,Which program does Suellen reference that shares its name with a snake?,error prompt size exce context window size process,python,0.0,0.0,0.0
+2,pairwise,200,0.1,Which person is talking to the Chief Justice?,error prompt size exce context window size process,mr. kneedler,0.0,0.0,0.0
+2,pairwise,200,0.1,What is the name of the most important center of learning of Sunni Islam in the country where the pope is going to celebrate a mass tomorrow ?,import center learn sunni islam countri pope go celebr mass tomorrow al-azhari univers cairo,al-azhar univers,0.125,0.07142857142857142,0.5
+2,pairwise,200,0.1,Who hosts NEWS & NOTES?,pope like bring war yemen visit unit arab emir,farai chideya,0.0,0.0,0.0
+2,pairwise,200,0.1,Which feature in DrRacket inserts an epsilon?,leslis craig chaney tell look document need sign uk tax reason therefor send confirm deni happi initi get sign mani thank richard chang made announcem announc made relat agreement must approv advanc write parti inform share given author individu marketplac particip i2 may minimum provid follow inform individu marketplac particip view enroncredit.com inform first last name compani name job titl email address busi address telephon numbertana would appreci could facilit document requir process lelsey need review chang london made email accept chang deni o'connel london thanks.richard thing need revis term provid first set comment maximum term author,\epsilon,0.0,0.0,0.0
+2,pairwise,200,0.1,What is the name of the clinical psychologist with the Psychological Group of Washington?,clinic psychologist psycholog group washington taniasha wood,katherin marshal wood,0.2,0.14285714285714285,0.3333333333333333
+2,pairwise,200,0.1,what was the name of the case?,error prompt size exce context window size process,baby-shak case,0.0,0.0,0.0
+2,pairwise,200,0.1,Who is the Chief Justice of  United States ?,chief justic unit state current john g. robert jr,chief justic robert,0.5,0.3333333333333333,1.0
+2,pairwise,200,0.1,What proportion of African American jurors were struck?,error prompt size exce context window size process,10 11,0.0,0.0,0.0
+2,pairwise,200,0.1,Which NPR reporter was traveling in South Carolina?,error prompt size exce context window size process,gonyea,0.0,0.0,0.0
+2,pairwise,200,0.1,Who is the only person that needs Denis O'Connell to sign a bilateral NDA?,person need deni o'connel sign bilater nd,leslie.hansen,0.0,0.0,0.0
+2,pairwise,200,0.1,In which industry lynda need the survey about developers?,question unclear pleas provid context clarifi question,tech industri,0.0,0.0,0.0
+2,pairwise,200,0.1,What is the name of the petitioner in the case?,error prompt size exce context window size process,mr. lamken,0.0,0.0,0.0
+2,pairwise,200,0.1,"Which act has a piece missing from it, according to the Circuit court?",error prompt size exce context window size process,feder whistle-blow protect act,0.0,0.0,0.0
+2,pairwise,200,0.1,Which restatement section was based on injured party?,error prompt size exce context window size process,section 324,0.0,0.0,0.0
+2,pairwise,200,0.1,How many months of unpaid leave does anyone with a permanent position have in Sweden ?,maximum term author approv 2 year bilater nd,six,0.0,0.0,0.0
+2,pairwise,200,0.1,What is the name of the amendment that requires reliability in the determination that death is an appropriate sentence ?,error prompt size exce context window size process,eighth amend,0.0,0.0,0.0
+1,cosine,200,0.1,Which program does Suellen reference that shares its name with a snake?,program suellen refer share name snake racket,python,0.0,0.0,0.0
+1,cosine,200,0.1,Which person is talking to the Chief Justice?,person talk chief justic provid given text,mr. kneedler,0.0,0.0,0.0
+1,cosine,200,0.1,What is the name of the most important center of learning of Sunni Islam in the country where the pope is going to celebrate a mass tomorrow ?,import center learn sunni islam countri pope go celebr mass tomorrow al-azhari univers cairo,al-azhar univers,0.125,0.07142857142857142,0.5
+1,cosine,200,0.1,Who hosts NEWS & NOTES?,websit news note host compani news note,farai chideya,0.0,0.0,0.0
+1,cosine,200,0.1,Which feature in DrRacket inserts an epsilon?,featur drracket insert epsilon call equal+hash,\epsilon,0.0,0.0,0.0
+1,cosine,200,0.1,What is the name of the clinical psychologist with the Psychological Group of Washington?,taniseh wood,katherin marshal wood,0.4,0.5,0.3333333333333333
+1,cosine,200,0.1,what was the name of the case?,error prompt size exce context window size process,baby-shak case,0.0,0.0,0.0
+1,cosine,200,0.1,Who is the Chief Justice of  United States ?,chief justic unit state current john g. robert jr,chief justic robert,0.5,0.3333333333333333,1.0
+1,cosine,200,0.1,What proportion of African American jurors were struck?,error prompt size exce context window size process,10 11,0.0,0.0,0.0
+1,cosine,200,0.1,Which NPR reporter was traveling in South Carolina?,error prompt size exce context window size process,gonyea,0.0,0.0,0.0
+1,cosine,200,0.1,Who is the only person that needs Denis O'Connell to sign a bilateral NDA?,person need deni o'connel sign bilater nd,leslie.hansen,0.0,0.0,0.0
+1,cosine,200,0.1,In which industry lynda need the survey about developers?,develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop develop,tech industri,0.0,0.0,0.0
+1,cosine,200,0.1,What is the name of the petitioner in the case?,error prompt size exce context window size process,mr. lamken,0.0,0.0,0.0
+1,cosine,200,0.1,"Which act has a piece missing from it, according to the Circuit court?",error prompt size exce context window size process,feder whistle-blow protect act,0.0,0.0,0.0
+1,cosine,200,0.1,Which restatement section was based on injured party?,error prompt size exce context window size process,section 324,0.0,0.0,0.0
+1,cosine,200,0.1,How many months of unpaid leave does anyone with a permanent position have in Sweden ?,answer 6 month,six,0.0,0.0,0.0
+1,cosine,200,0.1,What is the name of the amendment that requires reliability in the determination that death is an appropriate sentence ?,error prompt size exce context window size process,eighth amend,0.0,0.0,0.0
+2,cosine,200,0.1,Which program does Suellen reference that shares its name with a snake?,program suellen refer share name snake racket,python,0.0,0.0,0.0
+2,cosine,200,0.1,Which person is talking to the Chief Justice?,person talk chief justic provid given text,mr. kneedler,0.0,0.0,0.0
+2,cosine,200,0.1,What is the name of the most important center of learning of Sunni Islam in the country where the pope is going to celebrate a mass tomorrow ?,answer import center learn sunni islam countri pope go celebr mass tomorrow al-azhari univers cairo,al-azhar univers,0.11764705882352941,0.06666666666666667,0.5
+2,cosine,200,0.1,Who hosts NEWS & NOTES?,host news note geoffrey bennett,farai chideya,0.0,0.0,0.0
+2,cosine,200,0.1,Which feature in DrRacket inserts an epsilon?,featur drracket insert epsilon read-syntax,\epsilon,0.0,0.0,0.0
+2,cosine,200,0.1,What is the name of the clinical psychologist with the Psychological Group of Washington?,taniseh wood,katherin marshal wood,0.4,0.5,0.3333333333333333
+2,cosine,200,0.1,what was the name of the case?,error prompt size exce context window size process,baby-shak case,0.0,0.0,0.0
+2,cosine,200,0.1,Who is the Chief Justice of  United States ?,chief justic unit state current john g. robert jr,chief justic robert,0.5,0.3333333333333333,1.0
+2,cosine,200,0.1,What proportion of African American jurors were struck?,error prompt size exce context window size process,10 11,0.0,0.0,0.0
+2,cosine,200,0.1,Which NPR reporter was traveling in South Carolina?,error prompt size exce context window size process,gonyea,0.0,0.0,0.0
+2,cosine,200,0.1,Who is the only person that needs Denis O'Connell to sign a bilateral NDA?,lesli,leslie.hansen,0.0,0.0,0.0
+2,cosine,200,0.1,In which industry lynda need the survey about developers?,survey develop may need softwar develop industri,tech industri,0.22222222222222224,0.14285714285714285,0.5
+2,cosine,200,0.1,What is the name of the petitioner in the case?,error prompt size exce context window size process,mr. lamken,0.0,0.0,0.0
+2,cosine,200,0.1,"Which act has a piece missing from it, according to the Circuit court?",error prompt size exce context window size process,feder whistle-blow protect act,0.0,0.0,0.0
+2,cosine,200,0.1,Which restatement section was based on injured party?,error prompt size exce context window size process,section 324,0.0,0.0,0.0
+2,cosine,200,0.1,How many months of unpaid leave does anyone with a permanent position have in Sweden ?,amount unpaid leav someon perman posit sweden six month,six,0.19999999999999998,0.1111111111111111,1.0
+2,cosine,200,0.1,What is the name of the amendment that requires reliability in the determination that death is an appropriate sentence ?,error prompt size exce context window size process,eighth amend,0.0,0.0,0.0
