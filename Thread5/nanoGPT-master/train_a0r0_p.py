@@ -79,8 +79,8 @@ config_keys = [k for k,v in globals().items() if not k.startswith('_') and isins
 exec(open('configurator.py').read()) # overrides from command line or config file
 config = {k: globals()[k] for k in config_keys} # will be useful for logging
 # -----------------------------------------------------------------------------
-train_losses_a5r0 = []
-val_losses_a5r0 = []
+train_losses_a0r0 = []
+val_losses_a0r0 = []
 
 # various inits, derived attributes, I/O setup
 ddp = int(os.environ.get('RANK', -1)) != -1 # is this a ddp run?
@@ -263,8 +263,8 @@ while True:
     # evaluate the loss on train/val sets and write checkpoints
     if iter_num % eval_interval == 0 and master_process:
         losses = estimate_loss()
-        train_losses_a5r0.append(losses['train'].item())
-        val_losses_a5r0.append(losses['val'].item())
+        train_losses_a0r0.append(losses['train'].item())
+        val_losses_a0r0.append(losses['val'].item())
         print(f"step {iter_num}: train loss {losses['train']:.4f}, val loss {losses['val']:.4f}")
         if wandb_log:
             wandb.log({
@@ -343,8 +343,8 @@ if ddp:
     destroy_process_group()
 
 
-with open('train_losses_a5r0_p.json', 'w') as file:
-    json.dump(train_losses_a5r0, file)
+with open('train_losses_a0r0_p.json', 'w') as file:
+    json.dump(train_losses_a0r0, file)
 
-with open('val_losses_a5r0_p.json', 'w') as file:
-    json.dump(val_losses_a5r0, file)
+with open('val_losses_a0r0_p.json', 'w') as file:
+    json.dump(val_losses_a0r0, file)
