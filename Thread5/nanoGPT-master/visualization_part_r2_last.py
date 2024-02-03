@@ -57,10 +57,10 @@ plt.figure(figsize=(10, 6))
 plt.plot(val_losses_a2r0_2, label='Validation Loss a2r0')
 
 # plt.plot(train_losses_a2r1, label='Training Loss a2r1')
-plt.plot(val_losses_a2r2_2, label='Validation Loss a2r1')
+plt.plot(val_losses_a2r2_2, label='Validation Loss a2r2')
 
 # plt.plot(train_losses_a2r2, label='Training Loss a2r2')
-plt.plot(val_losses_a2r5_2, label='Validation Loss a2r2')
+plt.plot(val_losses_a2r5_2, label='Validation Loss a2r5')
 
 # plt.plot(train_losses_origin, label='Training Loss Origin')
 # plt.plot(val_losses_origin, label='Validation Loss Origin')
