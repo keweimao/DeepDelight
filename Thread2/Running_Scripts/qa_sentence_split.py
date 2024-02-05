@@ -19,14 +19,9 @@ from nltk.tokenize import sent_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 import string
-from heapq import nlargest
-import torch.nn as nn
 # Download necessary NLTK data
 # nltk.download('punkt')
 # nltk.download('stopwords')
-# from sklearn.feature_extraction.text import TfidfVectorizer
-# from rank_bm25 import BM25Okapi
-# import numpy as np
 
 ########## Config for Dr.Ke ############
 from langchain_community.llms import GPT4All
@@ -35,6 +30,11 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+# Experimental Semantic Chunker for sentences etc. 
+from langchain_experimental.text_splitter import SemanticChunker
+# from langchain_openai.embeddings import OpenAIEmbeddings
+
 from langchain.embeddings.huggingface import HuggingFaceInstructEmbeddings
 from transformers import set_seed
 from langchain_community.embeddings import GPT4AllEmbeddings
@@ -77,98 +77,72 @@ def calculate_token_f1(predicted, actual):
 
     return f1, precision, recall
 
-def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, top_n_sentences, dist_functions, 
-                instruct_embedding_model_name, instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, 
-                QA_CHAIN_PROMPT):
+def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, instruct_embedding_model_name, instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT):
     with open(output_csv_path, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1', 'Error'])
 
-        # Embedding for story sentences
-        hf_story_embs = HuggingFaceInstructEmbeddings(
+        word_embed = HuggingFaceInstructEmbeddings(
             model_name=instruct_embedding_model_name,
             model_kwargs=instruct_embedding_model_kwargs,
-            encode_kwargs=instruct_embedding_encode_kwargs,
-            embed_instruction="Use the following pieces of context to answer the question at the end:"
+            encode_kwargs=instruct_embedding_encode_kwargs
         )
-
-        # Embedding for questions
-        hf_query_embs = HuggingFaceInstructEmbeddings(
-            model_name=instruct_embedding_model_name,
-            model_kwargs=instruct_embedding_model_kwargs,
-            encode_kwargs=instruct_embedding_encode_kwargs,
-            query_instruction="How does this information relate to the question?"
-        )
-        
         start_time = time.time()
 
-        for dist_function in dist_functions:
-            print(f"\n{time.time()-start_time} Processing distance function: {dist_function}")
+        for chunk_size in chunk_sizes:
+            print(f"\n{time.time()-start_time} Processing chunk size {chunk_size}:")
             last_time = time.time()
             
-            for top_n_sentence in top_n_sentences:
-                print(f"\n{time.time()-start_time}\tTop sentences number: [{top_n_sentence}]")
+            for overlap_percentage in overlap_percentages:
+                actual_overlap = int(chunk_size * overlap_percentage)
+                print(f"\n{time.time()-start_time}\t{time.time()-last_time}\tOverlap [{overlap_percentage}] {actual_overlap}")
+                # text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=actual_overlap)
+                text_splitter = SemanticChunker(word_embed)
         
                 for i, story in enumerate(data['data']):
-                    # try: 
                     if i >= max_stories:
                         break
-
                     now_time = time.time()
-                    print(f"\n{now_time - start_time}\t{now_time - last_time}\t\tstory {i + 1}: ", end='')
+                    print(f"\n{now_time-start_time}\t{now_time-last_time}\t\tstory {i+1}: ", end='')
                     last_time = now_time
                     
-                    text_splitter = RecursiveCharacterTextSplitter()
-
-                    # Segment story text into sentences and embed each sentence
-                    sentences = sent_tokenize(story['text'])
-                    sentence_embs = hf_story_embs.embed_documents(sentences)
-
-                    # Text splitting for chunk-based processing (if required)
                     all_splits = text_splitter.split_text(story['text'])
-                    
-                    # Pass the embedding model to Chroma.from_texts
-                    vectorstore = Chroma.from_texts(texts=all_splits, embedding=hf_story_embs)
-
-                    # Initialize the QA chain with the vectorstore as the retriever
+                    vectorstore = Chroma.from_texts(texts=all_splits, embedding=word_embed)
                     qa_chain = RetrievalQA.from_chain_type(
-                        llm, 
-                        retriever=vectorstore.as_retriever(), 
-                        chain_type="stuff",
-                        verbose=False,
-                        chain_type_kwargs={
-                            "prompt": QA_CHAIN_PROMPT,
-                            "verbose": False},
-                        return_source_documents=False
-                    )
-                        
+                                llm, 
+                                retriever=vectorstore.as_retriever(), 
+                                chain_type="stuff",
+                                verbose=False,
+                                chain_type_kwargs={
+                                    "prompt": QA_CHAIN_PROMPT,
+                                    "verbose": False},
+                                return_source_documents=False)
+                    
+                    chunk_boundaries = []
+                    start_index = 0
+                    for split in all_splits:
+                        end_index = start_index + len(split)
+                        chunk_boundaries.append((start_index, end_index))
+                        start_index = end_index
+
                     for j, question_data in enumerate(story['questions']):
                         if question_data['isAnswerAbsent']:
                             continue  # Skip this question because an answer is absent
-
+                        
                         question = question_data['q']
-                        question_emb = hf_query_embs.embed_documents([question])[0]
-
-                        # Compute cosine similarity scores with each sentence
-                        if dist_functions == 'pairwise':
-                            scores = [pdist(torch.tensor(sentence_emb).unsqueeze(0), torch.tensor(question_emb).unsqueeze(0)).item() for sentence_emb in sentence_embs]
-                        else:
-                            scores = [torch.cosine_similarity(torch.tensor(sentence_emb).unsqueeze(0), torch.tensor(question_emb).unsqueeze(0))[0].item() for sentence_emb in sentence_embs]
-
-                        # Find the sentences with the top x highest scores
-                        top_scores_indices = nlargest(top_n_sentence, range(len(scores)), key=lambda idx: scores[idx])
-                        context_for_qa = " ".join([sentences[idx] for idx in top_scores_indices])
-
-                        # Check if there is a consensus answer and extract it
                         consensus = question_data['consensus']
+                        
+                        # Check if there is a consensus answer and extract it
                         if 's' in consensus and 'e' in consensus:
                             actual_answer = story['text'][consensus['s']:consensus['e']]
+                            answer_chunk_index = next((index for index, (start, end) in enumerate(chunk_boundaries) if consensus['s'] >= start and consensus['e'] <= end), None)
+                            if answer_chunk_index is not None:
+                                context_for_qa = all_splits[answer_chunk_index]
                         else:
                             continue  # No consensus answer, skip to the next question
 
                         # Get the prediction from the model
                         result = qa_chain({"context": context_for_qa, "query": question})
-                        # print(context_for_qa)
                         
                         # Extract and process the predicted answer
                         predicted_answer = result['result'] if isinstance(result['result'], str) else ""
@@ -184,11 +158,11 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, top_n_
                         # Write the scores to the file
                         error = 1 if 'error' in normalized_predicted_answer else 0
                         if error==0: 
-                            writer.writerow([dist_function, top_n_sentence, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value, error])
-                            
+                            writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value, error])
+                        
                             with open(output_log_path, 'a') as details_file:
-                                details_file.write(f"Distance Function: {dist_function}\n")
-                                details_file.write(f"Top sentences retrieved: {top_n_sentence}\n")
+                                details_file.write(f"Chunk Size: {chunk_size}\n")
+                                details_file.write(f"Overlap: {overlap_percentage}\n")
                                 details_file.write(f"Story: {i}\n")
                                 details_file.write(f"Question: {j}\n")
                                 details_file.write(f"Correct Answer: {actual_answer}\n")
@@ -207,18 +181,14 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, top_n_
                     del vectorstore
                     del all_splits
 
-                    # except Exception as e:
-                    #     print(f"Error processing Story{i}: {e}. Skipping to the next item.")
-
                 # End of the story loop
                 del text_splitter
 
 ############## Running Parameters ##############
 max_stories = 1000
-random_seed = 39836503
-top_n_sentences = [1, 2] # Use top n scored sentence as embedding
-dist_functions = ['pairwise', 'cosine'] # Default value is cosine similarity
-max_tokens = 4096
+chunk_sizes = [200]
+overlap_percentages = [0]  # Expressed as percentages (0.1 = 10%)
+random_seed = 123
 # model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
 # model_location = "/Users/wk77/Library/CloudStorage/OneDrive-DrexelUniversity/Documents/data/gpt4all/models/gpt4all-falcon-q4_0.gguf"
 # model_location = "/Users/wk77/Documents/data/gpt4all-falcon-newbpe-q4_0.gguf"
@@ -227,15 +197,13 @@ model_location = "/Users/wk77/Documents/data/mistral-7b-instruct-v0.1.Q4_0.gguf"
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/newsqa-data-v1.csv"
 input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined-newsqa-data-v1.json"
 # input_file_path = "/Users/wk77/Documents/git/DeepDelight/Thread2/data/combined-newsqa-data-story1.json"
-# output_csv_path = '../results/story2_score_test7.csv'
-# output_csv_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_scores_test.csv"
-output_csv_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_sentence_scores_test.csv"
-# output_log_path = '../results/story2_score_test7.log'
-# output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_scores_test.log"
-output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_sentence_scores_test.log"
-
-# Initialize PairwiseDistance
-pdist = nn.PairwiseDistance(p=2.0, eps=1e-06)
+# output_csv_path = '../results/story2_score_test2.csv'
+# output_csv_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_sentences.csv"
+output_csv_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_sentences.csv"
+# output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_scores_test.csv"
+# output_log_path = '../results/story2_score_test2.log'
+# output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_sentences.log"
+output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_sentences.log"
 
 ##################################################
 # logging.basicConfig(level=logging.INFO)
@@ -267,13 +235,13 @@ text_results = []
 
 # Initialize the language model and the QA chain
 print("Loading LLM.")
-llm = GPT4All(model=model_location, max_tokens=max_tokens, seed=random_seed)
+llm = GPT4All(model=model_location, max_tokens=2048, seed=random_seed)
 
 print("Preparing Parameters.")
 # HuggingFace Instruct Embeddings parameters
 instruct_embedding_model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
-# instruct_embedding_model_kwargs = {'device': 'cpu'}
-instruct_embedding_model_kwargs = {'device': 'mps'}
+instruct_embedding_model_kwargs = {'device': 'cpu'}
+# instruct_embedding_model_kwargs = {'device': 'mps'}
 instruct_embedding_encode_kwargs = {'normalize_embeddings': True}
 
 # The following code would iterate over the stories and questions to calculate the scores
@@ -282,5 +250,5 @@ print(f"{start_time} Started.")
 
 # Main Function Execution
 print("Processing.")
-newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, top_n_sentences, dist_functions, instruct_embedding_model_name,
+newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, instruct_embedding_model_name,
             instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT_ORIGINAL)
