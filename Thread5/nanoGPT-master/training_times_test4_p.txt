@@ -1,0 +1,3 @@
+Training time for a2r0_4_p: 89 min 57 s
+Training time for a2r2_4_p: 91 min 9 s
+Training time for a2r5_4_p: 94 min 24 s
