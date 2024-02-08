@@ -225,8 +225,10 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories,
 max_stories = 100
 random_seed = 123
 
-chunk_sizes = [100, 200, 300]
-overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
+# chunk_sizes = [100, 200, 300]
+chunk_sizes = [300]
+# overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
+overlap_percentages = [0.1, 0.2]
 top_n_sentences = [1, 2] # Use top n scored sentence as embedding
 dist_functions = ['pairwise', 'cosine'] # Default value is cosine similarity
 # model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
@@ -280,8 +282,8 @@ llm = GPT4All(model=model_location, max_tokens=2048, seed=random_seed)
 print("Preparing Parameters.")
 # HuggingFace Instruct Embeddings parameters
 instruct_embedding_model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
-instruct_embedding_model_kwargs = {'device': 'cpu'}
-# instruct_embedding_model_kwargs = {'device': 'mps'}
+# instruct_embedding_model_kwargs = {'device': 'cpu'}
+instruct_embedding_model_kwargs = {'device': 'mps'}
 instruct_embedding_encode_kwargs = {'normalize_embeddings': True}
 
 # The following code would iterate over the stories and questions to calculate the scores

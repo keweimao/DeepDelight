@@ -7,7 +7,7 @@
 # from langchain.chains import RetrievalQA
 
 # imports on mac
-from langchain.document_loaders import JSONLoader
+from langchain_community.document_loaders import JSONLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_community.vectorstores import Chroma
@@ -15,6 +15,7 @@ from langchain_community.llms import GPT4All
 from langchain.chains import RetrievalQA
 
 # Additional Imports
+import csv
 from collections import Counter
 import numpy as np
 from collections import defaultdict
@@ -54,6 +55,9 @@ combined_data = json.loads(Path(file_path2).read_text())
 
 from nltk.tokenize import word_tokenize
 import collections
+
+def calculate_em(predicted, actual):
+    return int(predicted == actual)
 
 def compute_f1(a_gold, a_pred):
     gold_toks = word_tokenize(a_gold)
@@ -125,7 +129,8 @@ template = """
 
                     """
 QA_CHAIN_PROMPT = PromptTemplate.from_template(template)
-llm = GPT4All(model="E:/ggml-model-gpt4all-falcon-q4_0.bin", max_tokens=2048)
+# llm = GPT4All(model="E:/ggml-model-gpt4all-falcon-q4_0.bin", max_tokens=2048)
+llm = GPT4All(model="/Users/wk77/Documents/data/mistral-7b-instruct-v0.1.Q4_0.gguf")
 
 instruct_embedding_model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
 # instruct_embedding_model_kwargs = {'device': 'cpu'}
@@ -147,65 +152,117 @@ def process_story_questions(combined_data, model_name, instruction,chunk_size,ov
         embed_instruction="Represent the story for retrieval:"
     )
 
-    for cov in combined_data:
-        all_splits = text_splitter.split_text(cov['text'])
-        vectorstore = Chroma.from_texts(texts=all_splits, embedding=word_embed)
-        qa_chain = RetrievalQA.from_chain_type(
-                    llm, 
-                    retriever=vectorstore.as_retriever(), 
-                    chain_type="stuff",
-                    verbose=False,
-                    chain_type_kwargs={
-                        "prompt": QA_CHAIN_PROMPT,
-                        "verbose": False},
-                    return_source_documents=False)
+    run = 0
+    with open(output_csv_path, 'a', newline='') as file:
+        writer = csv.writer(file)
+        for cov in combined_data:
+            run = run + 1
+            if run>max_runs: 
+                break 
 
-        question = cov['question']
-        hf_query_embs = HuggingFaceInstructEmbeddings(
-            model_name=instruct_embedding_model_name,
-            model_kwargs=instruct_embedding_model_kwargs,
-            encode_kwargs=instruct_embedding_encode_kwargs,
-            query_instruction=instruction
-        )
-        question_emb = hf_query_embs.embed_query(question)
-        docs = vectorstore.similarity_search_by_vector(question_emb)
-        predict = qa_chain({"query": question})
-        answers_pairs.append((cov['answers'],predict,chunk_size,overlap_percentage))
+            start_time = time.time()
+            all_splits = text_splitter.split_text(cov['text'])
+            vectorstore = Chroma.from_texts(texts=all_splits, embedding=word_embed)
+            qa_chain = RetrievalQA.from_chain_type(
+                        llm, 
+                        retriever=vectorstore.as_retriever(), 
+                        chain_type="stuff",
+                        verbose=False,
+                        chain_type_kwargs={
+                            "prompt": QA_CHAIN_PROMPT,
+                            "verbose": False},
+                        return_source_documents=False)
 
+            question = cov['question']
+            print(f"#{run} question: {question}")
+            hf_query_embs = HuggingFaceInstructEmbeddings(
+                model_name=instruct_embedding_model_name,
+                model_kwargs=instruct_embedding_model_kwargs,
+                encode_kwargs=instruct_embedding_encode_kwargs,
+                query_instruction=instruction
+            )
+            question_emb = hf_query_embs.embed_query(question)
+            docs = vectorstore.similarity_search_by_vector(question_emb)
+            qa_context = ""
+            for doc in docs: 
+                qa_context += doc.page_content + '.. '
+            print(f"#{run} context: {qa_context}")
+            predict = qa_chain({"context":qa_context, "query": question})
+            # answers_pairs.append((cov['answers'],predict,chunk_size,overlap_percentage))
+            actual_answer = normalize_and_stem(cov['answers'][0])
+            predict_answer = normalize_and_stem(predict['result'])
+            f1 = compute_f1(actual_answer,predict_answer)
+            p = compute_precision(actual_answer,predict_answer)
+            r = compute_recall(actual_answer,predict_answer)
+            em = calculate_em(actual_answer, predict_answer)
+
+            # Write the scores to the file
+            error = 1 if 'error' in predict_answer else 0
+            if error==0: 
+                writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, run, 0, em, p, r, f1, error])
+
+            with open(output_log_path, 'a') as details_file:
+                details_file.write(f"Chunk Size: {chunk_size}\n")
+                details_file.write(f"Overlap: {overlap_percentage}\n")
+                # details_file.write(f"Distance Function: {dist_function}\n")
+                # details_file.write(f"Top sentences retrieved: {top_n_sentence}\n")
+                details_file.write(f"Story: {run}\n")
+                details_file.write(f"Question: 0\n")
+                details_file.write(f"Correct Answer: {actual_answer}\n")
+                # details_file.write(f"Normalized Actual Answer: {normalized_actual_answer}\n")
+                details_file.write(f"Predicted Answer: {predict_answer}\n")
+                # details_file.write(f"Normalized Predicted Answer: {normalized_predicted_answer}\n")
+                details_file.write(f"Time: {time.time() - start_time}\n")
+                details_file.write(f"EM Score: {em}\n")
+                details_file.write(f"Precision: {p}\n")
+                details_file.write(f"Recall: {r}\n")
+                details_file.write(f"F1: {f1}\n")
+                details_file.write("----------------------------------------\n")
+        
+max_runs = 100
 model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
 instruction = "Represent the story for retrieval:" 
 #Try different chunk sizes and overlap percentages
-#chunk_sizes = [100, 200]
-#overlap_percentages = [0, 0.1]
-#for i in chunk_sizes:
-#    for j in overlap_percentages:
-#        text_splitter = RecursiveCharacterTextSplitter(chunk_size=i, chunk_overlap=j)
-#        process_story_questions(combined_data, model_name, instruction, i, j)
-chunk_size=200
-overlap_percentage=0.1
-text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=overlap_percentage)
-process_story_questions(combined_data, model_name, instruction, chunk_size, overlap_percentage)
-result_list=[]
-for i in answers_pairs:
-    actual_answer=normalize_and_stem(i[0][0])
-    predict_answer=normalize_and_stem(i[1]['result'])
-    f1_score = compute_f1(actual_answer,predict_answer)
-    precision = compute_precision(actual_answer,predict_answer)
-    recall = compute_recall(actual_answer,predict_answer)
+# chunk_sizes = [100, 200]
+chunk_sizes = [300,400]
+overlap_percentages = [0, 0.1]
+output_csv_path = 'results/qaconv_chunks2.csv'
+output_log_path = 'results/qaconv_chunks2.log'
+with open(output_csv_path, 'w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1', 'Error'])
 
-    #print(f"Question: {i[0]}")
-    #print(f"Predicted Answer: {i[2]}")
-    #print(f"Actual Answer: {i[1][0]}")
-    #print(f"F1 Score: {f1_score:.4f}")
-    #print(f"Precision: {precision:.4f}")
-    #print(f"Recall: {recall:.4f}")
-    #print()
-    result_list.append([i[2],i[3],i[1]['query'],predict_answer,actual_answer,f1_score,precision,recall])
+for i in chunk_sizes:
+   for j in overlap_percentages:
+       text_splitter = RecursiveCharacterTextSplitter(chunk_size=i, chunk_overlap=j)
+       process_story_questions(combined_data, model_name, instruction, i, j)
 
-df=pd.DataFrame({'Chunk_size':[],'Overlap_percentage':[],'Quesion':[],'Predicted Answer':[],'Actual Answer':[],'f1 score':[],'Precision':[],'Recall':[]})
-while((len(df))!=(len(result_list))):
-    df.loc[len(df)]=result_list[len(df)]
-df.to_csv('output_stemming.csv', index=False)
+
+# chunk_size=200
+# overlap_percentage=0.1
+# text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=overlap_percentage)
+# process_story_questions(combined_data, model_name, instruction, chunk_size, overlap_percentage)
+# result_list=[]
+# for i in answers_pairs:
+#     actual_answer=normalize_and_stem(i[0][0])
+#     predict_answer=normalize_and_stem(i[1]['result'])
+#     f1_score = compute_f1(actual_answer,predict_answer)
+#     precision = compute_precision(actual_answer,predict_answer)
+#     recall = compute_recall(actual_answer,predict_answer)
+
+#     #print(f"Question: {i[0]}")
+#     #print(f"Predicted Answer: {i[2]}")
+#     #print(f"Actual Answer: {i[1][0]}")
+#     #print(f"F1 Score: {f1_score:.4f}")
+#     #print(f"Precision: {precision:.4f}")
+#     #print(f"Recall: {recall:.4f}")
+#     #print()
+#     result_list.append([i[2],i[3],i[1]['query'],predict_answer,actual_answer,f1_score,precision,recall])
+
+# df=pd.DataFrame({'Chunk_size':[],'Overlap_percentage':[],'Quesion':[],'Predicted Answer':[],'Actual Answer':[],'f1 score':[],'Precision':[],'Recall':[]})
+# while((len(df))!=(len(result_list))):
+#     df.loc[len(df)]=result_list[len(df)]
+# df.to_csv('output_stemming.csv', index=False)
 
 '''
 answers_pairs=[]
