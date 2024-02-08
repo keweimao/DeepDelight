@@ -24,26 +24,26 @@ import string
 # nltk.download('stopwords')
 
 ########## Config for Dr.Ke ############
-# from langchain_community.llms import GPT4All
-# from pathlib import Path
-# from langchain.prompts import PromptTemplate
-# from langchain.chains import RetrievalQA
-# from langchain_community.vectorstores import Chroma
-# from langchain.text_splitter import RecursiveCharacterTextSplitter
-# from langchain.embeddings.huggingface import HuggingFaceInstructEmbeddings
-# from transformers import set_seed
-# from langchain_community.embeddings import GPT4AllEmbeddings
-
-######### Config for Lixiao ############
-from langchain.llms import GPT4All
+from langchain_community.llms import GPT4All
 from pathlib import Path
-from langchain import PromptTemplate
+from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.huggingface import HuggingFaceInstructEmbeddings
 from transformers import set_seed
-from langchain.embeddings import GPT4AllEmbeddings
+from langchain_community.embeddings import GPT4AllEmbeddings
+
+######### Config for Lixiao ############
+# from langchain.llms import GPT4All
+# from pathlib import Path
+# from langchain import PromptTemplate
+# from langchain.chains import RetrievalQA
+# from langchain.vectorstores import Chroma
+# from langchain.text_splitter import RecursiveCharacterTextSplitter
+# from langchain.embeddings.huggingface import HuggingFaceInstructEmbeddings
+# from transformers import set_seed
+# from langchain.embeddings import GPT4AllEmbeddings
 
 # Function to normalize and stem text
 def normalize_and_stem(text):
@@ -75,7 +75,7 @@ def calculate_token_f1(predicted, actual):
 def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overlap_percentages, max_stories, instruct_embedding_model_name, instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT):
     with open(output_csv_path, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1'])
+        writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1', 'Error'])
 
         word_embed = HuggingFaceInstructEmbeddings(
             model_name=instruct_embedding_model_name,
@@ -150,7 +150,9 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
                         em_score = calculate_em(normalized_predicted_answer, normalized_actual_answer)
 
                         # Write the scores to the file
-                        writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value])
+                        error = 1 if 'error' in normalized_predicted_answer else 0
+                        if error==0: 
+                            writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value])
                         
                         with open(output_log_path, 'a') as details_file:
                             details_file.write(f"Chunk Size: {chunk_size}\n")
@@ -178,21 +180,23 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
 
 ############## Running Parameters ##############
 max_stories = 100
-chunk_sizes = [200]
-overlap_percentages = [0, 0.1]  # Expressed as percentages (0.1 = 10%)
+chunk_sizes = [100, 200, 300]
+overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
 random_seed = 123
-model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
+# model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
 # model_location = "/Users/wk77/Library/CloudStorage/OneDrive-DrexelUniversity/Documents/data/gpt4all/models/gpt4all-falcon-q4_0.gguf"
 # model_location = "/Users/wk77/Documents/data/gpt4all-falcon-newbpe-q4_0.gguf"
-# model_location = "/Users/wk77/Documents/data/mistral-7b-instruct-v0.1.Q4_0.gguf"
-input_file_path='C:/NewsQA/combined-newsqa-data-story2.json'
+model_location = "/Users/wk77/Documents/data/mistral-7b-instruct-v0.1.Q4_0.gguf"
+# input_file_path='C:/NewsQA/combined-newsqa-data-story2.json'
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/newsqa-data-v1.csv"
-# input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined-newsqa-data-v1.json"
+input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined-newsqa-data-v1.json"
 # input_file_path = "/Users/wk77/Documents/git/DeepDelight/Thread2/data/combined-newsqa-data-story1.json"
-output_csv_path = '../results/story2_score_test2.csv'
+# output_csv_path = '../results/story2_score_test2.csv'
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_scores_test.csv"
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_scores_test.csv"
-output_log_path = '../results/story2_score_test2.log'
+output_csv_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_chunks.csv"
+# output_log_path = '../results/story2_score_test2.log'
+output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_chunks.log"
 
 ##################################################
 # logging.basicConfig(level=logging.INFO)
@@ -229,8 +233,8 @@ llm = GPT4All(model=model_location, max_tokens=2048, seed=random_seed)
 print("Preparing Parameters.")
 # HuggingFace Instruct Embeddings parameters
 instruct_embedding_model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
-instruct_embedding_model_kwargs = {'device': 'cpu'}
-# instruct_embedding_model_kwargs = {'device': 'mps'}
+# instruct_embedding_model_kwargs = {'device': 'cpu'}
+instruct_embedding_model_kwargs = {'device': 'mps'}
 instruct_embedding_encode_kwargs = {'normalize_embeddings': True}
 
 # The following code would iterate over the stories and questions to calculate the scores

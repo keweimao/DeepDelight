@@ -19,6 +19,8 @@ from nltk.tokenize import sent_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
 import string
+from heapq import nlargest
+import torch.nn as nn
 # Download necessary NLTK data
 # nltk.download('punkt')
 # nltk.download('stopwords')
@@ -87,6 +89,23 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
             model_kwargs=instruct_embedding_model_kwargs,
             encode_kwargs=instruct_embedding_encode_kwargs
         )
+
+        # Embedding for story sentences
+        hf_story_embs = HuggingFaceInstructEmbeddings(
+            model_name=instruct_embedding_model_name,
+            model_kwargs=instruct_embedding_model_kwargs,
+            encode_kwargs=instruct_embedding_encode_kwargs,
+            embed_instruction="Use the following pieces of context to answer the question at the end:"
+        )
+
+        # Embedding for questions
+        hf_query_embs = HuggingFaceInstructEmbeddings(
+            model_name=instruct_embedding_model_name,
+            model_kwargs=instruct_embedding_model_kwargs,
+            encode_kwargs=instruct_embedding_encode_kwargs,
+            query_instruction="How does this information relate to the question?"
+        )
+
         start_time = time.time()
 
         for chunk_size in chunk_sizes:
@@ -125,56 +144,8 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
                         chunk_boundaries.append((start_index, end_index))
                         start_index = end_index
 
-                    for j, question_data in enumerate(story['questions']):
-                        if question_data['isAnswerAbsent']:
-                            continue  # Skip this question because an answer is absent
-                        
-                        question = question_data['q']
-                        consensus = question_data['consensus']
-                        
-                        # Check if there is a consensus answer and extract it
-                        if 's' in consensus and 'e' in consensus:
-                            actual_answer = story['text'][consensus['s']:consensus['e']]
-                            answer_chunk_index = next((index for index, (start, end) in enumerate(chunk_boundaries) if consensus['s'] >= start and consensus['e'] <= end), None)
-                            if answer_chunk_index is not None:
-                                context_for_qa = all_splits[answer_chunk_index]
-                        else:
-                            continue  # No consensus answer, skip to the next question
-
-                        # Get the prediction from the model
-                        result = qa_chain({"context": context_for_qa, "query": question})
-                        
-                        # Extract and process the predicted answer
-                        predicted_answer = result['result'] if isinstance(result['result'], str) else ""
-                        
-                        # Normalize and stem the predicted and actual answers
-                        normalized_predicted_answer = normalize_and_stem(predicted_answer)
-                        normalized_actual_answer = normalize_and_stem(actual_answer)
-
-                        # Calculate the F1 score, precision, and recall using normalized and stemmed answers
-                        f1_score_value, precision, recall = calculate_token_f1(normalized_predicted_answer, normalized_actual_answer)
-                        em_score = calculate_em(normalized_predicted_answer, normalized_actual_answer)
-
-                        # Write the scores to the file
-                        error = 1 if 'error' in normalized_predicted_answer else 0
-                        if error==0: 
-                            writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value, error])
-                        
-                            with open(output_log_path, 'a') as details_file:
-                                details_file.write(f"Chunk Size: {chunk_size}\n")
-                                details_file.write(f"Overlap: {overlap_percentage}\n")
-                                details_file.write(f"Story: {i}\n")
-                                details_file.write(f"Question: {j}\n")
-                                details_file.write(f"Correct Answer: {actual_answer}\n")
-                                details_file.write(f"Normalized Actual Answer: {normalized_actual_answer}\n")
-                                details_file.write(f"Predicted Answer: {predicted_answer}\n")
-                                details_file.write(f"Normalized Predicted Answer: {normalized_predicted_answer}\n")
-                                details_file.write(f"Time: {time.time() - start_time}\n")
-                                details_file.write(f"EM Score: {em_score}\n")
-                                details_file.write(f"Precision: {precision}\n")
-                                details_file.write(f"Recall: {recall}\n")
-                                details_file.write(f"F1: {f1_score_value}\n")
-                                details_file.write("----------------------------------------\n")
+                    # Test story questions
+                    test_story_questions(story=story, hf_query_embs=hf_query_embs, sentences=sentences, sentence_embs=sentence_embs )
 
                     # Cleanup
                     del qa_chain
@@ -183,6 +154,67 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, chunk_sizes, overla
 
                 # End of the story loop
                 del text_splitter
+
+def test_story_questions(story, hf_query_embs, sentences, sentence_embs, qa_chain, chunk_size, overlap_percentage, dist_function, top_n_sentence, writer): 
+    for j, question_data in enumerate(story['questions']):
+        if question_data['isAnswerAbsent']:
+            continue  # Skip this question because an answer is absent
+
+        question = question_data['q']
+        question_emb = hf_query_embs.embed_documents([question])[0]
+
+        # Compute cosine similarity scores with each sentence
+        if dist_function == 'pairwise':
+            scores = [pdist(torch.tensor(sentence_emb).unsqueeze(0), torch.tensor(question_emb).unsqueeze(0)).item() for sentence_emb in sentence_embs]
+        else:
+            scores = [torch.cosine_similarity(torch.tensor(sentence_emb).unsqueeze(0), torch.tensor(question_emb).unsqueeze(0))[0].item() for sentence_emb in sentence_embs]
+
+        # Find the sentences with the top x highest scores
+        top_scores_indices = nlargest(top_n_sentence, range(len(scores)), key=lambda idx: scores[idx])
+        context_for_qa = " ".join([sentences[idx] for idx in top_scores_indices])
+
+        # Check if there is a consensus answer and extract it
+        consensus = question_data['consensus']
+        if 's' in consensus and 'e' in consensus:
+            actual_answer = story['text'][consensus['s']:consensus['e']]
+        else:
+            continue  # No consensus answer, skip to the next question
+
+        # Get the prediction from the model
+        result = qa_chain({"context": context_for_qa, "query": question})
+        
+        # Extract and process the predicted answer
+        predicted_answer = result['result'] if isinstance(result['result'], str) else ""
+        
+        # Normalize and stem the predicted and actual answers
+        normalized_predicted_answer = normalize_and_stem(predicted_answer)
+        normalized_actual_answer = normalize_and_stem(actual_answer)
+
+        # Calculate the F1 score, precision, and recall using normalized and stemmed answers
+        f1_score_value, precision, recall = calculate_token_f1(normalized_predicted_answer, normalized_actual_answer)
+        em_score = calculate_em(normalized_predicted_answer, normalized_actual_answer)
+
+        # Write the scores to the file
+        error = 1 if 'error' in normalized_predicted_answer else 0
+        if error==0: 
+            writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value, error])
+        
+            with open(output_log_path, 'a') as details_file:
+                details_file.write(f"Chunk Size: {chunk_size}\n")
+                details_file.write(f"Overlap: {overlap_percentage}\n")
+                details_file.write(f"Story: {i}\n")
+                details_file.write(f"Question: {j}\n")
+                details_file.write(f"Correct Answer: {actual_answer}\n")
+                details_file.write(f"Normalized Actual Answer: {normalized_actual_answer}\n")
+                details_file.write(f"Predicted Answer: {predicted_answer}\n")
+                details_file.write(f"Normalized Predicted Answer: {normalized_predicted_answer}\n")
+                details_file.write(f"Time: {time.time() - start_time}\n")
+                details_file.write(f"EM Score: {em_score}\n")
+                details_file.write(f"Precision: {precision}\n")
+                details_file.write(f"Recall: {recall}\n")
+                details_file.write(f"F1: {f1_score_value}\n")
+                details_file.write("----------------------------------------\n")
+
 
 ############## Running Parameters ##############
 max_stories = 1000
@@ -204,6 +236,9 @@ output_csv_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_sentences.
 # output_log_path = '../results/story2_score_test2.log'
 # output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_sentences.log"
 output_log_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_sentences.log"
+
+# Initialize PairwiseDistance
+pdist = nn.PairwiseDistance(p=2.0, eps=1e-06)
 
 ##################################################
 # logging.basicConfig(level=logging.INFO)
@@ -240,8 +275,8 @@ llm = GPT4All(model=model_location, max_tokens=2048, seed=random_seed)
 print("Preparing Parameters.")
 # HuggingFace Instruct Embeddings parameters
 instruct_embedding_model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
-instruct_embedding_model_kwargs = {'device': 'cpu'}
-# instruct_embedding_model_kwargs = {'device': 'mps'}
+# instruct_embedding_model_kwargs = {'device': 'cpu'}
+instruct_embedding_model_kwargs = {'device': 'mps'}
 instruct_embedding_encode_kwargs = {'normalize_embeddings': True}
 
 # The following code would iterate over the stories and questions to calculate the scores
