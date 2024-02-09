@@ -45,5 +45,14 @@ min=$(( cost_time / 60 ))
 sec=$(( cost_time % 60 ))
 echo "Training time for a2r5_4: $min min $sec s" >> "$output_file"
 
+# For train_a2r5.py
+start_time=$(date +%s)
+python train_a2r99_4.py config/train_shakespeare_char_a2.py
+end_time=$(date +%s)
+cost_time=$(( end_time - start_time ))
+min=$(( cost_time / 60 ))
+sec=$(( cost_time % 60 ))
+echo "Training time for a2r99_4: $min min $sec s" >> "$output_file"
+
 # Run the visualization script
 python visualization_r4.py

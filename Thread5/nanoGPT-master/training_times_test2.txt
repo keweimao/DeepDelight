@@ -1,2 +1,5 @@
-Training time for a2r2: 143 min 21 s
-Training time for a2r5: 143 min 54 s
+Training time for a2r025: 15 min 50 s
+Training time for a2r05: 16 min 3 s
+Training time for a2r1: 15 min 52 s
+Training time for a2r2: 15 min 59 s
+Training time for a2r5: 15 min 49 s

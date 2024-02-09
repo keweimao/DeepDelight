@@ -103,9 +103,9 @@ class Block(nn.Module):
 
     def forward(self, x):
         x = self.ln_1(x)        
-        y = self.dropout(x) + self.attn(x)    # add skip 1 layer from x
+        y = self.dropout(x) * (1-0.2) + self.attn(x)    # add skip 1 layer from x
         y = self.ln_2(y)        
-        z = self.dropout(y) + self.mlp(y)     # add skip 1 layer from y
+        z = self.dropout(y) * (1-0.2) + self.mlp(y)     # add skip 1 layer from y
         return z
 
 @dataclass

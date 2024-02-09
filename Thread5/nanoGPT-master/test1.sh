@@ -5,7 +5,7 @@
 
 
 # Set the output file name
-output_file="training_times_test1_p.txt"
+output_file="training_times_test1.txt"
 
 # Clear the existing content of the output file (if you do not wish to keep previous records)
 > "$output_file"

@@ -27,14 +27,32 @@ echo "Training time for a2r0_2: $min min $sec s" >> "$output_file"
 
 # Repeat the above steps for other training scripts
 
-# For train_a2r2.py
 start_time=$(date +%s)
-python train_a2r2_2.py config/train_shakespeare_char_a2.py
+python train_a2r05_2.py config/train_shakespeare_char_a2.py
 end_time=$(date +%s)
 cost_time=$(( end_time - start_time ))
 min=$(( cost_time / 60 ))
 sec=$(( cost_time % 60 ))
-echo "Training time for a2r2_2: $min min $sec s" >> "$output_file"
+echo "Training time for a2r05_2: $min min $sec s" >> "$output_file"
+
+
+# start_time=$(date +%s)
+# python train_a2r1_2.py config/train_shakespeare_char_a2.py
+# end_time=$(date +%s)
+# cost_time=$(( end_time - start_time ))
+# min=$(( cost_time / 60 ))
+# sec=$(( cost_time % 60 ))
+# echo "Training time for a2r1_2: $min min $sec s" >> "$output_file"
+
+
+# For train_a2r2.py
+start_time=$(date +%s)
+python train_a2r25_2.py config/train_shakespeare_char_a2.py
+end_time=$(date +%s)
+cost_time=$(( end_time - start_time ))
+min=$(( cost_time / 60 ))
+sec=$(( cost_time % 60 ))
+echo "Training time for a2r25_2: $min min $sec s" >> "$output_file"
 
 # For train_a2r5.py
 start_time=$(date +%s)
@@ -44,6 +62,24 @@ cost_time=$(( end_time - start_time ))
 min=$(( cost_time / 60 ))
 sec=$(( cost_time % 60 ))
 echo "Training time for a2r5_2: $min min $sec s" >> "$output_file"
+
+
+# start_time=$(date +%s)
+# python train_a2r75_2.py config/train_shakespeare_char_a2.py
+# end_time=$(date +%s)
+# cost_time=$(( end_time - start_time ))
+# min=$(( cost_time / 60 ))
+# sec=$(( cost_time % 60 ))
+# echo "Training time for a2r75_2: $min min $sec s" >> "$output_file"
+
+
+start_time=$(date +%s)
+python train_a2r100_2.py config/train_shakespeare_char_a2.py
+end_time=$(date +%s)
+cost_time=$(( end_time - start_time ))
+min=$(( cost_time / 60 ))
+sec=$(( cost_time % 60 ))
+echo "Training time for a2r100_2: $min min $sec s" >> "$output_file"
 
 # Run the visualization script
 python visualization_r2.py
