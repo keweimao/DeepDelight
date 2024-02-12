@@ -161,7 +161,9 @@ def process_story_questions(combined_data, model_name, instruction,chunk_size,ov
                 break 
 
             start_time = time.time()
-            all_splits = text_splitter.split_text(cov['text'])
+            # all_splits = text_splitter.split_text(cov['text'])  # chunk splits here
+            # for sentence splits
+            all_splits = sent_tokenize(cov['text'])
             vectorstore = Chroma.from_texts(texts=all_splits, embedding=word_embed)
             qa_chain = RetrievalQA.from_chain_type(
                         llm, 
@@ -223,11 +225,11 @@ max_runs = 100
 model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
 instruction = "Represent the story for retrieval:" 
 #Try different chunk sizes and overlap percentages
-# chunk_sizes = [100, 200]
-chunk_sizes = [300,400]
-overlap_percentages = [0, 0.1]
-output_csv_path = 'results/qaconv_chunks2.csv'
-output_log_path = 'results/qaconv_chunks2.log'
+# chunk_sizes = [100, 200, 300, 400]
+chunk_sizes = [0]
+overlap_percentages = [0]
+output_csv_path = 'results/qaconv_sentences.csv'
+output_log_path = 'results/qaconv_sentences.log'
 with open(output_csv_path, 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1', 'Error'])
