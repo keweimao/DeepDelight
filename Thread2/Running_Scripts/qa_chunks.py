@@ -222,25 +222,28 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories,
                         del text_splitter
 
 ############## Running Parameters ##############
-max_stories = 100
+max_stories = 50
 random_seed = 123
 
-chunk_sizes = [100, 200, 300]
-overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
-top_n_sentences = [1, 2] # Use top n scored sentence as embedding
+# chunk_sizes = [100, 200]
+chunk_sizes = [50,25]
+# overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
+overlap_percentages = [0]
+top_n_sentences = [2,4] # Use top n scored sentence as embedding
 dist_functions = ['pairwise', 'cosine'] # Default value is cosine similarity
 # model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
 # model_location = "/Users/wk77/Library/CloudStorage/OneDrive-DrexelUniversity/Documents/data/gpt4all/models/gpt4all-falcon-q4_0.gguf"
 # model_location = "/Users/wk77/Documents/data/gpt4all-falcon-newbpe-q4_0.gguf"
-model_location = "/Users/wk77/Documents/data/mistral-7b-instruct-v0.1.Q4_0.gguf"
+# model_location = "/Users/wk77/Documents/data/mistral-7b-instruct-v0.1.Q4_0.gguf"
+model_location = "/Users/wk77/Documents/data/orca-mini-3b-gguf2-q4_0.gguf"          # small 3b model
 # input_file_path='C:/NewsQA/combined-newsqa-data-story2.json'
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/newsqa-data-v1.csv"
 input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined-newsqa-data-v1.json"
 # input_file_path = "/Users/wk77/Documents/git/DeepDelight/Thread2/data/combined-newsqa-data-story1.json"
-output_csv_path = '../results/combined_chunks.csv'
+output_csv_path = '../results/combined_chunks5025.csv'
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_scores_test.csv"
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_scores_test.csv"
-output_log_path = '../results/combined_chunks.log'
+output_log_path = '../results/combined_chunks5025.log'
 
 # Initialize PairwiseDistance
 pdist = nn.PairwiseDistance(p=2.0, eps=1e-06)
@@ -280,8 +283,8 @@ llm = GPT4All(model=model_location, max_tokens=2048, seed=random_seed)
 print("Preparing Parameters.")
 # HuggingFace Instruct Embeddings parameters
 instruct_embedding_model_name = "sentence-transformers/multi-qa-MiniLM-L6-cos-v1"
-instruct_embedding_model_kwargs = {'device': 'cpu'}
-# instruct_embedding_model_kwargs = {'device': 'mps'}
+# instruct_embedding_model_kwargs = {'device': 'cpu'}
+instruct_embedding_model_kwargs = {'device': 'mps'}
 instruct_embedding_encode_kwargs = {'normalize_embeddings': True}
 
 # The following code would iterate over the stories and questions to calculate the scores

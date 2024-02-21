@@ -17,7 +17,7 @@ NR > 1 { # Skip the first line (header)
 
 END {
     # Print the header for the output
-    print "Group1", "Group2", "Mean3", "Mean6", "Mean7", "Mean8", "Mean9";
+    print "Chunk_NA", "Overlap_NA", "Time", "EM", "P", "R", "F1";
     
     # Iterate over the keys and print the means
     for (key in count) {
