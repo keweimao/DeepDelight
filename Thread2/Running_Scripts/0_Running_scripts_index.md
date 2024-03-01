@@ -73,3 +73,4 @@ The difference compared to the previous version:
  - Remove `top_n_sentences` and `dist_functions`, replace them with `similarity_search_by_vector()`, and potentially expand to other probability-based IR methods (e.g. BM25)
 - Consolidate import libraries and switch the model into `mistral-7b` to simplify the cross-machine code running
 - Modify memory release code
+- Use `similarity_search_by_vectors()` for sentence retrieval
