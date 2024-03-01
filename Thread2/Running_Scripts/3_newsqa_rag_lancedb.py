@@ -177,7 +177,7 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
             for overlap_percentage in overlap_percentages:
                 actual_overlap = int(chunk_size * overlap_percentage)
                 print(f"\n{time.time()-start_time}\t{time.time()-last_time}\tOverlap [{overlap_percentage}] {actual_overlap}")
-                text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=actual_overlap)
+                # text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=actual_overlap)
 
                 for i, story in enumerate(data['data']):
                     if i >= max_stories:
@@ -276,14 +276,14 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
                     #del chunk_embs
 
                 # End of the story loop
-                del text_splitter
+                # del text_splitter
 
 ############## Running Parameters ##############
 max_stories = 50
 random_seed = 123
 db_dir = 'C:/NewsQA/lancedb'
 embedding_function_name = 'hf_emb'
-chunk_sizes = [100, 200]
+chunk_sizes = [100, 200, 400]
 # chunk_sizes = [50,25]
 # overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
 overlap_percentages = [0, 0.1]
