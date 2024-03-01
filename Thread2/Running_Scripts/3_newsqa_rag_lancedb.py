@@ -245,9 +245,9 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
 
                         # Calculate the F1 score, precision, and recall using normalized and stemmed answers
                         # f1_score_value, precision, recall, em_score = token_eval(normalized_predicted_answer, normalized_actual_answer)
-                        print("Calling token_eval with:", normalized_predicted_answer, normalized_actual_answer)
+                        # print("Calling token_eval with:", normalized_predicted_answer, normalized_actual_answer)
                         result = token_eval(normalized_predicted_answer, normalized_actual_answer)
-                        print("token_eval returned:", result)
+                        # print("token_eval returned:", result)
                         f1_score_value, precision, recall, em_score = result
                         
                         # Write the scores to the file
