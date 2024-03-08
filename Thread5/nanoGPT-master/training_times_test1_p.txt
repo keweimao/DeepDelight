@@ -1,3 +1,1 @@
-Training time for a0r0: 133 min 35 s
-Training time for a2r0: 139 min 12 s
-Training time for a5r0: 138 min 53 s
+Training time for a0r0: 2 min 37 s

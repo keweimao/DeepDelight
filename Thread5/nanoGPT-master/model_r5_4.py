@@ -97,17 +97,17 @@ class Block(nn.Module):
         # First set of layers
         self.ln_1 = LayerNorm(config.n_embd, bias=config.bias)
         self.attn_1 = CausalSelfAttention(config)
-        self.dropout1 = nn.Dropout(0)
+        self.dropout1 = nn.Dropout(0.025)
 
         # Second set of layers
         self.ln_2 = LayerNorm(config.n_embd, bias=config.bias)
         self.mlp_1 = MLP(config)
-        self.dropout2 = nn.Dropout(0)
+        self.dropout2 = nn.Dropout(0.99)
 
         # Third set of layers
         self.ln_3 = LayerNorm(config.n_embd, bias=config.bias)
         self.attn_2 = CausalSelfAttention(config)
-        self.dropout3 = nn.Dropout(0.5)
+        # self.dropout3 = nn.Dropout(0)
 
         # Fourth set of layers
         self.ln_4 = LayerNorm(config.n_embd, bias=config.bias)
@@ -117,19 +117,19 @@ class Block(nn.Module):
     def forward(self, x):
         # First set of operations
         x = self.ln_1(x)
-        y = self.dropout1(x) + self.attn_1(x)
+        y = self.dropout1(x) * (1-0.025) + self.attn_1(x)
 
         # Second set of operations
         y = self.ln_2(y)
-        z = self.dropout2(x) + self.dropout1(y) + self.mlp_1(y)
+        z = self.dropout2(x) * (1-0.99) + self.dropout1(y) * (1-0.025) + self.mlp_1(y)
 
         # Third set of operations
         z = self.ln_3(z)
-        a = self.dropout3(z) + self.attn_2(z)
+        a = self.dropout1(z) * (1-0.025) + self.attn_2(z)
 
         # Fourth set of operations
         a = self.ln_4(a)
-        b = self.dropout4(x) + self.dropout3(z) + self.dropout2(y) + self.mlp_2(a)
+        b = self.dropout4(x) * (1 - 0.5)+ self.dropout2(z) * (1-0.99) + self.dropout1(a) * (1-0.025) + self.mlp_2(a)
 
         return b
 

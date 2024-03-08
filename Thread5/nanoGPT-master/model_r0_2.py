@@ -99,14 +99,14 @@ class Block(nn.Module):
         self.attn = CausalSelfAttention(config)
         self.ln_2 = LayerNorm(config.n_embd, bias=config.bias)
         self.mlp = MLP(config)
-        self.dropout1 = nn.Dropout(0)  # dropout1 for skip-1-layer connections
+        self.dropout1 = nn.Dropout(0.025)  # dropout1 for skip-1-layer connections
         self.dropout2 = nn.Dropout(0)  # dropout2 for skip-2-layer connections
  
     def forward(self, x):
         x = self.ln_1(x)        
-        y = self.dropout1(x) + self.attn(x)                     # x skips 1 layer
+        y = self.dropout1(x) * (1-0.025) + self.attn(x)                     # x skips 1 layer
         y = self.ln_2(y)        
-        z = self.dropout2(x) + self.dropout1(y) + self.mlp(y)   # x skips 2 layers and y skips 1 layer
+        z = self.dropout2(x) + self.dropout1(y) * (1-0.025) + self.mlp(y)   # x skips 2 layers and y skips 1 layer
         return z
 
 

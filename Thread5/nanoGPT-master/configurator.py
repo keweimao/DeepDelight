@@ -17,31 +17,37 @@ comes up with a better simple Python solution I am all ears.
 import sys
 from ast import literal_eval
 
+def safe_eval(val):
+    try:
+        return literal_eval(val)
+    except (SyntaxError, ValueError):
+        return val
+
 for arg in sys.argv[1:]:
-    if '=' not in arg:
-        # assume it's the name of a config file
-        assert not arg.startswith('--')
+    if '=' not in arg and not arg.startswith('--'):
+        # This is assumed to be a config file name
         config_file = arg
         print(f"Overriding config with {config_file}:")
         with open(config_file) as f:
-            print(f.read())
-        exec(open(config_file).read())
-    else:
-        # assume it's a --key=value argument
-        assert arg.startswith('--')
-        key, val = arg.split('=')
-        key = key[2:]
+            exec(f.read(), globals())
+    elif '=' in arg:
+        # This is assumed to be a --key=value argument
+        key, val = arg.split('=', 1)
+        key = key[2:]  # Remove leading '--'
+        val = safe_eval(val)  # Try to evaluate the value
         if key in globals():
-            try:
-                # attempt to eval it it (e.g. if bool, number, or etc)
-                attempt = literal_eval(val)
-            except (SyntaxError, ValueError):
-                # if that goes wrong, just use the string
-                attempt = val
-            # ensure the types match ok
-            assert type(attempt) == type(globals()[key])
-            # cross fingers
-            print(f"Overriding: {key} = {attempt}")
-            globals()[key] = attempt
+            if isinstance(val, type(globals()[key])):
+                print(f"Overriding: {key} = {val}")
+                globals()[key] = val
+            else:
+                print(f"Warning: Type mismatch for '{key}'. Expected {type(globals()[key])}, got {type(val)}. Using the original value.")
         else:
-            raise ValueError(f"Unknown config key: {key}")
+            print(f"Warning: Unknown config key: {key}. Ignoring.")
+    else:
+        # If the argument starts with '--' but doesn't contain '=', it's an invalid format
+        if arg.startswith('--'):
+            raise ValueError(f"Invalid argument format. Expected '--key=value'. Given: {arg}")
+        else:
+            raise ValueError(f"Config file name should not be prefixed with '--'. Given: {arg}")
+
+
