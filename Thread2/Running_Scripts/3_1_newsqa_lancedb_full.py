@@ -3,6 +3,7 @@
 1. Models and directory
 2. Input and output directory
 3. Device selection (CPU/GPU) - LINE 46 AND 300
+4. Install tantivy package for full index search
 
 Reference:
 1. similarity_search_by_vector(): https://python.langchain.com/docs/modules/data_connection/vectorstores/
@@ -11,12 +12,16 @@ Reference:
 4. LanceDB available models: https://lancedb.github.io/lancedb/embeddings/default_embedding_functions/#sentence-transformers
 5. https://colab.research.google.com/github/lancedb/vectordb-recipes/blob/main/examples/Code-Documentation-QA-Bot/main.ipynb
 6. Query via text: https://lancedb.github.io/lancedb/notebooks/DisappearingEmbeddingFunction/#querying-via-text
-
+7. Pre and post-filtering: https://lancedb.github.io/lancedb/sql/#pre-and-post-filtering
+8. Create FTS index on single column: https://lancedb.github.io/lancedb/fts/#create-fts-index-on-single-column
+9. LanceFtsQueryBuilder: https://lancedb.github.io/lancedb/python/python/#lancedb.query.LanceFtsQueryBuilder
 remove chunk size and overlap size for
 
-
+add similarity func, embedding_func into logging 
+code structure adjustment, incorporate prompt parameter
 """
-
+# Make S
+# pip install tantivy==0.20.1
 
 import os
 import logging
@@ -36,7 +41,7 @@ import torch.nn as nn
 from pathlib import Path
 from langchain_community.llms import GPT4All
 from langchain_community.vectorstores import Chroma
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import LanceDB
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.huggingface import HuggingFaceInstructEmbeddings
 from transformers import set_seed
@@ -54,10 +59,10 @@ print("LanceDB config.")
 registry = EmbeddingFunctionRegistry.get_instance()
 func = registry.get("sentence-transformers").create(device="cpu")  
 
-# def get_or_create_story_chunks(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_function_name):
+# def get_or_create_story_chunks(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_func):
 #     storyId = data['storyId']
 #     story_text = data['text']
-#     unique_dir_name = f"{embedding_function_name}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{storyId}"
+#     unique_dir_name = f"{embedding_func}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{storyId}"
 #     story_db_dir = os.path.join(db_dir, unique_dir_name)
 
 #     # Check if directory exists which means embeddings are already generated
@@ -75,150 +80,183 @@ func = registry.get("sentence-transformers").create(device="cpu")
 #         # If the directory doesn't exist, process the story chunks and store them
 #         text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=int(chunk_size * overlap_percentage))
 #         chunk_splits = text_splitter.split_text(story_text)
-#         process_and_store_story(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_function_name, chunk_splits)
+#         process_and_store_story(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_func, chunk_splits)
 
 #     return chunk_splits
 
-def ensure_table_exists(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_function_name):
-    story_id = data['storyId']
+def ensure_table_exists(data, embedding_model, embedding_func, db_dir, story_id, text_splitter, chunk_size, overlap_percentage):
     story_text = data['text']
-    unique_dir_name = f"{embedding_function_name}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{story_id}"
-    story_db_dir = os.path.join(db_dir, unique_dir_name)
 
-    # Connect to or create the database and table
+    # Define the unique table name for this story's chunks
+    adjusted_story_id = story_id[:-6] if len(story_id) > 6 else story_id
+    table_name = f"{adjusted_story_id}-chunks"
+    story_db_dir = os.path.join(db_dir, table_name)
+
+    # Connect to or create the database
     db = lancedb.connect(story_db_dir)
-    
+
     try:
-        table = db.open_table("chunks")
-        return table
-    except Exception as e:    
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=int(chunk_size * overlap_percentage))
+        table = db.open_table(table_name)
+    except Exception as e:
         chunk_splits = text_splitter.split_text(story_text)
-        
-        # Generate embeddings for each chunk
         chunk_embs = embedding_model.embed_documents(chunk_splits)
         
-        chunks_data = [{
-            "embed_model": embedding_function_name,
-            "story_id": story_id,
-            "chunk_text": chunk,
-            "vector": emb
-        } for chunk, emb in zip(chunk_splits, chunk_embs)]
+        # Prepare the data for storage
+        chunks_embs_data = [
+            {
+                "storyId": story_id,
+                "chunk_size": chunk_size,
+                "overlap_size": overlap_percentage,
+                "embedding_function": embedding_func,
+                "vector": c_emb,
+                "chunk_text": chunk_splits[i]
+            } 
+            for i, c_emb in enumerate(chunk_embs)
+        ]
         
-        # Create the chunks table and populate it
+        # Create a new table for this story and configuration, and store the data
         db.create_table(
-            "chunks", 
-            data=chunks_data, 
-            mode="overwrite"
+            f"{story_id}-chunks",
+            data=chunks_embs_data,
+            mode="overwrite"  # Each story and configuration combination gets its own table
         )
+
         
-def find_or_create_and_get_best_chunk(sentence_text, data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_function_name):
+def find_or_create_and_get_best_chunk(sentence_text, data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_func):
     # print(data)
     # Ensure the chunks table exists and is populated
-    table = ensure_table_exists(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_function_name)
+    ensure_table_exists(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_func)
     
     story_id = data['storyId']
-    unique_dir_name = f"{embedding_function_name}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{story_id}"
+    unique_dir_name = f"{embedding_func}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{story_id}"
     story_db_dir = os.path.join(db_dir, unique_dir_name)
 
     # Connect to the database
     db = lancedb.connect(story_db_dir)
     table = db.open_table("chunks")
+    print(f"sentence: {sentence_text}")
     
-    # Search for the best matching chunk
-    results = table.search(sentence_text).limit(1)
-    print(results[0].chunk)
-    
-    if results:
-        # Retrieve the embedding of the best matching chunk
-        best_chunk_embedding = results[0]['vector']
-        return best_chunk_embedding
-    else:
+    try:
+        # Search for the best matching chunk
+        results = table.search(sentence_text).limit(1).execute()
+        # print(results[0].chunk)
+        
+        if results:
+            # Retrieve the embedding of the best matching chunk
+            best_chunk_embedding = results[0]['vector']
+            return best_chunk_embedding
+        else:
+            print("No results found.")
+            return None
+    except Exception as e:
+        print(f"Error during search: {e}")
         return None
 
 
-def process_and_store_story(data, db_dir, embedding_model, embedding_function_name):
-    storyId = data['storyId']
-    story_text = data['text']
-    unique_dir_name = f"{embedding_function_name}/WholeStoryVectorstore"
-    story_db_dir = os.path.join(db_dir, unique_dir_name)
-
-    # Ensure the database directory exists
-    if not os.path.exists(story_db_dir):
-        os.makedirs(story_db_dir, exist_ok=True)
-
-    # Connect to Lancedb
-    db = lancedb.connect(story_db_dir)
-    
-    # Generate embeddings for each chunk if not done already
-    # chunk_embs = embedding_model.embed_documents(chunk_splits)
-    story_vectorstore = embedding_model.embed_query(story_text)
-    # Chroma.from_texts(texts=story_text, embedding=embedding_model)
-    
-    story_embs_data = [
-        {
-            "storyId": storyId,
-            "embedding_function": embedding_function_name,
-            "vector": story_vectorstore,
-            "chunk_text": story_text
-        }
-    ]
-    
-    db.create_table(
-        "StoryVectorstore",
-        data=story_embs_data,
-        mode="overwrite"  # Overwrite or create new as needed
-    )
-
-    return story_vectorstore  # Return the last used database connection for further operations if necessary
-
-# def process_and_store_chunks(data, db_dir, embedding_model, chunk_size, overlap_percentage, embedding_function_name):
-#     storyId = data['storyId']
+# def process_and_store_story_chunks(data, db_dir, chunk_size, overlap_percentage, embedding_model, embedding_func):
+#     story_id = data['storyId']
 #     story_text = data['text']
-    
+#     unique_dir_name = f"{embedding_func}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{story_id}"
+#     story_db_dir = os.path.join(db_dir, unique_dir_name)
+
 #     # Ensure the database directory exists
-#     if not os.path.exists(db_dir):
-#         os.makedirs(db_dir, exist_ok=True)
-    
-#     # Define a unique directory name for the story with the specified chunk size and overlap
-#     unique_dir_name = f"{embedding_function_name}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{storyId}"
-#     story_db_dir = f"{db_dir}/{unique_dir_name}"
 #     if not os.path.exists(story_db_dir):
 #         os.makedirs(story_db_dir, exist_ok=True)
 
-#     # Connect to Lancedb using the directory for this specific story, chunk size, and overlap
+#     # Connect to Lancedb
 #     db = lancedb.connect(story_db_dir)
     
-#     # Initialize the text splitter with the specified chunk size and overlap
-#     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=int(chunk_size * overlap_percentage))
-#     chunk_splits = text_splitter.split_text(story_text)
+#     # Generate embeddings for each chunk if not done already
+#     # chunk_embs = embedding_model.embed_documents(chunk_splits)
+#     story_vectorstore = embedding_model.embed_query(story_text)
+#     # Chroma.from_texts(texts=story_text, embedding=embedding_model)
     
-#     # Generate embeddings for each chunk
-#     # chunk_embs = Chroma.from_texts(texts=chunk_splits, embedding=embedding_model)
-#     chunk_embs = embedding_model.embed_documents(chunk_splits)
-    
-#     # Prepare the data for storage
-#     chunks_embs_data = [
+#     story_embs_data = [
 #         {
-#             "storyId": storyId,
-#             "chunk_size": chunk_size,
-#             "overlap_size": overlap_percentage,
-#             "embedding_function": embedding_function_name,
-#             "vector": c_emb,
-#             "chunk_text": chunk_splits[i]
-#         } 
-#         for i, c_emb in enumerate(chunk_embs)
+#             "storyId": story_id,
+#             "embedding_function": embedding_func,
+#             "vector": story_vectorstore,
+#             "chunk_text": story_text
+#         }
 #     ]
     
-#     # Create a new table for this story and configuration, and store the data
-#     db.create_table(
-#         "chunks",
-#         data=chunks_embs_data,
-#         mode="overwrite"  # Each story and configuration combination gets its own table
+#     story_table = db.create_table(
+#         "StoryVectorstore",
+#         data=story_embs_data,
+#         mode="overwrite"  # Overwrite or create new as needed
 #     )
 
-#     return chunk_splits  # Return the last used database connection for further operations if necessary
+#     return story_table  # Return the last used database connection for further operations if necessary
 
+def process_and_store_chunks(data, db_dir, embedding_model, chunk_size, overlap_percentage, text_splitter, embedding_func):
+    story_id = data['storyId']
+    story_text = data['text']
+    print("\n In process function")
+    
+    # Ensure the database directory exists
+    if not os.path.exists(db_dir):
+        os.makedirs(db_dir, exist_ok=True)
+    
+    # Define the unique table name for this story's chunks
+    adjusted_story_id = story_id[14:-6] if len(story_id) > 6 else story_id
+    table_name = f"{adjusted_story_id}-chunks"
+    story_db_dir = db_dir # os.path.join(db_dir, table_name)
+    print(db_dir)
+
+    # Connect to or create the database
+    db = lancedb.connect(story_db_dir)
+
+    try:
+        table = db.open_table(table_name)
+        print("\n Found existing table in the location.")
+    except Exception as e:
+        chunk_splits = text_splitter.split_text(story_text)
+        chunk_embs = embedding_model.embed_documents(chunk_splits)
+        
+        # Prepare the data for storage
+        chunks_embs_data = [
+            {
+                "storyId": adjusted_story_id,
+                "chunk_size": chunk_size,
+                "overlap_size": overlap_percentage,
+                "embedding_function": embedding_func,
+                "vector": c_emb,
+                "chunk_text": chunk_splits[i]
+            } 
+            for i, c_emb in enumerate(chunk_embs)
+        ]
+        
+        # Create a new table for this story and configuration, and store the data
+        # print(f"Creating table with name: {adjusted_story_id}-chunks at {story_db_dir}")
+        db.create_table(
+            f"{adjusted_story_id}-chunks",
+            data=chunks_embs_data,
+            mode="overwrite"  # Each story and configuration combination gets its own table
+        )
+        print("\n Creating new table for the story.")
+    
+def retrieve_best_matching_chunk(question, story_id, db_dir, top_n, embedding_model, similarity_func):
+    db = lancedb.connect(db_dir)
+    # print(f"Retrieve table: {story_id}-chunks")
+    table = db.open_table(f"{story_id}-chunks")
+
+    # Embed the question for the search
+    question_embedding = embedding_model.embed_query(question)#[0].tolist()
+
+    # Perform the search
+    search_results = table.search(question_embedding) \
+                            .metric(similarity_func) \
+                            .select(["chunk_text", "vector"]) \
+                            .limit(top_n) \
+                            .to_pandas()
+    
+    # Check if the DataFrame is not empty
+    if not search_results.empty:
+        best_chunk_text = search_results.iloc[0]['chunk_text']  # Accessing the first row's chunk_text
+        best_chunk_vector = search_results.iloc[0]['vector']  # Assuming 'vector' is stored and accessible
+        return best_chunk_text, best_chunk_vector
+    else:
+        raise Exception("Empty chunk retrieved. No matching chunk found.")
 
 # Function to normalize and stem text
 def normalize_and_stem(text):
@@ -249,13 +287,13 @@ def token_eval(predicted, actual):
 
 def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_sizes, overlap_percentages,
                 instruct_embedding_model_name, instruct_embedding_model_kwargs, 
-                instruct_embedding_encode_kwargs, QA_CHAIN_PROMPT, db_dir, embedding_function_name):
+                instruct_embedding_encode_kwargs, top_n_chunk, db_dir, embedding_func, similarity_func):
     
     with open(output_csv_path, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Chunk_size', 'Chunk_Overlap', 'Time', 'Story Number', 'Question Number', 'EM', 'Precision', 'Recall', 'F1', 'Error'])
 
-        if embedding_function_name == 'hf_emb':
+        if embedding_func == 'hf_emb':
             # Embedding for story sentences
             story_embs = HuggingFaceInstructEmbeddings(
                 model_name=instruct_embedding_model_name,
@@ -283,7 +321,7 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
             for overlap_percentage in overlap_percentages:
                 actual_overlap = int(chunk_size * overlap_percentage)
                 print(f"\n{time.time()-start_time}\t{time.time()-last_time}\tOverlap [{overlap_percentage}] {actual_overlap}")
-                # text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=actual_overlap)
+                text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=actual_overlap)
 
                 for i, story in enumerate(data['data']):
                     if i >= max_stories:
@@ -293,41 +331,37 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
                     print(f"\n{now_time - start_time}\t{now_time - last_time}\t\tstory {i + 1}: ", end='')
                     last_time = now_time
                     
-                    # Process the story and store its data in a separate table/database
-                    story_db_dir = f"{db_dir}/{story['storyId']}"  # Adjust as necessary for your directory structure
-                    story_vectorstore = process_and_store_story(
+                    # Define a unique directory name for the story with the specified chunk size and overlap
+                    story_id = story['storyId']
+                    adjusted_story_id = story_id[14:-6] if len(story_id) > 6 else story_id
+                    unique_dir_name = f"{embedding_func}/chunk_{chunk_size}/overlap_{int(chunk_size * overlap_percentage)}/{adjusted_story_id}"
+                    story_db_dir = f"{db_dir}/{unique_dir_name}"
+                    print("\n In Loop:", story_db_dir)
+                    process_and_store_chunks(
                         data=story, 
-                        db_dir=story_db_dir, 
+                        db_dir=story_db_dir,
+                        chunk_size=chunk_size,
+                        overlap_percentage=overlap_percentage,
+                        text_splitter=text_splitter,
                         embedding_model=story_embs, 
-                        embedding_function_name=embedding_function_name
+                        embedding_func=embedding_func
                     )
-                    
-                    # chunk_vectorstore = Chroma.from_texts(texts=chunk_splits, embedding=story_embs)
                     
                     for j, question_data in enumerate(story['questions']):
                         if question_data['isAnswerAbsent']:
                             continue  # Skip this question because an answer is absent
 
                         question = question_data['q']
-                        # best_chunk, chunk_splits = get_best_chunk(story_text, question, embedding_model, db_dir, storyId)
-                        question_emb = query_embs.embed_query(question)
-                        question_db = Chroma.from_texts(question, query_embs)
 
-                        # Retrieve similar sentences
-                        # docs = story_vectorstore.similarity_search_by_vector(question_emb)
-                        docs = question_db.similarity_search_by_vector(question_emb)
-                        sentences_retrieved = docs[0].page_content # Select first returned results.
-                        # for doc in docs: 
-                        #     context_for_qa += doc.page_content + '.. '
-                            
-                        best_chunk_emb = find_or_create_and_get_best_chunk(
-                            sentence_text=sentences_retrieved,
-                            data=story,
-                            db_dir=db_dir,
-                            embedding_model=story_embs,
-                            chunk_size=chunk_size,
-                            overlap_percentage=overlap_percentage,
-                            embedding_function_name=embedding_function_name)
+                        best_chunk_text, _ = retrieve_best_matching_chunk(question=question, 
+                                                                                       story_id=adjusted_story_id, 
+                                                                                       db_dir=story_db_dir, 
+                                                                                       top_n=top_n_chunk,
+                                                                                       embedding_model=query_embs, 
+                                                                                       similarity_func=similarity_func)
+                        # print(best_chunk_text)
+
+                        best_chunk_emb = Chroma.from_texts(best_chunk_text, query_embs)
 
                         # Initialize the QA chain with the vectorstore as the retriever
                         qa_chain = RetrievalQA.from_chain_type(
@@ -349,12 +383,25 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
                             continue  # No consensus answer, skip to the next question
 
                         # Get the prediction from the model
-                        query = question + "Please provide the answer in as few words as possible and do NOT repeat any word in the question."
+                        # query = question # + "Please provide the answer in as few words as possible and do NOT repeat any word in the question."
+                        query = f"""
+                        Based on the following information only: 
+                        
+                        {best_chunk_text}
+                        
+                        {question} Please provide the answer in as few words as possible and please do NOT repeat any word in the question, i.e. "{question}".
+
+                        Answer:
+                        """
                         result = qa_chain.run(query)
-                        print(query, result)
+                        print('q:', query, 'a:', result)
                         
                         # Extract and process the predicted answer
-                        predicted_answer = result['result'] if isinstance(result['result'], str) else ""
+                        if result is None:
+                            result = 0, 0, 0, 0
+                        else:
+                            print(f"Result from qa_chain.run(): {result}, type: {type(result)}")
+                            predicted_answer = result if isinstance(result, str) else result['result']
                         
                         # Normalize and stem the predicted and actual answers
                         normalized_predicted_answer = normalize_and_stem(predicted_answer)
@@ -370,11 +417,14 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
                         # Write the scores to the file
                         error = 1 if 'error' in normalized_predicted_answer else 0
                         if error==0: 
-                            writer.writerow([chunk_size, overlap_percentage, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value, error])
+                            writer.writerow([chunk_size, overlap_percentage, embedding_func, similarity_func, top_n_chunk, time.time() - start_time, i, j, em_score, precision, recall, f1_score_value, error])
                         
                         with open(output_log_path, 'a') as details_file:
                             details_file.write(f"Chunk Size: {chunk_size}\n")
                             details_file.write(f"Overlap: {overlap_percentage}\n")
+                            details_file.write(f"Embedding Func: {embedding_func}\n")
+                            details_file.write(f"Similarity Func: {similarity_func}\n")
+                            details_file.write(f"Top n Chunk Selected: {top_n_chunk}\n")
                             details_file.write(f"Story: {i}\n")
                             details_file.write(f"Question: {j}\n")
                             details_file.write(f"Correct Answer: {actual_answer}\n")
@@ -399,11 +449,13 @@ def newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_
 max_stories = 50
 random_seed = 123
 db_dir = 'C:/NewsQA/lancedb'
-embedding_function_name = 'hf_emb'
-chunk_sizes = [100, 200, 400]
+embedding_func = 'hf_emb'
+similarity_func = "cosine" # "cosine", "l2", "dot"
+chunk_sizes = [200, 400]
 # chunk_sizes = [50,25]
 # overlap_percentages = [0, 0.1, 0.2]  # Expressed as percentages (0.1 = 10%)
 overlap_percentages = [0, 0.1]
+top_n_chunk = 1
 
 # model_location = "C:/Users/24075/AppData/Local/nomic.ai/GPT4All/ggml-model-gpt4all-falcon-q4_0.bin"
 model_location = "C:/NewsQA/GPT4ALL/mistral-7b-instruct-v0.1.Q4_0.gguf"
@@ -414,10 +466,10 @@ input_file_path='C:/NewsQA/combined-newsqa-data-story2.json'
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/newsqa-data-v1.csv"
 # input_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined-newsqa-data-v1.json"
 # input_file_path = "/Users/wk77/Documents/git/DeepDelight/Thread2/data/combined-newsqa-data-story1.json"
-output_csv_path = '../results/combined_chunks2.csv'
+output_csv_path = '../results/combined_chunks3.csv'
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/story1_scores_test.csv"
 # output_file_path = "/Users/wk77/Documents/data/newsqa-data-v1/combined_scores_test.csv"
-output_log_path = '../results/combined_chunks2.log'
+output_log_path = '../results/combined_chunks3.log'
 
 # # Initialize PairwiseDistance
 # pdist = nn.PairwiseDistance(p=2.0, eps=1e-06)
@@ -430,17 +482,17 @@ logging.basicConfig(level=logging.ERROR)
 print("Loading data.")
 data = json.loads(Path(input_file_path).read_text())
 
-print("Setting template.")
-template_original = """
-                    Based on the following information only: 
+# print("Setting template.")
+# template_original = """
+#                     Based on the following information only: 
                     
-                    {context}
+#                     {context}
                     
-                    {question} Please provide the answer in as few words as possible and please do NOT repeat any word in the question, i.e. "{question}".
+#                     {question} Please provide the answer in as few words as possible and please do NOT repeat any word in the question, i.e. "{question}".
 
-                    Answer:
-                    """
-QA_CHAIN_PROMPT_ORIGINAL = PromptTemplate.from_template(template_original)
+#                     Answer:
+#                     """
+# QA_CHAIN_PROMPT_ORIGINAL = PromptTemplate.from_template(template_original)
 
 print("Random seeding.")
 set_seed(random_seed)
@@ -469,4 +521,4 @@ print(f"{start_time} Started.")
 print("Processing.")
 newsqa_loop(data, llm, output_csv_path, output_log_path, max_stories, chunk_sizes, overlap_percentages, 
             instruct_embedding_model_name, instruct_embedding_model_kwargs, instruct_embedding_encode_kwargs, 
-            QA_CHAIN_PROMPT_ORIGINAL, db_dir, embedding_function_name)
+            top_n_chunk, db_dir, embedding_func, similarity_func)
