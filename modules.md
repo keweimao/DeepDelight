@@ -122,7 +122,9 @@ GPT for private data retrieval:
 ## DeBerta Reference
 
 + DEBERTA: DECODING-ENHANCED BERT WITH DISENTANGLED ATTENTION: https://openreview.net/pdf?id=XPZIaotutsD
-+ Github code for DeBERTA (Microsoft): https://github.com/microsoft/DeBERTa 
++ Github code for DeBERTA (Microsoft): https://github.com/microsoft/DeBERTa
++ DeBERTA-base fine-tuned NER: https://huggingface.co/geckos/deberta-base-fine-tuned-ner
++ DeBERTA-v3 large Conll2003 dataset: https://huggingface.co/tner/deberta-v3-large-conll2003 
 + KDDIE at SemEval-2022 Task 11: Using DeBERTa for Named Entity Recognition: https://aclanthology.org/2022.semeval-1.210.pdf
 + NER Papers with code Reference: https://paperswithcode.com/task/named-entity-recognition
 
