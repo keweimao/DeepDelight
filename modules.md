@@ -117,4 +117,12 @@ GPT for private data retrieval:
 
 ## Additional Reading
 
-* Simplified explanation of GPT: https://arstechnica.com/science/2023/07/a-jargon-free-explanation-of-how-ai-large-language-models-work/ 
+* Simplified explanation of GPT: https://arstechnica.com/science/2023/07/a-jargon-free-explanation-of-how-ai-large-language-models-work/
+
+## DeBerta Reference
+
++ DEBERTA: DECODING-ENHANCED BERT WITH DISENTANGLED ATTENTION: https://openreview.net/pdf?id=XPZIaotutsD
++ Github code for DeBERTA (Microsoft): https://github.com/microsoft/DeBERTa 
++ KDDIE at SemEval-2022 Task 11: Using DeBERTa for Named Entity Recognition: https://aclanthology.org/2022.semeval-1.210.pdf
++ NER Papers with code Reference: https://paperswithcode.com/task/named-entity-recognition
+
