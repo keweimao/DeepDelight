@@ -7,7 +7,7 @@
 * [ ] Meetings: weekly presentations
 * [ ] Due: IEEE Big Data, 9/8/2024; others
 
-## Thread 2
+## Thread 2 (Lixiao and Mengyang)
 
 ### 2024 Summer Objectives
 
@@ -21,4 +21,16 @@
       * [ ] Results: 
             * [ ] https://github.com/beir-cellar/beir
             * [ ] https://eval.ai/web/challenges/challenge-page/1897/leaderboard/4475
+      * [ ] Retrieval (scoring) functions to consider
+            * [ ] Benchmark: dot, cosine, TF*IDF, BM25
+            * [ ] New methods: DLITE, BM25-revision, Portfolio (diversity)
 
+### References
+
+* Ke's 2020 Big Data using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
+
+## Thread 4 (Sonia and Michael)
+
+* [ ] NER: to work on loss functions, new data (NY Times)
+    * [ ] Done with new BERT (Microsoft) implementation
+* [ ] Information representation with DLITE, on RCV1 data
