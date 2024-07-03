@@ -13,17 +13,17 @@
 
 * [ ] 1. Wrap up RAG implementation on NewsQA and QAConv
 * [ ] 2. New focus on the retrieval stage with dense vectors
-      * [ ] Consider Robust 04 (HARD track): https://paperswithcode.com/dataset/robust04
-      * [ ] Other IR benchmark datasets (e.g. HotpotQA, TREC-Covid) at: 
-            * [ ] https://paperswithcode.com/dataset/beir, 
-            * [ ] https://paperswithcode.com/paper/beir-a-heterogenous-benchmark-for-zero-shot
-      * [ ] BEIR code: https://github.com/beir-cellar/beir
-      * [ ] Results: 
-            * [ ] https://github.com/beir-cellar/beir
-            * [ ] https://eval.ai/web/challenges/challenge-page/1897/leaderboard/4475
-      * [ ] Retrieval (scoring) functions to consider
-            * [ ] Benchmark: dot, cosine, TF*IDF, BM25
-            * [ ] New methods: DLITE, BM25-revision, Portfolio (diversity)
+  * [ ] Consider Robust 04 (HARD track): https://paperswithcode.com/dataset/robust04
+  * [ ] Other IR benchmark datasets (e.g. HotpotQA, TREC-Covid) at: 
+    * [ ] https://paperswithcode.com/dataset/beir, 
+    * [ ] https://paperswithcode.com/paper/beir-a-heterogenous-benchmark-for-zero-shot
+  * [ ] BEIR code: https://github.com/beir-cellar/beir
+  * [ ] Results: 
+    * [ ] https://github.com/beir-cellar/beir
+    * [ ] https://eval.ai/web/challenges/challenge-page/1897/leaderboard/4475
+  * [ ] Retrieval (scoring) functions to consider
+      * [ ] Benchmark: dot, cosine, TF*IDF, BM25
+      * [ ] New methods: DLITE, BM25-revision, Portfolio (diversity)
 
 ### 7/3/2024
 
