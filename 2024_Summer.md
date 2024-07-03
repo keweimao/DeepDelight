@@ -30,10 +30,10 @@
 * [ ] Sonia presentation
 * [ ] Update on existing RAG implementations and readiness
 * [ ] Next steps, setup for research on dense vector retrieval with Elastic
-      * [ ] Setup: Set up Elastic locally first, and then on BVM96
-      * [ ] Code: research and reuse BEIR code, with existing Elastic TF*IDF, BM25 baselines
-      * [ ] Data: benmark datasets to consider, ultimately Robust 04 (HARD track)
-      * [ ] Test: test on a small subset to hopefully replicate some baselines
+  * [ ] Setup: Set up Elastic locally first, and then on BVM96
+  * [ ] Code: research and reuse BEIR code, with existing Elastic TF*IDF, BM25 baselines
+  * [ ] Data: benmark datasets to consider, ultimately Robust 04 (HARD track)
+  * [ ] Test: test on a small subset to hopefully replicate some baselines
 
 ### 7/10/2024
 
