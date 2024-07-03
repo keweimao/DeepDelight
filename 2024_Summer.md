@@ -25,6 +25,26 @@
             * [ ] Benchmark: dot, cosine, TF*IDF, BM25
             * [ ] New methods: DLITE, BM25-revision, Portfolio (diversity)
 
+### 7/3/2024
+
+* [ ] Sonia presentation
+* [ ] Update on existing RAG implementations and readiness
+* [ ] Next steps, setup for research on dense vector retrieval with Elastic
+      * [ ] Setup: Set up Elastic locally first, and then on BVM96
+      * [ ] Code: research and reuse BEIR code, with existing Elastic TF*IDF, BM25 baselines
+      * [ ] Data: benmark datasets to consider, ultimately Robust 04 (HARD track)
+      * [ ] Test: test on a small subset to hopefully replicate some baselines
+
+### 7/10/2024
+
+* [ ] Lixiao presentation, potential implication on diversity retrieval
+* [ ] Ke's DLITE as alterantive to IDF and BM25
+
+
+### 7/17/2024
+
+* [ ] Mengyang presentation
+
 ### References
 
 * Ke's 2020 Big Data using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
