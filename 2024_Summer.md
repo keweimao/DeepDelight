@@ -18,6 +18,7 @@
     * [ ] https://paperswithcode.com/dataset/beir, 
     * [ ] https://paperswithcode.com/paper/beir-a-heterogenous-benchmark-for-zero-shot
   * [ ] BEIR code: https://github.com/beir-cellar/beir
+    * [x] [Local setup](./Thread2/BEIR/BEIR_local_setup.md)
   * [ ] Results: 
     * [ ] https://github.com/beir-cellar/beir
     * [ ] https://eval.ai/web/challenges/challenge-page/1897/leaderboard/4475
@@ -31,7 +32,12 @@
 * [ ] Update on existing RAG implementations and readiness
 * [ ] Next steps, setup for research on dense vector retrieval with Elastic
   * [ ] Setup: Set up Elastic locally first, and then on BVM96
+    * [ ] Elastic local deployment
+    * [ ] Elastic BVM96 deployment
+    * [ ] [BEIR Elasticsearch examples](https://github.com/beir-cellar/beir/wiki/Examples-and-tutorials)
   * [ ] Code: research and reuse BEIR code, with existing Elastic TF*IDF, BM25 baselines
+    * [x] [BEIR local setup](./Thread2/BEIR/BEIR_local_setup.md)
+    * [x] Test the BEIR environment
   * [ ] Data: benmark datasets to consider, ultimately Robust 04 (HARD track)
   * [ ] Test: test on a small subset to hopefully replicate some baselines
 
