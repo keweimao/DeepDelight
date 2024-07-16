@@ -1,0 +1,79 @@
+Chunk Size: 200
+Overlap: 0
+Embedding Func: hf_emb
+Similarity Func: cosine
+Top n Chunk Selected: 1
+Correct Answer: Mr. Lamken
+Normalized Actual Answer: mr. lamken
+Predicted Answer: 
+                    Petitioner
+Normalized Predicted Answer: petition
+Time: 15.065507173538208
+EM Score: 0
+Precision: 0
+Recall: 0
+F1: 0
+----------------------------------------
+Chunk Size: 200
+Overlap: 0
+Embedding Func: hf_emb
+Similarity Func: cosine
+Top n Chunk Selected: 1
+Correct Answer: Federal Whistle-blower Protection Act
+Normalized Actual Answer: feder whistle-blow protect act
+Predicted Answer: 
+                    The Federal Circuit has construed the statute to exclude protection for speech that is part of an employee's normal duties.
+Normalized Predicted Answer: feder circuit constru statut exclud protect speech part employe 's normal duti
+Time: 34.2085075378418
+EM Score: 0
+Precision: 0.16666666666666666
+Recall: 0.5
+F1: 0.25
+----------------------------------------
+Chunk Size: 200
+Overlap: 0
+Embedding Func: hf_emb
+Similarity Func: cosine
+Top n Chunk Selected: 1
+Correct Answer: Section 324
+Normalized Actual Answer: section 324
+Predicted Answer: 
+                    None
+Normalized Predicted Answer: none
+Time: 50.63850712776184
+EM Score: 0
+Precision: 0
+Recall: 0
+F1: 0
+----------------------------------------
+Chunk Size: 200
+Overlap: 0
+Embedding Func: hf_emb
+Similarity Func: cosine
+Top n Chunk Selected: 1
+Correct Answer: six
+Normalized Actual Answer: six
+Predicted Answer: 6
+Normalized Predicted Answer: 6
+Time: 67.44150757789612
+EM Score: 0
+Precision: 0
+Recall: 0
+F1: 0
+----------------------------------------
+Chunk Size: 200
+Overlap: 0
+Embedding Func: hf_emb
+Similarity Func: cosine
+Top n Chunk Selected: 1
+Correct Answer: Eighth Amendment
+Normalized Actual Answer: eighth amend
+Predicted Answer: 
+                    Due Process
+Normalized Predicted Answer: due process
+Time: 84.99950766563416
+EM Score: 0
+Precision: 0
+Recall: 0
+F1: 0
+----------------------------------------
