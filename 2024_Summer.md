@@ -41,7 +41,12 @@
   * [ ] Test: test on a small subset to hopefully replicate some baselines
     * [x] Local test for `scifact` dataset: lexical, reranking and reranking w/ cross encoder
       * [x] [Scripts and Logs](./Thread2/BEIR/BEIR_example_results)
-      * [x] [Local Results Summary](./Thread2/BEIR/BEIR_local_results.md) along with evaluation comparison   
+      * [x] [Local Results Summary](./Thread2/BEIR/BEIR_local_results.md) along with evaluation comparison
+    * [x] Adjusted system implemented with lancedb on QAConv dataset:
+      * [x] [Scripts](./Thread2/Running_Scripts/qaconv_lancedb.ipynb)
+      * [x] [Logs](.Thread2/Running_Scripts/combined_chunks3.log)
+    * [x] Local test for `hotpot` dataset based on the former system structure:
+
 
 ### 7/10/2024
 
