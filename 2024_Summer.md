@@ -30,6 +30,12 @@
 
 * [x] Sonia presentation
 * [ ] Update on existing RAG implementations and readiness
+    * [x] Adjusted system implemented with lancedb on QAConv dataset:
+      * [x] [Scripts](./Thread2/Running_Scripts/qaconv_lancedb.ipynb)
+      * [x] [Logs](./Thread2/Running_Scripts/combined_chunks3.log)
+    * [x] Local test for `hotpot` dataset based on the former system structure:
+      * [x] [Scripts](./Thread2/HOTPOT/QA_hotpot.ipynb)
+      * [x] [Results](./Thread2/HOTPOT/output_hotpot.csv)      
 * [ ] Next steps, setup for research on dense vector retrieval with Elastic
   * [ ] Setup: Set up Elastic locally first, and then on BVM96
     * [x] Elastic local deployment in Docker
@@ -42,12 +48,7 @@
     * [x] Local test for `scifact` dataset: lexical, reranking and reranking w/ cross encoder
       * [x] [Scripts and Logs](./Thread2/BEIR/BEIR_example_results)
       * [x] [Local Results Summary](./Thread2/BEIR/BEIR_local_results.md) along with evaluation comparison
-    * [x] Adjusted system implemented with lancedb on QAConv dataset:
-      * [x] [Scripts](./Thread2/Running_Scripts/qaconv_lancedb.ipynb)
-      * [x] [Logs](./Thread2/Running_Scripts/combined_chunks3.log)
-    * [x] Local test for `hotpot` dataset based on the former system structure:
-      * [x] [Scripts](./Thread2/HOTPOT/QA_hotpot.ipynb)
-      * [x] [Results](./Thread2/HOTPOT/output_hotpot.csv)
+
 
 
 ### 7/10/2024
