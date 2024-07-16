@@ -27,7 +27,9 @@ Dataset: Scifact [Homepage](https://github.com/allenai/scifact)\
 
 
 ## Reranking
-[SBERT Pretrained Models](https://www.sbert.net/docs/sentence_transformer/pretrained_models.html#original-models)
+[Pretrained SentenceTransformer Models](https://www.sbert.net/docs/sentence_transformer/pretrained_models.html#original-models)
+
+- Something to consider: for now BEIR only supports cosine similarity and dot score for scoring functions in evaluation retrieval process.
 
 ### Dataset-01
 **Reranking top-100 BM25 results with SBERT CE**  [Code](./BEIR_example_results/evaluate_bm25_sbert_reranking.py)\
@@ -41,12 +43,24 @@ Model: msmarco-distilbert-base-v3 [Output Log](./BEIR_example_results/evaluate_b
 | 100  | 0.5768 | 0.4979 | 0.8493 | 0.0096    |
 | 1000 | 0.5768 | 0.4979 | 0.8493 | 0.0010    |
 
+Model: bert-base-uncased [Output Log](./BEIR_example_results/evaluate_bm25_sbert_reranking_result2.txt)
+| k    | NDCG   | MAP    | Recall | Precision |
+| ---- | ------ | ------ | ------ | --------- |
+| 1    | 0.0733 | 0.0686 | 0.0686 | 0.0733    |
+| 3    | 0.0983 | 0.0893 | 0.1161 | 0.0422    |
+| 5    | 0.1146 | 0.0988 | 0.1556 | 0.0347    |
+| 10   | 0.1337 | 0.1066 | 0.2108 | 0.0240    |
+| 100  | 0.1871 | 0.1149 | 0.4884 | 0.0054    |
+| 1000 | 0.1871 | 0.1149 | 0.4884 | 0.0005    |
+
+
 
 ## Reranking with Cross Encoder
 [SBERT Cross Encoder Models](https://www.sbert.net/docs/pretrained-models/ce-msmarco.html)
 
 ### Dataset-01
 **Reranking top-100 BM25 results with Dense Retriever**  [Code](./BEIR_example_results/evaluate_bm25_ce_reranking.py)\
+
 Model: cross-encoder/ms-marco-MiniLM-L-6-v2 [Output Log](./BEIR_example_results/evaluate_bm25_ce_reranking_result.txt)
 | k    | nDCG   | MAP    | Recall | Precision |
 | ---- | ------ | ------ | ------ | --------- |
@@ -56,3 +70,33 @@ Model: cross-encoder/ms-marco-MiniLM-L-6-v2 [Output Log](./BEIR_example_results/
 | 10   | 0.6824 | 0.6383 | 0.8011 | 0.0900    |
 | 100  | 0.7025 | 0.6437 | 0.8842 | 0.0100    |
 | 1000 | 0.7025 | 0.6437 | 0.8842 | 0.0010    |
+
+Model: cross-encoder/ms-marco-MiniLM-L-4-v2 [Output Log](./BEIR_example_results/evaluate_bm25_ce_reranking_result3.txt)
+| k    | NDCG   | MAP    | Recall | Precision |
+| ---- | ------ | ------ | ------ | --------- |
+| 1    | 0.5633 | 0.5384 | 0.5384 | 0.5633    |
+| 3    | 0.6348 | 0.6085 | 0.6823 | 0.2467    |
+| 5    | 0.6590 | 0.6250 | 0.7418 | 0.1640    |
+| 10   | 0.6803 | 0.6349 | 0.8038 | 0.0903    |
+| 100  | 0.6996 | 0.6400 | 0.8842 | 0.0100    |
+| 1000 | 0.6996 | 0.6400 | 0.8842 | 0.0010    |
+
+Model: cross-encoder/ms-marco-TinyBERT-L-2-v2 [Output Log](./BEIR_example_results/evaluate_bm25_ce_reranking_result4.txt)
+| k    | NDCG   | MAP    | Recall | Precision |
+| ---- | ------ | ------ | ------ | --------- |
+| 1    | 0.5633 | 0.5326 | 0.5326 | 0.5633    |
+| 3    | 0.6222 | 0.5967 | 0.6636 | 0.2411    |
+| 5    | 0.6428 | 0.6121 | 0.7131 | 0.1580    |
+| 10   | 0.6625 | 0.6212 | 0.7709 | 0.0870    |
+| 100  | 0.6892 | 0.6283 | 0.8842 | 0.0100    |
+| 1000 | 0.6892 | 0.6283 | 0.8842 | 0.0010    |
+
+Model: cross-encoder/ms-marco-TinyBERT-L-6 [Output Log](./BEIR_example_results/evaluate_bm25_ce_reranking_result2.txt)
+| k    | NDCG   | MAP    | Recall | Precision |
+| ---- | ------ | ------ | ------ | --------- |
+| 1    | 0.5133 | 0.4909 | 0.4909 | 0.5133    |
+| 3    | 0.5984 | 0.5701 | 0.6555 | 0.2356    |
+| 5    | 0.6209 | 0.5855 | 0.7072 | 0.1580    |
+| 10   | 0.6452 | 0.5966 | 0.7798 | 0.0877    |
+| 100  | 0.6702 | 0.6032 | 0.8842 | 0.0100    |
+| 1000 | 0.6702 | 0.6032 | 0.8842 | 0.0010    |
