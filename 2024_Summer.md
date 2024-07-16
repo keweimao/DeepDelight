@@ -44,8 +44,10 @@
       * [x] [Local Results Summary](./Thread2/BEIR/BEIR_local_results.md) along with evaluation comparison
     * [x] Adjusted system implemented with lancedb on QAConv dataset:
       * [x] [Scripts](./Thread2/Running_Scripts/qaconv_lancedb.ipynb)
-      * [x] [Logs](.Thread2/Running_Scripts/combined_chunks3.log)
+      * [x] [Logs](./Thread2/Running_Scripts/combined_chunks3.log)
     * [x] Local test for `hotpot` dataset based on the former system structure:
+      * [x] [Scripts](./Thread2/HOTPOT/QA_hotpot.ipynb)
+      * [x] [Results](./Thread2/HOTPOT/output_hotpot.csv)
 
 
 ### 7/10/2024
