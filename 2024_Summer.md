@@ -61,9 +61,13 @@
 * [ ] Hybrid Dense + Sparse: https://ar5iv.labs.arxiv.org/html/2401.04055
 
 
-### 7/17/2024
+### 7/24/2024
 
 * [ ] Mengyang presentation
+* [ ] DLITE reading: 
+  * [ ] Information theory of IDF: https://youtu.be/fIIuyorK7BY?si=1uYindxv8jYXISA2
+  * [ ] DLITE for IR: https://youtu.be/qQXCgmX8sOk?si=bpcrdeW6HLujIAY4
+
 
 ### References
 
