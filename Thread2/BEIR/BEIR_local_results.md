@@ -7,6 +7,13 @@ Lixiao Yang\
 [BEIR Examples](https://github.com/beir-cellar/beir/wiki/Examples-and-tutorials)\
 [Leaderboard](https://eval.ai/web/challenges/challenge-page/1897/leaderboard) (Ranked by nDCG@10)
 
+## Summary
+### 7/16/2024
+- Based on the nDCG results (used by the scifact leaderboard), the BM25 number is close to the record
+- Reranking using Sentence Transformer shows relative bad results, with very low nDCF for base-bert model
+- Reranking using cross encoder shows better results (close to benchmark results), follows the trend that larger models have better results
+
+
 ## Running Configuration
 ### Dataset-01
 Dataset: Scifact [Homepage](https://github.com/allenai/scifact)\
