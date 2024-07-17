@@ -84,6 +84,11 @@ See the result at [here](./beir_test_output.txt)
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 
+Build a new container for elastic:
+```cmd
+docker run --name local_es --net elastic -p 9200:9200 -it -m 3GB docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+```
+
 ```cmd
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ✅ Elasticsearch security features have been automatically configured!
