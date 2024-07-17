@@ -43,8 +43,12 @@
 
 ### 7/10/2024
 
+### 7/17/2024
+
 * [ ] Lixiao presentation, potential implication on diversity retrieval
 * [ ] Ke's DLITE as alterantive to IDF and BM25
+* [ ] Reading: https://ar5iv.labs.arxiv.org/html/2311.18503
+* [ ] Hybrid Dense + Sparse: https://ar5iv.labs.arxiv.org/html/2401.04055
 
 
 ### 7/17/2024
@@ -53,10 +57,13 @@
 
 ### References
 
-* Ke's 2020 Big Data using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
+* Ke's 2020 BigD ata using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
 
 ## Thread 4 (Sonia and Michael)
 
 * [ ] NER: to work on loss functions, new data (NY Times)
     * [ ] Done with new BERT (Microsoft) implementation
 * [ ] Information representation with DLITE, on RCV1 data
+* [ ] Comparable papers and results: 
+  * [ ] Results: https://paperswithcode.com/sota/token-classification-on-conll2003
+  * [ ] Recent paper: https://arxiv.org/pdf/2406.17474v1
