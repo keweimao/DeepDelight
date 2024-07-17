@@ -84,6 +84,48 @@ See the result at [here](./beir_test_output.txt)
 
 https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html
 
+Build a new container for elastic:
+```cmd
+docker run --name local_es --net elastic -p 9200:9200 -it -m 3GB docker.elastic.co/elasticsearch/elasticsearch:8.14.3
+```
+
+```cmd
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Elasticsearch security features have been automatically configured!
+✅ Authentication is enabled and cluster connections are encrypted.
+
+ℹ️  Password for the elastic user (reset with `bin/elasticsearch-reset-password -u elastic`):
+  [hidden]
+
+ℹ️  HTTP CA certificate SHA-256 fingerprint:
+  [hidden]
+
+ℹ️  Configure Kibana to use this cluster:
+• Run Kibana and click the configuration link in the terminal when Kibana starts.
+• Copy the following enrollment token and paste it into Kibana in your browser (valid for the next 30 minutes):
+  [hidden]
+
+ℹ️ Configure other nodes to join this cluster:
+• Copy the following enrollment token and start new Elasticsearch nodes with `bin/elasticsearch --enrollment-token <token>` (valid for the next 30 minutes):
+  [hidden]
+
+  If you're running in Docker, copy the enrollment token and run:
+  `docker run -e "ENROLLMENT_TOKEN=<token>" docker.elastic.co/elasticsearch/elasticsearch:8.14.3`
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+For fixing potential connection password issue:
+```cmd
+curl.exe -u elastic --cacert c:/Users/24075/http_ca.crt https://localhost:9200 --insecure
+```
+
+Create elastic index:
+```cmd
+curl.exe -u elastic -X PUT "https://localhost:9200/reranking" --insecure
+Enter host password for user 'elastic':
+{"acknowledged":true,"shards_acknowledged":true,"index":"reranking"}
+```
+
 ## Complete packages list
 ```cmd
 (beir_py) PS C:\Users\24075\beir> conda list
