@@ -66,18 +66,22 @@
 * [ ] Mengyang presentation
 * [ ] DLITE reading: 
   * [ ] Information theory of IDF: https://youtu.be/fIIuyorK7BY?si=1uYindxv8jYXISA2
-  * [ ] DLITE for IR: https://youtu.be/qQXCgmX8sOk?si=bpcrdeW6HLujIAY4
+  * [ ] DLITE for IR (BigData Conf presentation): https://youtu.be/qQXCgmX8sOk?si=bpcrdeW6HLujIAY4
+    * [ ] [Link to presentation slides](Reading/dlite_ir_ke.pdf)
+    * [ ] [Link to paper](https://www.tud.ttu.ee/im/Ahti.Lohk/Papers/Alternatives_to_Classic_BM25-IDF_based_on_a_New_Information_Theoretical_Framework%20%281%29.pdf)
 
 
 ### References
 
-* Ke's 2020 BigD ata using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
+* Ke's 2022 BigD ata using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
 
 ## Thread 4 (Sonia and Michael)
 
 * [ ] NER: to work on loss functions, new data (NY Times)
-    * [ ] Done with new BERT (Microsoft) implementation
-    * [ ] [Deberta with linear layer result](./Thread4/deberta_with_linear_layer)
+  * [ ] Done with new BERT (Microsoft) implementation
+  * [ ] [Deberta with linear layer result](./Thread4/deberta_with_linear_layer)
+    * [ ] check training/fine-tuning convergence with lr, epochs, train/val loss
+    * [ ] For layer sizes, don't go below 100, for example, use [512, 384, 256, 128, 128, 128, 128] for 8 layers; or you can have another set of experiments with a constant layer size at 512. 
 * [ ] Information representation with DLITE, on RCV1 data
 * [ ] Comparable papers and results: 
   * [ ] Results: https://paperswithcode.com/sota/token-classification-on-conll2003
