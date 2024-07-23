@@ -4,9 +4,9 @@
 
    The BM25 formula is given by:
 
-   $
+   $$
    \text{score}(q, d) = \sum_{i=1}^n \text{IDF}(q_i) \cdot \frac{f(q_i, d) \cdot (k_1 + 1)}{f(q_i, d) + k_1 \cdot (1 - b + b \cdot \frac{|d|}{\text{avgdl}})}
-   $
+   $$
 
    where:
    - \( q \) is a query
