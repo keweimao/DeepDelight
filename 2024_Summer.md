@@ -69,7 +69,7 @@
   * [ ] DLITE for IR (BigData Conf presentation): https://youtu.be/qQXCgmX8sOk?si=bpcrdeW6HLujIAY4
     * [ ] [Link to presentation slides](Reading/dlite_ir_ke.pdf)
     * [ ] [Link to paper](https://www.tud.ttu.ee/im/Ahti.Lohk/Papers/Alternatives_to_Classic_BM25-IDF_based_on_a_New_Information_Theoretical_Framework%20%281%29.pdf)
-
+  * [ ] [BM25 example implementation/script in Elastic](elastic_scoring.md)
 
 ### References
 
