@@ -77,6 +77,7 @@
 
 * [ ] NER: to work on loss functions, new data (NY Times)
     * [ ] Done with new BERT (Microsoft) implementation
+    * [ ] [Deberta with linear layer result](./Thread4/deberta_with_linear_layer)
 * [ ] Information representation with DLITE, on RCV1 data
 * [ ] Comparable papers and results: 
   * [ ] Results: https://paperswithcode.com/sota/token-classification-on-conll2003
