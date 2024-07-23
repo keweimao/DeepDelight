@@ -1,3 +1,18 @@
+Micro Best Result Table 
+0 layer     |     1 layer     |     2 layers     |     4 layers     |     8 layers     |     4 layers + 1 ltsm layer     |
+kl (0.9758)     l2 (0.9734)        ce (0.9730)        kl (0.9730)      dlite (0.7659)          l2 (0.9736)
+
+Macro Best Result Table 
+0 layer     |     1 layer     |     2 layers     |     4 layers     |     8 layers     |     4 layers + 1 ltsm layer     |
+kl (0.9011)     l2 (0.8932)        l2 (0.8921)        kl (0.8897)        kl (0.1652)           kl (0.6878)
+
+Weighted Best Result Table 
+0 layer     |     1 layer     |     2 layers     |     4 layers     |     8 layers     |     4 layers + 1 ltsm layer     |
+kl (0.9765)     l2 (0.9735)        ce (0.9738)        kl (0.9732)        kl (0.6963)           l2 (0.9738)
+
+
+
+
 1. Original Deberta Result    
 ====================================================================================================
 micro
