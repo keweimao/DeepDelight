@@ -37,11 +37,12 @@
       * [x] [Scripts](./Thread2/HOTPOT/QA_hotpot.ipynb)
       * [x] [Results](./Thread2/HOTPOT/output_hotpot.csv)      
 * [ ] Next steps, setup for research on dense vector retrieval with Elastic
-  * [ ] Setup: Set up Elastic locally first, and then on BVM96
+  * [x] Setup: Set up Elastic locally first, and then on BVM96
     * [x] Elastic local deployment in Docker
-    * [ ] Elastic BVM96 deployment
+    * [x] [Elastic BVM96 deployment](./Thread2/BEIR/BEIR_setup.md/#4-elastic-deployment-on-bvm96)
+    * [x] [BVM96 running instructions](./Thread2/BEIR/BEIR_setup.md/#5-workflow-of-running-the-scripts-on-the-remote-machine)
   * [ ] Code: research and reuse BEIR code, with existing Elastic TF*IDF, BM25 baselines
-    * [x] [BEIR local setup](./Thread2/BEIR/BEIR_local_setup.md)
+    * [x] [BEIR local setup](./Thread2/BEIR/BEIR_setup.md/#step-by-step-local-deployment-of-beir-code)
     * [x] Test the BEIR environment
   * [ ] Data: benmark datasets to consider, ultimately Robust 04 (HARD track)
   * [ ] Test: test on a small subset to hopefully replicate some baselines
@@ -55,7 +56,7 @@
 
 ### 7/17/2024
 
-* [ ] Lixiao presentation, potential implication on diversity retrieval
+* [x] Lixiao presentation, potential implication on diversity retrieval
 * [ ] Ke's DLITE as alterantive to IDF and BM25
 * [ ] Reading: https://ar5iv.labs.arxiv.org/html/2311.18503
 * [ ] Hybrid Dense + Sparse: https://ar5iv.labs.arxiv.org/html/2401.04055
