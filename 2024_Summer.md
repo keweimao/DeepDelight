@@ -45,7 +45,7 @@
     * [x] [BEIR local setup](./Thread2/BEIR/BEIR_setup.md/#step-by-step-local-deployment-of-beir-code)
     * [x] Test the BEIR environment
   * [ ] Data: benmark datasets to consider, ultimately Robust 04 (HARD track)
-  * [ ] Test: test on a small subset to hopefully replicate some baselines
+  * [x] Test: test on a small subset to hopefully replicate some baselines
     * [x] Local test for `scifact` dataset: lexical, reranking and reranking w/ cross encoder
       * [x] [Scripts and Logs](./Thread2/BEIR/BEIR_example_results)
       * [x] [Local Results Summary](./Thread2/BEIR/BEIR_local_results.md) along with evaluation comparison
@@ -64,13 +64,18 @@
 
 ### 7/24/2024
 
-* [ ] Mengyang presentation
+* [x] Mengyang presentation
 * [ ] DLITE reading: 
   * [ ] Information theory of IDF: https://youtu.be/fIIuyorK7BY?si=1uYindxv8jYXISA2
   * [ ] DLITE for IR (BigData Conf presentation): https://youtu.be/qQXCgmX8sOk?si=bpcrdeW6HLujIAY4
-    * [ ] [Link to presentation slides](Reading/dlite_ir_ke.pdf)
+    * [x] [Link to presentation slides](Reading/dlite_ir_ke.pdf)
     * [ ] [Link to paper](https://www.tud.ttu.ee/im/Ahti.Lohk/Papers/Alternatives_to_Classic_BM25-IDF_based_on_a_New_Information_Theoretical_Framework%20%281%29.pdf)
-  * [ ] [BM25 example implementation/script in Elastic](elastic_scoring.md)
+* [x] [BM25 example implementation/script in Elastic](elastic_scoring.md)
+  * [x] Custom BM25 implementation on BVM96
+    * [x] [Experiment Log](./Thread2/BEIR/Experiment_log.md) contains all updates for `beir` package and running scripts
+    * [x] [beir packages](./Thread2/BEIR/beir-main/) contains updated scripts for beir library (for customized functions)
+    * [x] [Running Scripts](./Thread2/BEIR/experiment_scripts/) contains running scripts based on BM25 (lexical and reranking)
+    * [x] [Result Logs](./Thread2/BEIR/result_logs/) contains BVM96 running results for the scripts
 
 ### References
 
