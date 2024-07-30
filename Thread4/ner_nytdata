@@ -1,0 +1,49 @@
+import xml.etree.ElementTree as ET
+
+def parse_xml(file_path):
+    tree = ET.parse(file_path)
+    root = tree.getroot()
+    return root
+
+def extract_texts(root):
+    texts = []
+    for block in root.findall(".//block"):
+        for p in block.findall("p"):
+            if p.text:
+                texts.append(p.text.strip())
+    return texts
+
+def format_conll(texts):
+    formatted_text = "-DOCSTART- -X- -X- O\n\n"
+    for text in texts:
+        if text:
+            for word in text.split():
+                # Here, we're using "O O O" for each word as placeholder tags.
+                # These should be replaced with actual tags if available.
+                formatted_text += f"{word} O O O\n"
+            formatted_text += "\n"
+    return formatted_text
+
+def save_to_file(content, file_path):
+    with open(file_path, 'w') as file:
+        file.write(content)
+
+def print_file(file_path):
+    with open(file_path, 'r') as file:
+        print(file.read())
+
+def main():
+    xml_file_path = '/mnt/data/0000000.xml'
+    output_file_path = 'train_nytdata.txt'
+    
+    root = parse_xml(xml_file_path)
+    texts = extract_texts(root)
+    formatted_text = format_conll(texts)
+    save_to_file(formatted_text, output_file_path)
+    print(f"Data has been formatted and saved to {output_file_path}")
+    
+    # Print the contents of the saved file
+    print_file(output_file_path)
+
+if __name__ == "__main__":
+    main()
