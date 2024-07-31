@@ -9,7 +9,7 @@ Lixiao Yang \
 
 ## Update for customized BM25 method
 
-### BEIR code updates
+### 1. BEIR code updates
 
 **Add scripted BM25 method within beir** \
 Update for customized BM25 method in `beir-main/beir/retrieval/search/lexical/__init__.py`:
@@ -17,8 +17,8 @@ Update for customized BM25 method in `beir-main/beir/retrieval/search/lexical/__
 from .scripted_bm25 import ScriptedBM25Search
 ```
 
-**Add an elastic search script** \
-[custom_elastic_search.py](./beir-main/beir/retrieval/search/lexical/customed_elastic_search.py)
+**Add an elastic search script**\
+[custom_elastic_search.py](./beir-main/beir/retrieval/search/lexical/customed_elastic_search.py)\
 Modified based on [`beir-main/beir/retrieval/search/lexical/elastic_search.py`](./beir-main/beir/retrieval/search/lexical/elastic_search.py):
 - For `create_index` method, add an additional parameter `body` to handle the scripted BM25 method (custom BM25 method)
 - Error and exception handling
@@ -27,7 +27,7 @@ To use the method:
 from beir.retrieval.search.lexical.customed_elastic_search import CustomedElasticSearch
 ```
 
-**Add an custom bm25 search script** \ 
+**Add an custom bm25 search script** \
 [scripted_bm25.py](./beir-main/beir/retrieval/search/lexical/scripted_bm25.py) \
 Modified based on [`beir-main/beir/retrieval/search/lexical/bm25_search.py`](./beir-main/beir/retrieval/search/lexical/bm25_search.py):
 - Works together with `customed_elastic_search.py` to add custom BM25 retrieval logic
@@ -37,9 +37,9 @@ To use the method:
 from beir.retrieval.search.lexical.scripted_bm25 import ScriptedBM25Search
 ```
 
-### Experiment scripts update
+### 2. Experiment scripts update
 
-**Customed BM25 lexical retrieval**
+**Customed BM25 lexical retrieval**\
 [1_1_custom_bm25_lexical.py](./experiment_scripts/1_1_custom_bm25_lexical.py) \
 Modified BM25 lexical retrieval code using `CustomedElasticSearch` and `ScriptedBM25Search`. \
 Parameters:
@@ -60,7 +60,7 @@ avgdl = 201.81 # Average length for scifact document
 
 7/30/2024: **Lexical BM25 results running on BVM96 indicating same results as the elastic embedded BM25 method.**
 
-**Customed BM25 reranking with Sentense-BERT**
+**Customed BM25 reranking with Sentense-BERT**\
 [1_3_custom_bm25_reranking_sbert.py](./experiment_scripts/1_3_custom_bm25_reranking_sbert.py) \
 Modified BM25 reranking with Sentence-BERT code using `CustomedElasticSearch` and `ScriptedBM25Search`. \
 Parameters:
@@ -82,7 +82,7 @@ k_values = [1, 3, 5, 10, 100]
 
 7/30/2024: **Reranking with SBERT BM25 results running on BVM96 indicating same results as the elastic embedded BM25 method.**
 
-**Customed BM25 reranking with Cross-Encoder**
+**Customed BM25 reranking with Cross-Encoder**\
 [1_2_custom_bm25_reranking_ce.py](./experiment_scripts/1_2_custom_bm25_reranking_ce.py) \ 
 Modified BM25 reranking with Cross-Encoder code using `CustomedElasticSearch` and `ScriptedBM25Search`. \
 Parameters:
