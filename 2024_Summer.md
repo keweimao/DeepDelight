@@ -77,6 +77,24 @@
     * [x] [Running Scripts](./Thread2/BEIR/experiment_scripts/) contains running scripts based on BM25 (lexical and reranking)
     * [x] [Result Logs](./Thread2/BEIR/result_logs/) contains BVM96 running results for the scripts
 
+### 7/31/2024
+
+* [ ] BEIR + Custom BM25, control paramters to experiment on
+  * [ ] How many retrieved before reranking? 
+  * [ ] How many are retrieved after reranking? 
+  * [ ] What method is used for the final reranking with dense vectors? 
+* [ ] Additional implementations of scoring functions
+  * [ ] Classic TF*IDF
+  * [ ] DLITE, DLITE^1/3
+
+### 8/7/2024
+
+* [ ] Reranking functions to consider: 
+  * [ ] Built-in: dot-product, cosine? 
+  * [ ] To consider based on probabilities (after softmax)
+    * [ ] KL divergence
+    * [ ] DLITE-related functions
+
 ### References
 
 * Ke's 2022 BigD ata using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
