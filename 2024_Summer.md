@@ -79,10 +79,13 @@
 ## Thread 4 (Sonia and Michael)
 
 * [ ] NER: to work on loss functions, new data (NY Times)
-  * [ ] Done with new BERT (Microsoft) implementation
+  * [X] Done with new BERT (Microsoft) implementation
   * [ ] [Deberta with linear layer result](./Thread4/deberta_with_linear_layer)
-    * [ ] check training/fine-tuning convergence with lr, epochs, train/val loss
-    * [ ] For layer sizes, don't go below 100, for example, use [512, 384, 256, 128, 128, 128, 128] for 8 layers; or you can have another set of experiments with a constant layer size at 512. 
+    * [X] check training/fine-tuning convergence with lr, epochs, train/val loss
+    * [X] For layer sizes, don't go below 100, for example, use [512, 384, 256, 128, 128, 128, 128] for 8 layers; or you can have another set of experiments with a constant layer size at 512. 
+    * [ ] Consider dropout and residual connections
+      * [ ] [See Thread 5 Notes about dropout and residual](./Thread5/thread5_notes.md)
+      * [ ] [Example and Illustration of Residual connection](./Thread5/examples2.md)
 * [ ] Information representation with DLITE, on RCV1 data
 * [ ] Comparable papers and results: 
   * [ ] Results: https://paperswithcode.com/sota/token-classification-on-conll2003
