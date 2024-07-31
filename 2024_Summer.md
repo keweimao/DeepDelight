@@ -77,6 +77,24 @@
     * [x] [Running Scripts](./Thread2/BEIR/experiment_scripts/) contains running scripts based on BM25 (lexical and reranking)
     * [x] [Result Logs](./Thread2/BEIR/result_logs/) contains BVM96 running results for the scripts
 
+### 7/31/2024
+
+* [ ] BEIR + Custom BM25, control paramters to experiment on
+  * [ ] How many retrieved before reranking? 
+  * [ ] How many are retrieved after reranking? 
+  * [ ] What method is used for the final reranking with dense vectors? 
+* [ ] Additional implementations of scoring functions
+  * [ ] Classic TF*IDF
+  * [ ] DLITE, DLITE^1/3
+
+### 8/7/2024
+
+* [ ] Reranking functions to consider: 
+  * [ ] Built-in: dot-product, cosine? 
+  * [ ] To consider based on probabilities (after softmax)
+    * [ ] KL divergence
+    * [ ] DLITE-related functions
+
 ### References
 
 * Ke's 2022 BigD ata using DLITE as a scoring function: https://ieeexplore.ieee.org/document/10020937
@@ -84,10 +102,13 @@
 ## Thread 4 (Sonia and Michael)
 
 * [ ] NER: to work on loss functions, new data (NY Times)
-  * [ ] Done with new BERT (Microsoft) implementation
+  * [X] Done with new BERT (Microsoft) implementation
   * [ ] [Deberta with linear layer result](./Thread4/deberta_with_linear_layer)
-    * [ ] check training/fine-tuning convergence with lr, epochs, train/val loss
-    * [ ] For layer sizes, don't go below 100, for example, use [512, 384, 256, 128, 128, 128, 128] for 8 layers; or you can have another set of experiments with a constant layer size at 512. 
+    * [X] check training/fine-tuning convergence with lr, epochs, train/val loss
+    * [X] For layer sizes, don't go below 100, for example, use [512, 384, 256, 128, 128, 128, 128] for 8 layers; or you can have another set of experiments with a constant layer size at 512. 
+    * [ ] Consider dropout and residual connections
+      * [ ] [See Thread 5 Notes about dropout and residual](./Thread5/thread5_notes.md)
+      * [ ] [Example and Illustration of Residual connection](./Thread5/examples2.md)
 * [ ] Information representation with DLITE, on RCV1 data
 * [ ] Comparable papers and results: 
   * [ ] Results: https://paperswithcode.com/sota/token-classification-on-conll2003
