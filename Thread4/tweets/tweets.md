@@ -47,7 +47,15 @@ id: a string feature.
 tokens: a list of strings
 ner_tags: a list of class IDs (ints) representing the NER class
 
-|Section |   Region   | Collection Period |         Description      |  
+ 0:  O 
+ 
+ 1: B-PER
+ 
+ 2: I-PER
+ | 3: | B-ORG |
+ | 4: | I-ORG |
+ | 5: | B-LOC |
+ | 6: | I-LOC |
 
 
 
@@ -63,14 +71,6 @@ ner_tags: a list of class IDs (ints) representing the NER class
 |    F	 | Stratified |	        2009-2014 |	Twitterati               | Crowd & expert |        2000 |
 |    G	 | Stratified |	        2011-2014 |	Mainstream news          | Crowd & expert	|        2351 |
 |    H	 |   Non-UK	  |              2014	| General collection	     | Crowd & expert	|        2000 |
-
- | 0: | O     |
- | 1: | B-PER |
- | 2: | I-PER |
- | 3: | B-ORG |
- | 4: | I-ORG |
- | 5: | B-LOC |
- | 6: | I-LOC | 
  
 The most varied parts of the BTC are sections F and H. However, each of the remaining four sections has some specific readily-identifiable bias. So, we propose that one uses half of section H for evaluation and leaves the other half in the training data. Section H should be partitioned in the order of the JSON-format lines. Note that the CoNLL-format data is readily reconstructible from the JSON format, which is the authoritative data format from which others are derived.
 
