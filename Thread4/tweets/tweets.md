@@ -1,5 +1,6 @@
 # Broad Twitter Corpus
-Introduced by Derczynski et al. in Broad Twitter Corpus: A Diverse Named Entity Recognition Resource
+Introduced by Derczynski et al. in Broad Twitter Corpus: A Diverse Named Entity Recognition Resource : https://paperswithcode.com/paper/broad-twitter-corpus-a-diverse-named-entity
+/
 This paper introduces the Broad Twitter Corpus (BTC), which is not only significantly bigger, but sampled across different regions, temporal periods, and types of Twitter users. The gold-standard named entity annotations are made by a combination of NLP experts and crowd workers, which enables us to harness crowd recall while maintaining high quality. We also measure the entity drift observed in our dataset (i.e. how entity representation varies over time), and compare to newswire.
 Link: https://paperswithcode.com/dataset/broad-twitter-corpus
 Dataset: GateNLP/broad_twitter_corpus https://huggingface.co/datasets/GateNLP/broad_twitter_corpus
