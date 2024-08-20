@@ -58,10 +58,11 @@ ner_tags: a list of class IDs (ints) representing the NER class:
 ## Data Splits
 
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+|Section |Region | Collection Period |      Description     | Annotators | Tweet Count |
+| ------ | ----- | ----------------- | -------------------- | ---------- | ----------- |
+|    A   |   UK  |           2012.01 | General collectionl  |   Expert   |        1000 |
+|    B   |   UK  |        2012.01-02 | Non-directed tweets  |   Expert   |        2000 |
+
 
 Section	Region	Collection period	Description	Annotators	Tweet count
 A	UK	2012.01	General collection	Expert	1000
