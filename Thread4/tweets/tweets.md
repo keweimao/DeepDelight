@@ -52,10 +52,14 @@ ner_tags: a list of class IDs (ints) representing the NER class
  1: B-PER
  
  2: I-PER
- | 3: | B-ORG |
- | 4: | I-ORG |
- | 5: | B-LOC |
- | 6: | I-LOC |
+ 
+ 3: B-ORG
+ 
+ 4: I-ORG
+ 
+ 5: B-LOC
+ 
+ 6: I-LOC
 
 
 
