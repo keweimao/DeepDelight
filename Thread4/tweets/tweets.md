@@ -78,9 +78,9 @@ ner_tags: a list of class IDs (ints) representing the NER class
  
 The most varied parts of the BTC are sections F and H. However, each of the remaining four sections has some specific readily-identifiable bias. So, we propose that one uses half of section H for evaluation and leaves the other half in the training data. Section H should be partitioned in the order of the JSON-format lines. Note that the CoNLL-format data is readily reconstructible from the JSON format, which is the authoritative data format from which others are derived.
 
-### Test: Section F
+Test: Section F
 
-### Development: Section H (the paper says "second half of Section H" but ordinality could be ambiguous, so it all goes in. Bonne chance)
+Development: Section H (the paper says "second half of Section H" but ordinality could be ambiguous, so it all goes in. Bonne chance)
 
 ## Reference
 
