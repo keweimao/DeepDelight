@@ -46,6 +46,7 @@ Each tweet contains an ID, a list of tokens, and a list of NER tags
 id: a string feature.
 tokens: a list of strings
 ner_tags: a list of class IDs (ints) representing the NER class:
+
  | 0: | O     |
  | 1: | B-PER |
  | 2: | I-PER |
