@@ -1,13 +1,13 @@
 # Broad Twitter Corpus
 Introduced by Derczynski et al. in Broad Twitter Corpus: A Diverse Named Entity Recognition Resource : https://paperswithcode.com/paper/broad-twitter-corpus-a-diverse-named-entity
-/
+
 This paper introduces the Broad Twitter Corpus (BTC), which is not only significantly bigger, but sampled across different regions, temporal periods, and types of Twitter users. The gold-standard named entity annotations are made by a combination of NLP experts and crowd workers, which enables us to harness crowd recall while maintaining high quality. We also measure the entity drift observed in our dataset (i.e. how entity representation varies over time), and compare to newswire.
 Link: https://paperswithcode.com/dataset/broad-twitter-corpus
 Dataset: GateNLP/broad_twitter_corpus https://huggingface.co/datasets/GateNLP/broad_twitter_corpus
 Dataset Card for broad_twitter_corpus
 
 
-Dataset Summary
+# Dataset Summary
 
 This is the Broad Twitter corpus, a dataset of tweets collected over stratified times, places and social uses. The goal is to represent a broad range of activities, giving a dataset more representative of the language used in this hardest of social media formats to process. Further, the BTC is annotated for named entities.
 
@@ -16,7 +16,7 @@ See the paper, Broad Twitter Corpus: A Diverse Named Entity Recognition Resource
 
 Supported Tasks and Leaderboards
 
-Named Entity Recognition
+## Named Entity Recognition
 On PWC: Named Entity Recognition on Broad Twitter Corpus
 
 Languages
@@ -24,10 +24,10 @@ Languages
 English from UK, US, Australia, Canada, Ireland, New Zealand; bcp47:en
 
 
-Dataset Structure
+# Dataset Structure
 
 
-Data Instances
+## Data Instances
 
 Feature	Count
 Documents	9 551
@@ -36,7 +36,7 @@ Person entities	5 271
 Location entities	3 114
 Organization entities	3 732
 
-Data Fields
+## Data Fields
 
 Each tweet contains an ID, a list of tokens, and a list of NER tags
 
@@ -52,7 +52,7 @@ ner_tags: a list of class IDs (ints) representing the NER class:
   6: I-LOC
 
 
-Data Splits
+## Data Splits
 
 Section	Region	Collection period	Description	Annotators	Tweet count
 A	UK	2012.01	General collection	Expert	1000
