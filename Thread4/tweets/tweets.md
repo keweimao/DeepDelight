@@ -72,10 +72,4 @@ Development: Section H (the paper says "second half of Section H" but ordinality
 
 ## Reference
 
-@inproceedings{derczynski2016broad,
-  title={Broad twitter corpus: A diverse named entity recognition resource},
-  author={Derczynski, Leon and Bontcheva, Kalina and Roberts, Ian},
-  booktitle={Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers},
-  pages={1169--1179},
-  year={2016}
-}
+Leon Derczynski, Kalina Bontcheva, and Ian Roberts. 2016. Broad twitter corpus:A diverse named entity recognition resource. InProceedings of COLING 2016,the 26th International Conference on Computational Linguistics: Technical Papers.1169–1179.
