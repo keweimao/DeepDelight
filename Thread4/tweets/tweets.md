@@ -47,6 +47,8 @@ id: a string feature.
 tokens: a list of strings
 ner_tags: a list of class IDs (ints) representing the NER class:
 
+|Section |   Region   | Collection Period |         Description      |  
+
  | 0: | O     |
  | 1: | B-PER |
  | 2: | I-PER |
