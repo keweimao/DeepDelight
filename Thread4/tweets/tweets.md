@@ -58,19 +58,21 @@ ner_tags: a list of class IDs (ints) representing the NER class:
 ## Data Splits
 
 
-|Section |Region | Collection Period |      Description     | Annotators | Tweet Count |
-| ------ | ----- | ----------------- | -------------------- | ---------- | ----------- |
-|    A   |   UK  |           2012.01 | General collectionl  |   Expert   |        1000 |
-|    B   |   UK  |        2012.01-02 | Non-directed tweets  |   Expert   |        2000 |
+|Section |   Region   | Collection Period |         Description      |   Annotators   | Tweet Count |
+| ------ | ---------- | ----------------- | ------------------------ | -------------- | ----------- |
+|    A   |     UK     |           2012.01 | General collectionl      |      Expert    |        1000 |
+|    B   |     UK     |        2012.01-02 | Non-directed tweets      |      Expert    |        2000 |
+|    E   |    Global  |	          2014.07 | Related to MH17 disaste  | Crowd & expert |       	200 |
+|    F	 | Stratified |	        2009-2014 |	Twitterati               | Crowd & expert |        2000 |
+|    G	 | Stratified |	        2011-2014 |	Mainstream news          | Crowd & expert	|        2351 |
+|    H	 |   Non-UK	  |              2014	| General collection	     | Crowd & expert	|        2000 |
+| ------ | ---------- | ----------------- | ------------------------ | -------------- | ----------- |
 
 
 Section	Region	Collection period	Description	Annotators	Tweet count
 A	UK	2012.01	General collection	Expert	1000
 B	UK	2012.01-02	Non-directed tweets	Expert	2000
-E	Global	2014.07	Related to MH17 disaster	Crowd & expert	200
-F	Stratified	2009-2014	Twitterati	Crowd & expert	2000
-G	Stratified	2011-2014	Mainstream news	Crowd & expert	2351
-H	Non-UK	2014	General collection	Crowd & expert	2000
+
 The most varied parts of the BTC are sections F and H. However, each of the remaining four sections has some specific readily-identifiable bias. So, we propose that one uses half of section H for evaluation and leaves the other half in the training data. Section H should be partitioned in the order of the JSON-format lines. Note that the CoNLL-format data is readily reconstructible from the JSON format, which is the authoritative data format from which others are derived.
 
 Test: Section F
