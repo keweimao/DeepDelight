@@ -82,6 +82,12 @@ Test: Section F
 
 Development: Section H (the paper says "second half of Section H" but ordinality could be ambiguous, so it all goes in. Bonne chance)
 
+## Broad Twitter Corpus: A Diverse Named Entity Recognition Resource
+
+COLING 2016  ·  Leon Derczynski, Kalina Bontcheva, Ian Roberts · https://paperswithcode.com/paper/broad-twitter-corpus-a-diverse-named-entity
+
+One of the main obstacles, hampering method development and comparative evaluation of named entity recognition in social media, is the lack of a sizeable, diverse, high quality annotated corpus, analogous to the CoNLL{'}2003 news dataset. For instance, the biggest Ritter tweet corpus is only 45,000 tokens {--} a mere 15{\%} the size of CoNLL{'}2003. Another major shortcoming is the lack of temporal, geographic, and author diversity. This paper introduces the Broad Twitter Corpus (BTC), which is not only significantly bigger, but sampled across different regions, temporal periods, and types of Twitter users. The gold-standard named entity annotations are made by a combination of NLP experts and crowd workers, which enables us to harness crowd recall while maintaining high quality. We also measure the entity drift observed in our dataset (i.e. how entity representation varies over time), and compare to newswire. The corpus is released openly, including source text and intermediate annotations.
+
 ## Reference
 
 Leon Derczynski, Kalina Bontcheva, and Ian Roberts. 2016. Broad twitter corpus:A diverse named entity recognition resource. InProceedings of COLING 2016,the 26th International Conference on Computational Linguistics: Technical Papers.1169–1179.
