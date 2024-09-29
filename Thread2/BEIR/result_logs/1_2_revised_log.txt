@@ -1,0 +1,52 @@
+2024-09-22 23:54:08 - Loading Corpus...
+2024-09-22 23:54:08 - Loaded 5183 TEST Documents.
+2024-09-22 23:54:08 - Doc Example: {'text': 'Alterations of the architecture of cerebral white matter in the developing human brain can affect cortical development and result in functional disabilities. A line scan diffusion-weighted magnetic resonance imaging (MRI) sequence with diffusion tensor analysis was applied to measure the apparent diffusion coefficient, to calculate relative anisotropy, and to delineate three-dimensional fiber architecture in cerebral white matter in preterm (n = 17) and full-term infants (n = 7). To assess effects of prematurity on cerebral white matter development, early gestation preterm infants (n = 10) were studied a second time at term. In the central white matter the mean apparent diffusion coefficient at 28 wk was high, 1.8 microm2/ms, and decreased toward term to 1.2 microm2/ms. In the posterior limb of the internal capsule, the mean apparent diffusion coefficients at both times were similar (1.2 versus 1.1 microm2/ms). Relative anisotropy was higher the closer birth was to term with greater absolute values in the internal capsule than in the central white matter. Preterm infants at term showed higher mean diffusion coefficients in the central white matter (1.4 +/- 0.24 versus 1.15 +/- 0.09 microm2/ms, p = 0.016) and lower relative anisotropy in both areas compared with full-term infants (white matter, 10.9 +/- 0.6 versus 22.9 +/- 3.0%, p = 0.001; internal capsule, 24.0 +/- 4.44 versus 33.1 +/- 0.6% p = 0.006). Nonmyelinated fibers in the corpus callosum were visible by diffusion tensor MRI as early as 28 wk; full-term and preterm infants at term showed marked differences in white matter fiber organization. The data indicate that quantitative assessment of water diffusion by diffusion tensor MRI provides insight into microstructural development in cerebral white matter in living infants.', 'title': 'Microstructural development of human newborn cerebral white matter assessed in vivo by diffusion tensor magnetic resonance imaging.'}
+2024-09-22 23:54:08 - Loading Queries...
+2024-09-22 23:54:08 - Loaded 300 TEST Queries.
+2024-09-22 23:54:08 - Query Example: 0-dimensional biomaterials show inductive properties.
+2024-09-22 23:54:08 - Indexing the SciFact corpus...
+2024-09-22 23:54:09 - Indexing completed.
+2024-09-22 23:54:18 - 
+The SBERT model used is: bert-base-uncased.
+
+2024-09-22 23:54:18 - Load pretrained SentenceTransformer: bert-base-uncased
+2024-09-22 23:54:19 - No sentence-transformers model found with name /home/ly364/.cache/torch/sentence_transformers/bert-base-uncased. Creating a new one with MEAN pooling.
+2024-09-22 23:54:23 - Use pytorch device: cpu
+2024-09-22 23:54:24 - Encoding Queries...
+2024-09-22 23:54:31 - Sorting Corpus by document length (Longest first)...
+2024-09-22 23:54:31 - Encoding Corpus in batches... Warning: This might take a while!
+2024-09-22 23:54:31 - Scoring Function: Cosine Similarity (cos_sim)
+2024-09-22 23:54:31 - Encoding Batch 1/1...
+2024-09-23 00:18:34 - For evaluation, we ignore identical query and document ids (default), please explicitly set ``ignore_identical_ids=False`` to ignore this.
+2024-09-23 00:18:34 - 
+
+2024-09-23 00:18:34 - NDCG@1: 0.0733
+2024-09-23 00:18:34 - NDCG@3: 0.0983
+2024-09-23 00:18:34 - NDCG@5: 0.1133
+2024-09-23 00:18:34 - NDCG@10: 0.1336
+2024-09-23 00:18:34 - NDCG@100: 0.1859
+2024-09-23 00:18:34 - NDCG@1000: 0.1859
+2024-09-23 00:18:34 - 
+
+2024-09-23 00:18:34 - MAP@1: 0.0686
+2024-09-23 00:18:34 - MAP@3: 0.0893
+2024-09-23 00:18:34 - MAP@5: 0.0981
+2024-09-23 00:18:34 - MAP@10: 0.1065
+2024-09-23 00:18:34 - MAP@100: 0.1147
+2024-09-23 00:18:34 - MAP@1000: 0.1147
+2024-09-23 00:18:34 - 
+
+2024-09-23 00:18:34 - Recall@1: 0.0686
+2024-09-23 00:18:34 - Recall@3: 0.1161
+2024-09-23 00:18:34 - Recall@5: 0.1522
+2024-09-23 00:18:34 - Recall@10: 0.2108
+2024-09-23 00:18:34 - Recall@100: 0.4818
+2024-09-23 00:18:34 - Recall@1000: 0.4818
+2024-09-23 00:18:34 - 
+
+2024-09-23 00:18:34 - P@1: 0.0733
+2024-09-23 00:18:34 - P@3: 0.0422
+2024-09-23 00:18:34 - P@5: 0.0340
+2024-09-23 00:18:34 - P@10: 0.0240
+2024-09-23 00:18:34 - P@100: 0.0054
+2024-09-23 00:18:34 - P@1000: 0.0005
