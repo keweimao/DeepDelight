@@ -1,9 +1,9 @@
 # Step-by-Step Local Deployment of BEIR Code
 
-Lixiao Yang\
-7/9/2024
+Lixiao Yang \
+7/30/2024
 
-This notebook illustrates the steps I conducted to setup BEIR locally.\
+This notebook illustrates the steps I conducted to setup BEIR locally and on BVM96 machine.\
 Note: this instruction is based on Windows OS, deployment on MacOS / Linux can be slightly different.
 
 ## 1. Create conda environment
